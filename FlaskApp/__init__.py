@@ -22,6 +22,7 @@ def MakePage(content, url=''):
         'kinfolk': ' class="active" ' if '/kinfolk/' in url.lower() else '',
         'garou': ' class="active" ' if '/garou/' in url.lower() else '',
         'human': ' class="active" ' if '/human/' in url.lower() else '',
+        'vampir': ' class="active" ' if '/vampir/' in url.lower() else '',
         'bsd': ' class="active" ' if '/bsd/' in url.lower() else '',
         'fomor': ' class="active" ' if '/fomor/' in url.lower() else '',
         'bsdpack': ' class="active" ' if '/bsdpack/' in url.lower() else '',
@@ -45,6 +46,7 @@ def MakePage(content, url=''):
             <a {linkActivity["kinfolk"]} href="{baseURL}/nsc/kinfolk/0/html"> Kinfolk </a>
             <a {linkActivity["garou"]} href="{baseURL}/nsc/garou/0/html"> Garou </a>
             <a {linkActivity["human"]} href="{baseURL}/nsc/Human/0/html"> Mensch </a>
+            <a {linkActivity["vampir"]} href="{baseURL}/nsc/vampir/0/html"> Vampir </a>
             <a {linkActivity["bsd"]} href="{baseURL}/nsc/bsd/0/html"> Tänzer der schwarzen Spirale </a>
             <a {linkActivity["fomor"]} href="{baseURL}/nsc/fomor/0/html"> Fomor </a>
             <a {linkActivity["bsdpack"]} href="{baseURL}/nsc/bsdpack/"> Rudel Tänzer der schwarzen Spirale </a>
@@ -101,6 +103,8 @@ def createGarouPackLinks(args):
 def HandleNSCCalls(args, art, powerlevel, language):
     if art in ['kinfolk', 'garou', 'Human']:
         return MakePage(CreateRandom(seed=-1, Art=art[0].upper()+art[1:], Powerlevel=int(powerlevel), language=language.upper(), packname=args, shortPrint=False), f'/nsc/{art}/')
+    elif art in ['vampir']:
+        return MakePage(CreateRandom(-1, Art=art, Powerlevel=int(powerlevel), language=language.upper(), packname=args, shortPrint=False), f'/nsc/{art}/')
     elif art == 'bsd':
         return MakePage(str(CreateBSD(-1, Powerlevel=int(powerlevel), language=language.upper(), packname=args)), f'/nsc/{art}/')
     elif art == 'bane':
@@ -110,11 +114,14 @@ def HandleNSCCalls(args, art, powerlevel, language):
     return 'TODO'
 
 
-@app.route('/nsc/<art>/<powerlevel>/<language>/<seed>')
+@app.route('/nsc/<art>/<powerlevel>/<language>/<seed>/')
 @use_args({'packname': fields.Str(required=False)}, location="query")
 def HandleNSCCallsWithSeed(args, art, powerlevel, language, seed):
+    print(f'seed: {seed}')
     if art in ['kinfolk', 'garou', 'human']:
         return MakePage(CreateRandom(seed=seed, Art=art[0].upper()+art[1:], Powerlevel=int(powerlevel), language=language.upper(), packname=args, shortPrint=False), f'/nsc/{art}/')
+    elif art in ['vampir']:
+        return MakePage(CreateRandom(seed=seed, Art=art, Powerlevel=int(powerlevel), language=language.upper(), packname=args, shortPrint=False), f'/nsc/{art}/')
     elif art == 'bsd':
         return MakePage(str(CreateBSD(seed=seed, Powerlevel=int(powerlevel), language=language.upper(), packname=args)), f'/nsc/{art}/')
     elif art == 'bane':

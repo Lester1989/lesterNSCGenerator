@@ -3,41 +3,133 @@
 import csv
 import hashlib
 import random
+import requests
+import json
+from bs4 import BeautifulSoup
+
 from .gaben import LookUpTexteByName, GetGaben, GetFomorGaben
 from .bsdFomorGen import MakeBSD, MakeFomor
 from .PackNameGen import GenerateRandomName
 from .SpielHinweise import MakeSpielAnweisung
-from .LookGen import MakeBeschreibung,PrintBeschreibung
+from .LookGen import MakeBeschreibung, PrintBeschreibung
 from .Formatting import Bold, Newline, Header, ListLines, Table, StartCapital
-import requests
-import json
-from bs4 import BeautifulSoup
 from .config import baseURL, basePath
 from .NSCGenUtils import NameToSeed, DrawWithWeightsUnique, DrawWithWeights, DrawKey, DrawKeyUnique
+from .vampireGen import PrintVampire, MakeVampire
 # =================================================================
 # INIT TABLES
 # =================================================================
 
-hintergründe = {'Zeit': {'neu in der Gemeinschaft': 1, 'voll eingearbeitet': 3, 'seit langer Zeit dabei': 4, 'von Geburt an indoktriniert': 5}, 'Familie': {'Ledig': 3, 'Verheiratet (mit Kinfolk)': 1, 'Verheiratet (mit Garou)': 2, 'Verwitwet': 1, 'Geschieden': 1}, 'Alter': {
-    'gerade Volljährig': 2, 'zwischen 20 und 30': 6, 'anfang 30': 4, 'mitte 30': 3, 'anfang 40': 2, 'mitte 40': 2, 'zwischen 40 und 50': 2, 'ende 50': 1, 'über 60': 1, }}
+hintergründe = {
+    'Zeit': {'neu in der Gemeinschaft': 1, 'voll eingearbeitet': 3, 'seit langer Zeit dabei': 4, 'von Geburt an indoktriniert': 5},
+    'Familie': {'Single': 2, 'In einer Beziehung': 2, 'Verheiratet': 2, 'Verwitwet': 1, 'Geschieden': 1},
+    'Familienzufriedenheit': {'glücklich': 2, 'zufrieden': 3, 'verbittert': 1, 'auf der Suche nach Veränderung': 2},
+    'Alter': {'gerade Volljährig': 2, 'zwischen 20 und 30': 6, 'anfang 30': 4, 'mitte 30': 3, 'anfang 40': 2, 'mitte 40': 2, 'zwischen 40 und 50': 2, 'ende 50': 1, 'über 60': 1, }
+}
+namedMotivation = {
+    'Alle': {
+        'Anführerin': ' muss das Sagen haben.',
+        'Händlerin': ' will ein gutes Geschäft machen.',
+        'Gigolo': ' will im Mittelpunkt stehen.',
+        'Tyrannin': ' will andere einschüchtern.',
+        'Guru': ' strebt nach metaphysischer Erkenntnis.',
+        'Punk': ' will gesellschaftliche Konventionen brechen.',
+        'Schlaubergerin': ' glaubt alles zu wissen und will andere lehren.',
+        'Rebellin': ' ist gegen Autorität.',
+        'Perfektionistin': ' hat sehr hohe Maßstäbe und erwartet diese auch bei Anderen.',
+        'Altmodisch': ' hält am Altbewährten fest.',
+        'Rohling': ' bevorzugt Macht und Gewalt als Werkzeug.',
+        'Schmarotzerin': ' ist zu faul zum arbeiten und läßt Andere die Dinge erledigen.',
+        'Soldatin': ' mag klare Ziele und Abläufe.',
+        'Überlebenskünstlerin': ' gibt niemals auf.',
+        'kindliches Verhalten': ' ist nicht bereit Verantwortung zu übernehmen, unreif oder will beschützt werden.',
+        'Wissenschaftlerin': ' will alles verstehen und handelt seht methodisch und logisch.',
+        'Partyheldin': ' will bei allem Spaß haben und das Leben genießen.',
+    },
+    'Garou': {
+        'militanter Krieger': ' sieht den Kampf als oberste Priorität, ordnet andere Punkte der Litanei diesem Ziel unter.',
+        'Pazifist': ' verteidigt sich nur und versucht Konflikte mit Worten zu lösen.',
+        'Totalitärer Rudelführer': ' verhängt einen permanenten Kriegszustand, damit keine Herausforderung ausgesprochen werden kann.',
+        'Isolierte Politik': ' Kümmert sich nur um das eigene Rudelterritorium.',
+        'Wanderer': ' wandert meist von Septe zu Septe.',
+        'Umbraforscher': ' erkundet gerne das Umbra.',
+        'Agent der Geister': ' erledigt oft Angelegenheiten der Geister in der materiellen Welt.',
+        'Kind der Wyldnis': ' nutzt, so oft es geht Gestaltwandel und Gaben.',
+        'Kind der Weberin': ' handelt sehr strukturiert und mag Regeln.',
+        'Planer': ' hat für alles einen Plan.',
+        'Hobbyhandwerker': '  bastelt gerne herum.',
+        'Welpensucher': ' sucht Welpen nach der ersten Wandlung, um diese dann zu ihren Stämmen zu führen.',
+        'Einsamer Wolf': ' ist meist allein unterwegs.',
+        'Rudelkämpfer': ' ist meistens mit seinem Rudel unterweg.',
+        'Ehrenwolf': ' ist sehr auf die eigene Ehre bedacht.',
+        'fieser Kämpfer': ' ist kein Trick zu schmutzig, um zu gewinnen.',
+        'Aktivist': ' setzt sich hingebungsvoll für ein Ziel ein.',
+        'Faulpelz': ' ist träge, muss immer von Anderen motiviert werden.',
+        'Hobbyhistoriker': ' beschäftigt sich mit der Geschichte.',
+        'Egoist': ' ist nur auf den eigenen Vorteil bedacht.',
+        'neugierig': ' steckt die Nase gerne in fremde Angelegenheiten.',
+        'Antikapitalist': ' sieht in den Konzernen die Wurzel des Bösen.',
+        'Rätselfreund': ' liebt es geistige Herausforderungen zu lösen.',
+        'Sünden der Vergangenheit': ' wird von den eigenen Sünden oder denen der Vorfahren oder Familie verfolgt.',
+        'Architekt': ' will etwas Dauerhaftes errichten.',
+    },
+    'Vampire': {
+        'Einsamer Wolf': ' ist meist allein unterwegs.',
+        'Pazifist': ' verteidigt sich nur, versucht Konflikte mit Worten zu lösen.',
+        'Isolierte Politik': ' kümmert sich nur um das eigene Territorium.',
+        'Wanderer': ' zieht meist herum und bleibt nirgends dauerhaft.',
+        'Okkultist': ' studiert die okkulten Mythen.',
+        'Teamplayer': ' arbeitet lieber in der Gruppe.',
+        'Ehrenmann/frau': ' ist sehr auf Ehre bedacht.',
+        'fieser Taktiker': ' ist kein Trick zu schmutzig, um zu gewinnen.',
+        'Aktivist': ' setzt sich hingebungsvoll für ein Ziel ein.',
+        'Faulpelz': ' ist träge und muss immer von Anderen motiviert werden.',
+        'Hobbyhistoriker': ' beschäftigt sich mit der Geschichte.',
+        'Egoist': ' ist nur auf den eigenen Vorteil bedacht.',
+        'Neugierig': ' steckt die Nase gerne in fremde Angelegenheiten.',
+        'Antikapitalist': ' sieht in den Konzernen die Wurzel des Bösen.',
+        'Rätselfreund': ' liebt es geistige Herausforderungen zu lösen.',
+        'Sünden der Vergangenheit': ' wird von den eigenen Sünden oder denen der Vorfahren oder Familie verfolgt.',
+        'Architekt': ' will etwas Dauerhaftes errichten.',
+        'Kind der Magie': ' nutzt, so oft es geht, übernatürliche Kräfte.',
+        'Struktur und Ordnung': ' handelt sehr strukturiert und mag Regeln.',
+        'Planer': ' hat für alles einen Plan.',
+        'Hobbyhandwerker': ' bastelt gerne herum.',
+    },
+}
+
 motivation = {'Persönlicher Machtgewinn': 1, 'Anerkennung': 3, 'Neugierde': 1, 'Familiengründung': 2, 'Beschützen': 3,
               'Selbstlose Opferbereitschaft': 2, 'Angst vor Bösem/Weltuntergang': 1, 'Pflichtgefühl': 6, 'Rache': 1}
 pläne = {'Rang aufstieg': 3, 'Vermögenszuwachs': 1, 'Partner finden und Kinder machen': 2,
          'Nachforschungen': 1, 'Training (Fähigkeitssteigerung)': 2, 'auf Befehle warten': 4, 'Flucht': .5, 'Rache': 1}
 richtlinien = {'Ich vor allem': 2, 'Familie vor allem': 4, 'Ehre vor allem': 1,
                'Bedacht statt Übermut': 3, 'Für das höhere Wohl': 2, 'Gerechtigkeit für alle': 1, }
-einstellung = {'Wyrm': {'Sofort vernichten': 6, 'Verstehen um zu vernichten': 5, 'Verstehen um zu verhindern': 2, 'Heilen/bekehren': 1}, 'Rangordnung': {'Unantastbar': 2, 'von Gaia gewollt': 2, 'nötig für das Überleben': 3,
-                                                                                                                                                         'wie sie ist': 3, 'ein Relikt und Hindernis aus alter Zeit': 2, 'die Wurzel des Untergangs': .5}, 'Rudel': {'Liebevoll': .5, 'Freundlich': 1, 'Offen': 3, 'Neutral': 3, 'Verschlossen': 2, 'Misstrauisch': 1, 'Feindselig': .5, 'Hass': .25}}
+einstellung = {
+    'Wyrm': {'Sofort vernichten': 6, 'Verstehen um zu vernichten': 5, 'Verstehen um zu verhindern': 2, 'Heilen/bekehren': 1},
+    'Rangordnung': {'Unantastbar': 2, 'von Gaia gewollt': 2, 'nötig für das Überleben': 3, 'wie sie ist': 3, 'ein Relikt und Hindernis aus alter Zeit': 2, 'die Wurzel des Untergangs': .5},
+    'Rudel': {'Liebevoll': .5, 'Freundlich': 1, 'Offen': 3, 'Neutral': 3, 'Verschlossen': 2, 'Misstrauisch': 1, 'Feindselig': .5, 'Hass': .25}
+}
 wissen = {'volles Wissen und Verstehen': .5, 'Wissen und Ahnung über Bedeutung': 1,
           'lückenhaftes Wissen': 2, 'wenig Ahnung': 2, 'nur Gerüchte gehört': 5, 'kein Wissen': 4, }
-ausbildung = {'Art': {'im Nahkampf': 2, 'im Fernkampf': 4, 'in Selbstverteidigung': 2, 'im Handwerk': 3, 'als Führungsperson': 1, 'in Medizin': 3,
-                      'über altes Wissen': .5}, 'Güte': {'exzellente': 2, 'fortgeschrittene': 5, 'grundlegende': 4, 'schlechte': 2, 'fehlerhafte': .5}, 'Anzahl': {1: 1, 2: 2, 3: 1, 4: .5}}
-schwerpunkte = {'Attribute': {'Körperlich': 1, 'Sozial': 1, 'Geistig': 1},
-                'Strategie': {'Offensiv': 1, 'Defensiv': 1, 'Passiv': 1}}
+ausbildung = {
+    'Art': {'im Nahkampf': 2, 'im Fernkampf': 4, 'in Selbstverteidigung': 2, 'im Handwerk': 3, 'als Führungsperson': 1, 'in Medizin': 3,                      'über altes Wissen': .5},
+    'Güte': {'exzellente': 2, 'fortgeschrittene': 5, 'grundlegende': 4, 'schlechte': 2, 'fehlerhafte': .5},
+    'Anzahl': {1: 1, 2: 2, 3: 1, 4: .5}
+}
+schwerpunkte = {
+    'Attribute': {'Körperlich': 1, 'Sozial': 1, 'Geistig': 1},
+    'Strategie': {'Offensiv': 1, 'Defensiv': 1, 'Passiv': 1}
+}
 factor = {'exzellente': 3, 'fortgeschrittene': 2,
           'grundlegende': 1, 'schlechte': 0, 'fehlerhafte': -2}
-skills = {'im Nahkampf': ['Nahkampf', 'Widerstand'], 'im Fernkampf': ['Fernkampf', 'Wahrnehmen'], 'in Selbstverteidigung': ['Widerstand', 'Wille', 'Verstecken'], 'im Handwerk': [
-    'Handwerk'], 'als Führungsperson': ['Wille', 'Lügen', 'Wahrnehmen'], 'in Medizin': ['Medizin'], 'über altes Wissen': ['Wahrnehmen']}
+skills = {
+    'im Nahkampf': ['Nahkampf', 'Widerstand'],
+    'im Fernkampf': ['Fernkampf', 'Wahrnehmen'],
+    'in Selbstverteidigung': ['Widerstand', 'Wille', 'Verstecken'],
+    'im Handwerk': ['Handwerk'],
+    'als Führungsperson': ['Wille', 'Lügen', 'Wahrnehmen'],
+    'in Medizin': ['Medizin'],
+    'über altes Wissen': ['Wahrnehmen']}
 poolMaxes = {'Nahkampf': 7, 'Fernkampf': 7, 'Widerstand': 5, 'Wille': 3,
              'Lügen': 6, 'Wahrnehmen': 6, 'Verstecken': 6, 'Handwerk': 6, 'Medizin': 6}
 stämme = {'Fianna': 1, 'Glaswandler': 1, 'Kinder Gaias': 1, 'Knochenbeißer': 1, 'Nachfahren des Fenris': 1, 'Rote Klauen': 1,
@@ -110,8 +202,7 @@ def MakeValue(nsc):
         print('Ausbildungen sollten erstellt werden, bevor Würfelpools erzeugt werden.')
         return nsc
     NameToSeed(nsc['vorname']+' '+nsc['nachname'])
-    baseVal = (3 if nsc['art'] == 'Kinfolk' else 5) + \
-        int(nsc['Powerlevel'] / 2)
+    baseVal = (3 if nsc['art'] == 'Kinfolk' or nsc['art'] == 'Human' else 5) + int(nsc['Powerlevel'] / 2)
     charPools = {'Nahkampf': baseVal, 'Fernkampf': baseVal, 'Widerstand': baseVal, 'Wille': baseVal, 'Lügen': baseVal,
                  'Wahrnehmen': baseVal, 'Verstecken': baseVal, 'Handwerk': baseVal, 'Medizin': baseVal}
     badSkill = min(0, nsc['Powerlevel'] - 2)
@@ -124,8 +215,7 @@ def MakeValue(nsc):
         for skill in skills[SkillArt]:
             charPools[skill] += factor[SkillGüte]
     for pool in charPools:
-        charPools[pool] = min(
-            charPools[pool], poolMaxes[pool] + nsc['Powerlevel'])
+        charPools[pool] = min(charPools[pool], poolMaxes[pool] + nsc['Powerlevel'])
         charPools[pool] = max(charPools[pool], 1)
     nsc['dicePools'] = charPools
     return nsc
@@ -135,11 +225,17 @@ def MakeDescriptions(nsc):
     NameToSeed(nsc['vorname']+' '+nsc['nachname'])
     nsc['alter'] = DrawWithWeights(hintergründe["Alter"])
     nsc['zeit'] = DrawWithWeights(hintergründe["Zeit"])
-    nsc['familie'] = DrawWithWeights(hintergründe["Familie"]) if nsc['art'] == "Kinfolk" else DrawWithWeightsUnique(
-        hintergründe["Familie"], ["Verheiratet (mit Garou)"])
+    nsc['familie'] = DrawWithWeights(hintergründe["Familie"])
     nsc['motivation'] = DrawWithWeights(motivation)
     nsc['pläne'] = DrawWithWeights(pläne)
-    nsc['motto'] = DrawWithWeights(richtlinien)
+    #nsc['motto'] = DrawWithWeights(richtlinien)
+    print(f'Ziehe Motto für {nsc["art"]}')
+    mottos = namedMotivation['Alle']
+    if nsc['art'] in vorzeichen:
+        mottos.update(namedMotivation['Garou'])
+    if nsc['art'] == 'vampir':
+        mottos.update(namedMotivation['Vampire'])
+    nsc['motto'] = random.choice(list(mottos.items()))
     nsc['wyrm'] = DrawWithWeights(einstellung['Wyrm'])
     nsc['rangordnung'] = DrawWithWeights(einstellung['Rangordnung'])
     nsc['scRudel'] = DrawWithWeights(einstellung['Rudel'])
@@ -150,7 +246,7 @@ def MakeDescriptions(nsc):
 
 def MakeBreed(nsc, brut=''):
     NameToSeed(nsc['vorname']+' '+nsc['nachname'])
-    if nsc['art'] != 'Kinfolk' and nsc['art'] != 'Vampir' and nsc['art'] != 'Human' and nsc['art'] != 'Fomor':
+    if nsc['art'] in vorzeichen:
         nsc['brut'] = DrawWithWeights(bruten) if brut == '' else brut
         #print(f'{nsc["vorname"]} {nsc["nachname"]}, {nsc["art"]} {nsc["brut"]} {nsc["stamm"]}')
         nsc['gaben'] = {}
@@ -161,19 +257,19 @@ def MakeBreed(nsc, brut=''):
                 nsc['rang'] = 'Legende'
             else:
                 nsc['rang'] = Ränge[nsc['Powerlevel']]
-            gabe = LookUpTexteByName(DrawKeyUnique(
-                GetGaben(nsc['brut'], nsc['art'], nsc['stamm'], nsc['rang']), nsc['gaben']))
+            gabe = LookUpTexteByName(DrawKeyUnique(GetGaben(nsc['brut'], nsc['art'], nsc['stamm'], nsc['rang']), nsc['gaben']))
             nsc['gaben'][gabe['name']] = gabe
+    if nsc['art'] == 'Vampir':
+        nsc['Disziplinen'] = {}
+        # TODO add Disziplinen
     if nsc['art'] == 'Fomor':
         nsc['gaben'] = {}
         if random.random() > .2:
-            nsc['gaben']['Immunität gegen das Delirium'] = LookUpTexteByName(
-                'Immunität gegen das Delirium')
+            nsc['gaben']['Immunität gegen das Delirium'] = LookUpTexteByName('Immunität gegen das Delirium')
         if random.random() > .66:
             nsc['gaben']['Berserker'] = LookUpTexteByName('Berserker')
         for _ in range(max(1, min(nsc['Powerlevel'], 4))):
-            gabe = LookUpTexteByName(
-                DrawKeyUnique(GetFomorGaben(), nsc['gaben']))
+            gabe = LookUpTexteByName(DrawKeyUnique(GetFomorGaben(), nsc['gaben']))
             nsc['gaben'][gabe['name']] = gabe
             pass
     return nsc
@@ -181,15 +277,12 @@ def MakeBreed(nsc, brut=''):
 
 def MakeExpertise(nsc):
     NameToSeed(nsc['vorname']+' '+nsc['nachname'])
-    nrAusbildung = DrawWithWeights(
-        ausbildung['Anzahl']) + (0 if nsc['art'] == "Kinfolk" else 1)
+    nrAusbildung = DrawWithWeights(ausbildung['Anzahl']) + (0 if nsc['art'] == "Kinfolk" else 1)
     nscAusbildungen = []
     nscGüte = []
     for _ in range(nrAusbildung):
-        nscAusbildungen.append(DrawWithWeightsUnique(
-            ausbildung['Art'], nscAusbildungen))
-        nscGüte.append(DrawWithWeightsUnique(
-            ausbildung['Güte'], [] if nsc['art'] == "Kinfolk" else ['fehlerhafte']))
+        nscAusbildungen.append(DrawWithWeightsUnique(ausbildung['Art'], nscAusbildungen))
+        nscGüte.append(DrawWithWeightsUnique(ausbildung['Güte'], [] if nsc['art'] == "Kinfolk" else ['fehlerhafte']))
     nsc['ausbildung'] = list(zip(nscAusbildungen, nscGüte))
     return nsc
 
@@ -214,7 +307,7 @@ def MakeBase(seed=-1, Art='Kinfolk', Stamm='', Powerlevel=0, occupation=''):
                 nameData = names[ndNr]
                 break
     if 'vorname' not in nameData:
-        print(f'{seed}, {Art}, {Stamm}, {Powerlevel}, {occupation}')
+        print(f'VORNAME not recognised returning random ({seed})')
         return MakeBase(-1, Art, Stamm, Powerlevel, occupation)
     nsc = {
         'vorname': nameData['vorname'].replace('_', ' '),
@@ -225,7 +318,7 @@ def MakeBase(seed=-1, Art='Kinfolk', Stamm='', Powerlevel=0, occupation=''):
         'occupation': occupation,
         'job': random.sample(berufe, 1)[0]
     }
-    if Art == 'Human':
+    if Art == 'Human' or Art == 'vampir':
         nsc['art'] = Art
         return nsc
 
@@ -285,6 +378,7 @@ def GetFace(nsc):
     else:
         bildEmotion = 'neutral'
     gender = 'male'if nsc['pronomen'] == 'er' else 'female'
+    print(f'getting Image for ({gender}) {nsc["vorname"]+" "+nsc["nachname"]}')
     try:
         url = f'https://generated.photos/faces/{bildAlter}/{bildEmotion}/{gender}'
         soup = BeautifulSoup(requests.get(url).text, "html.parser")
@@ -311,26 +405,25 @@ def PrintNSC(nsc, packname, language='Plain', shortPrint=False):
     if 'rang' in nsc:
         result += f'{nsc["rang"]} '
 
-    result += f'{nsc["art"]}'
+    result += f'{nsc["art"].upper()}'
     if 'stamm' in nsc:
         result += f' {nsc["stamm"]}'
     if 'brut' in nsc and len(nsc['brut']) > 0:
-        result += f' ({nsc["brut"]})'+Newline(language)
+        result += f' ({nsc["brut"]})'
     else:
         result += Newline(language)
     if 'stamm' in nsc and nsc['stamm'] == 'Tänzer der schwarzen Spirale':
-        result += f'{nsc["Abstammung"]}'+Newline(language)
+        result += f'{nsc["Abstammung"]}'
+
+    # Kurzform Wesen
+    result += f' ({nsc["motto"][0]}) '+Newline(language)
 
     # Rollenspiel
     result += Header('Rollenspiel', 'Vorschläge', language, 3)
-    result += f'Ein Persönlichkeitsmerkmal ist {Bold(nsc["grundstimmung"],language)}'+Newline(
-        language)
-    result += 'Körperhaltung: '+Bold(nsc["haltung"][0], language)+(
-        (f' ({nsc["haltung"][1]})'+Newline(language)) if not shortPrint else Newline(language))
-    result += 'Gestik: '+Bold(nsc["gestik"][0], language)+(
-        (f' ({nsc["gestik"][1]})'+Newline(language)) if not shortPrint else Newline(language))
-    result += 'Mimik: '+Bold(nsc["mimik"][0], language)+(
-        (f' ({nsc["mimik"][1]})'+Newline(language)) if not shortPrint else Newline(language))
+    result += f'Ein Persönlichkeitsmerkmal ist {Bold(nsc["grundstimmung"],language)}'+Newline(language)
+    result += 'Körperhaltung: '+Bold(nsc["haltung"][0], language)+((f' ({nsc["haltung"][1]})'+Newline(language)) if not shortPrint else Newline(language))
+    result += 'Gestik: '+Bold(nsc["gestik"][0], language)+((f' ({nsc["gestik"][1]})'+Newline(language)) if not shortPrint else Newline(language))
+    result += 'Mimik: '+Bold(nsc["mimik"][0], language)+((f' ({nsc["mimik"][1]})'+Newline(language)) if not shortPrint else Newline(language))
 
     # Aussehen
     result += Header('Aussehen', '', language, 3)
@@ -340,20 +433,22 @@ def PrintNSC(nsc, packname, language='Plain', shortPrint=False):
     result += Header('Beschreibung:', '', language, 3)
     result += f'{nsc["vorname"]} ({nsc["alter"]}), ist {nsc["zeit"]} und aktuell {Bold(nsc["familie"],language)}. {StartCapital(nsc["pronomen"])} arbeitet(e) als {nsc["job"]}. {Newline(language)}'
     result += f'{nsc["possesivpronomen"][0].upper()+nsc["possesivpronomen"][1:]} eigentliche Motivation ist {nsc["motivation"]} und der zur Zeit verfolgte Plan hat {nsc["pläne"]} als Ziel.{Newline(language)}'
-    result += f'Die Handlungen sind geprägt durch das Motto {Bold(nsc["motto"],language)}'
+    result += f'{nsc["vorname"]} {nsc["motto"][1]}'
     if nsc['art'] == 'Human':
-        result += '.' + \
-            Newline(
-                language)+f'Gegenüber dem SC Rudel ist {nsc["pronomen"]} {Bold(nsc["scRudel"],language)}.'
+        result += Newline(language) + f'Gegenüber dem SC Rudel ist {nsc["pronomen"]} {Bold(nsc["scRudel"],language)}.'
+    elif nsc['art'] == 'vampir':
+        pass
     else:
         if 'stamm' in nsc and nsc['stamm'] == 'Tänzer der schwarzen Spirale':
-            result += f'. Die Rangordnung ist {nsc["rangordnung"]} für {nsc["pronomen"] if nsc["pronomen"]=="sie" else "ihn"}. {Newline(language)}'
+            result += f' Die Rangordnung ist {nsc["rangordnung"]} für {nsc["pronomen"] if nsc["pronomen"]=="sie" else "ihn"}. {Newline(language)}'
             pass
         else:
-            result += f' und über den Wyrm denkt {nsc["pronomen"]}: {nsc["wyrm"]}.{Newline(language)}'
+            result += f' Über den Wyrm denkt {nsc["pronomen"]}: {nsc["wyrm"]}.{Newline(language)}'
             result += f'Die Rangordnung ist für {nsc["pronomen"] if nsc["pronomen"]=="sie" else "ihn"} {nsc["rangordnung"]} und gegenüber dem SC Rudel ist {nsc["pronomen"]} {Bold(nsc["scRudel"],language)}. '
+
     result += f'Über den {Bold("Plot",language)} hat {nsc["vorname"]} {nsc["plot"]}. '
     result += f'In Konflikten reagiert {nsc["pronomen"]} meist {Bold(nsc["reaktion"],language)}.{Newline(language)}'
+
     if 'stamm' in nsc and nsc['stamm'] == 'Tänzer der schwarzen Spirale':
         result += f'{nsc["vorname"]} leidet an {nsc["Geistesstörung"]["Grad"]}{nsc["Geistesstörung"]["Art"]}{Newline(language)}'
         result += f'{Bold("Äußere Merkmale:",language)}{Newline(language)}'
@@ -388,56 +483,46 @@ def PrintNSC(nsc, packname, language='Plain', shortPrint=False):
     # Arbeit oder Amt
     if len(nsc['occupation']) > 0:
         if nsc['art'] != 'Kinfolk':
-            result += f'In der Septe hat {nsc["vorname"]} folgende Ämter: {Bold(nsc["occupation"],language)}'+Newline(
-                language)
+            result += f'In der Septe hat {nsc["vorname"]} folgende Ämter: {Bold(nsc["occupation"],language)}'+Newline(language)
         else:
-            result += f'In der Siedlung arbeitet {nsc["vorname"]} als {Bold(nsc["occupation"],language)}'+Newline(
-                language)
+            result += f'In der Siedlung arbeitet {nsc["vorname"]} als {Bold(nsc["occupation"],language)}'+Newline(language)
 
     # ausbildung
-    if not shortPrint:
-        result += f'Um einen Platz in der Gesellschaft einzunehmen gab es {len(nsc["ausbildung"])} Ausbildung{"en" if len(nsc["ausbildung"])>1 else ""} für {nsc["pronomen"] if nsc["pronomen"]=="sie" else "ihn"}:{Newline(language)}'
-        result += ListLines([f'{güte} Ausbildung {Bold(ausb,language)}' for ausb,
-                             güte in nsc["ausbildung"]], language)
+    if nsc['art']!= 'vampir':
+        if not shortPrint:
+            result += f'Um einen Platz in der Gesellschaft einzunehmen gab es {len(nsc["ausbildung"])} Ausbildung{"en" if len(nsc["ausbildung"])>1 else ""} für {nsc["pronomen"] if nsc["pronomen"]=="sie" else "ihn"}:{Newline(language)}'
+            result += ListLines([f'{güte} Ausbildung {Bold(ausb,language)}' for ausb,                                güte in nsc["ausbildung"]], language)
+    else:
+        result += PrintVampire(nsc,language)
 
     # Würfelpools
-    result += Header('Würfelpools', language, 3)
-    result += Table(6, [f'{cell}' for pool in nsc['dicePools']
-                        for cell in [pool, nsc["dicePools"][pool]]], language)
+    result += Header('Würfelpools','', language, 3)
+    result += Table(6, [f'{cell}' for pool in nsc['dicePools'] for cell in [pool, nsc["dicePools"][pool]]], language)
 
     # Gaben
     if nsc['art'] != 'Kinfolk' and 'gaben' in nsc:
         result += Header('Gaben', 'Vorschläge', language, 3)
         if not shortPrint:
-            result += ListLines([Bold(gabe, language)+':'+nsc['gaben'][gabe]['fluffText']+Newline(language)+Bold(
-                'System: ', language)+nsc['gaben'][gabe]['systemText'] for gabe in nsc['gaben']], language)
+            result += ListLines([Bold(gabe, language)+':'+nsc['gaben'][gabe]['fluffText']+Newline(language) +
+                                 Bold('System: ', language)+nsc['gaben'][gabe]['systemText'] for gabe in nsc['gaben']], language)
         else:
-            result += ListLines([Bold(gabe, language)
-                                 for gabe in nsc['gaben']], language)
+            result += ListLines([Bold(gabe, language) for gabe in nsc['gaben']], language)
 
     if not shortPrint:
-        baseLink = Newline("HTML") + \
-            f'<a class="no-print" href="http://{baseURL}/nsc/'
-        art = nsc["art"].lower(
-        ) if nsc["art"] == "Kinfolk" or nsc["art"] == "Human" or nsc["art"] == "Fomor" else "garou"
+        baseLink = Newline("HTML") + f'<a class="no-print" href="{baseURL}/nsc/'
+        art = nsc["art"].lower() if nsc["art"] == "Kinfolk" or nsc["art"] == "Human" or nsc["art"] == "Fomor" else "garou"
         if 'stamm' in nsc and nsc['stamm'] == 'Tänzer der schwarzen Spirale':
             art = 'bsd'
         seed = (nsc["vorname"]+" "+nsc["nachname"]).replace(" ", "_")
 
-        result += baseLink + \
-            f'{art}/{nsc["Powerlevel"]}/{language.lower()}/{seed}{packString}">Dieser NCS ({nsc["vorname"]+" "+nsc["nachname"]})</a>'
-        result += baseLink + \
-            f'{art}/{nsc["Powerlevel"]+1}/{language.lower()}/{seed}{packString}">Stärker</a>'
-        result += baseLink + \
-            f'{art}/{nsc["Powerlevel"]-1}/{language.lower()}/{seed}{packString}">Schwächer</a>{Newline("HTML")}'
+        result += baseLink + f'{art}/{nsc["Powerlevel"]}/{language.lower()}/{seed}{packString}">Dieser NCS ({nsc["vorname"]+" "+nsc["nachname"]})</a>'
+        result += baseLink + f'{art}/{nsc["Powerlevel"]+1}/{language.lower()}/{seed}{packString}">Stärker</a>'
+        result += baseLink + f'{art}/{nsc["Powerlevel"]-1}/{language.lower()}/{seed}{packString}">Schwächer</a>{Newline("HTML")}'
         if language == 'HTML':
-            result += baseLink + \
-                f'{art}/{nsc["Powerlevel"]}/latex/{seed}{packString}">Dieser NCS ({seed}) als LaTeX Subsection</a>'
+            result += baseLink + f'{art}/{nsc["Powerlevel"]}/latex/{seed}{packString}">Dieser NCS ({seed}) als LaTeX Subsection</a>'
         else:
-            result += baseLink + \
-                f'{art}/{nsc["Powerlevel"]}/html/{seed}{packString}">Dieser NCS ({seed}) als HTML Subsection</a>'
-        result += baseLink + \
-            f'{art}/{nsc["Powerlevel"]}/{language.lower()}">Zufall neu</a>'
+            result += baseLink + f'{art}/{nsc["Powerlevel"]}/html/{seed}{packString}">Dieser NCS ({seed}) als HTML Subsection</a>'
+        result += baseLink + f'{art}/{nsc["Powerlevel"]}/{language.lower()}">Zufall neu</a>'
     return result
 
 
@@ -449,14 +534,13 @@ def BuildNSC(seed=-1, Art='Kinfolk', Stamm='', Powerlevel=0, language='Plain', p
     nsc = MakeExpertise(nsc)
     nsc = MakeDescriptions(nsc)
     nsc = MakeValue(nsc)
-    art = nsc["art"].lower(
-    ) if nsc["art"] == "Kinfolk" or nsc["art"] == "Human" else "garou"
+    art = nsc["art"].lower() if nsc["art"] == "Kinfolk" or nsc["art"] == "Human" else "garou"
     seed = (nsc["vorname"]+" "+nsc["nachname"]).replace(" ", "_")
     if packname != '' and 'packname' in packname:
         packString = f'?packname={packname["packname"]}'
     else:
         packString = ''
-    nsc['link'] = f'<a href="http://{baseURL}/nsc/{art}/{nsc["Powerlevel"]}/{language.lower()}/{seed}{packString}">{nsc["vorname"]+" "+nsc["nachname"]}</a>'
+    nsc['link'] = f'<a href="{baseURL}/nsc/{art}/{nsc["Powerlevel"]}/{language.lower()}/{seed}{packString}">{nsc["vorname"]+" "+nsc["nachname"]}</a>'
 
     return nsc
 
@@ -473,14 +557,13 @@ def BuildBSD(seed=-1, Powerlevel=0, language='Plain', packname=None):
     tänzerMotivationen = {'Wahnsinn': 5}
     tänzerMotivationen.update(motivation)
     bsd['motivation'] = DrawWithWeights(tänzerMotivationen)
-    bsd['motto'] = DrawWithWeightsUnique(
-        richtlinien, ['Bedacht statt Übermut'])
+    bsd['motto'] = DrawWithWeightsUnique(richtlinien, ['Bedacht statt Übermut'])
     seed = (bsd["vorname"]+" "+bsd["nachname"]).replace(" ", "_")
     if packname is not None and 'packname' in packname:
         packString = f'?packname={packname["packname"]}'
     else:
         packString = ''
-    bsd['link'] = f'<a href="http://{baseURL}/nsc/bsd/{bsd["Powerlevel"]}/{language.lower()}/{seed}{packString}">{bsd["vorname"]+" "+bsd["nachname"]}</a>'
+    bsd['link'] = f'<a href="{baseURL}/nsc/bsd/{bsd["Powerlevel"]}/{language.lower()}/{seed}{packString}">{bsd["vorname"]+" "+bsd["nachname"]}</a>'
     return bsd
 
 
@@ -496,8 +579,7 @@ def BuildFomor(seed, Powerlevel, language):
     tänzerMotivationen = {'Wahnsinn': 5}
     tänzerMotivationen.update(motivation)
     fomor['motivation'] = DrawWithWeights(tänzerMotivationen)
-    fomor['motto'] = DrawWithWeightsUnique(
-        richtlinien, ['Bedacht statt Übermut'])
+    fomor['motto'] = DrawWithWeightsUnique(richtlinien, ['Bedacht statt Übermut'])
     return fomor
 
 
@@ -523,20 +605,18 @@ def BuildGarouPack(seed=-1, limitTribes=[], limitBreeds=[], minMembers=3, maxMem
     packMember = random.randint(minMembers, maxMembers)
     pack = []
     for _ in range(packMember):
-        nsc = BuildNSC(
-            seed=-1,
-            Art='Garou',
-            packname=packname
-        )
+        nsc = BuildNSC(seed=-1,
+                       Art='Garou',
+                       packname=packname
+                       )
         # or nsc['art'] !='Galliard':
         while (len(limitTribes) > 0 and nsc['stamm'] in limitTribes) or (len(limitBreeds) > 0 and nsc['brut'] in limitBreeds):
-            nsc = BuildNSC(
-                seed=-1,
-                Art='Garou',
-                packname=packname
-            )
+            nsc = BuildNSC(seed=-1,
+                           Art='Garou',
+                           packname=packname
+                           )
         pack.append(nsc)
-    return {'packname': packname, 'pack': pack, 'link': f'<a href="http://{baseURL}/nsc/garoupack/?packname={packname}">Rudel: {packname.replace("_"," ")}</a>'}
+    return {'packname': packname, 'pack': pack, 'link': f'<a href="{baseURL}/nsc/garoupack/?packname={packname}">Rudel: {packname.replace("_"," ")}</a>'}
 
 
 def BuildBSDPack(seed=-1, limitBreeds=[], minMembers=3, maxMembers=6):
@@ -549,50 +629,44 @@ def BuildBSDPack(seed=-1, limitBreeds=[], minMembers=3, maxMembers=6):
     packMember = random.randint(minMembers, maxMembers)
     pack = []
     for _ in range(packMember):
-        nsc = BuildBSD(
-            seed=-1,
-            packname=packname
-        )
+        nsc = BuildBSD(seed=-1,
+                       packname=packname
+                       )
         # or nsc['art'] !='Galliard':
         while (len(limitBreeds) > 0 and nsc['brut'] in limitBreeds):
-            nsc = BuildBSD(
-                seed=-1,
-                packname=packname
-            )
+            nsc = BuildBSD(seed=-1,
+                           packname=packname
+                           )
         pack.append(nsc)
-    return {'packname': packname, 'pack': pack, 'link': f'<a href="http://{baseURL}/nsc/bsdpack/?packname={packname}">Rudel: {packname.replace("_"," ")}</a>'}
+    return {'packname': packname, 'pack': pack, 'link': f'<a href="{baseURL}/nsc/bsdpack/?packname={packname}">Rudel: {packname.replace("_"," ")}</a>'}
 
 
 def PrintPack(seed=-1, memberName='', language='HTML', limitTribes=[], limitBreeds=[], minMembers=3, maxMembers=6):
     pack = BuildGarouPack(seed, limitTribes, limitBreeds,
                           minMembers, maxMembers)
 
-    result = Header(pack['packname'], '', language, 2) if memberName == '' else Header(
-        pack['link'], '', language, 3)
+    result = Header(pack['packname'], '', language, 2) if memberName == '' else Header(pack['link'], '', language, 3)
     packMemberNames = []
     for nsc in pack['pack']:
         packMemberNames.append(f'{nsc["vorname"]} {nsc["nachname"]}')
         if language == 'HTML':
-            result += f'{Newline(language)}<a href="http://{baseURL}/nsc/garou/0/html/{nsc["vorname"]+"_"+nsc["nachname"]}?packname={pack["packname"]}">{nsc["vorname"]} {nsc["nachname"]} ({nsc["art"]} von den {nsc["stamm"]})</a>'
+            result += f'{Newline(language)}<a href="{baseURL}/nsc/garou/0/html/{nsc["vorname"]+"_"+nsc["nachname"]}?packname={pack["packname"]}">{nsc["vorname"]} {nsc["nachname"]} ({nsc["art"]} von den {nsc["stamm"]})</a>'
         else:
-            result += f'{nsc["vorname"]} {nsc["nachname"]} ({nsc["art"]} von den {nsc["stamm"]})'+Newline(
-                language)
+            result += f'{nsc["vorname"]} {nsc["nachname"]} ({nsc["art"]} von den {nsc["stamm"]})'+Newline(language)
     result += BuildRelationships(packMemberNames, memberName, language)
     return result
 
 
 def PrintBSDPack(seed=-1, limitBreeds=[], memberName='', minMembers=3, maxMembers=6, language='HTML'):
     pack = BuildBSDPack(seed, limitBreeds, minMembers, maxMembers)
-    result = Header(pack['packname'], '', language, 2) if memberName == '' else Header(
-        pack['link'], '', language, 3)
+    result = Header(pack['packname'], '', language, 2) if memberName == '' else Header(pack['link'], '', language, 3)
     packMemberNames = []
     for nsc in pack['pack']:
         packMemberNames.append(f'{nsc["vorname"]} {nsc["nachname"]}')
         if language == 'HTML':
-            result += f'{Newline(language)}<a href="http://{baseURL}/nsc/bsd/0/html/{nsc["vorname"]+"_"+nsc["nachname"]}?packname={pack["packname"]}">{nsc["vorname"]} {nsc["nachname"]} ({nsc["art"]} von den {nsc["stamm"]})</a>'
+            result += f'{Newline(language)}<a href="{baseURL}/nsc/bsd/0/html/{nsc["vorname"]+"_"+nsc["nachname"]}?packname={pack["packname"]}">{nsc["vorname"]} {nsc["nachname"]} ({nsc["art"]} von den {nsc["stamm"]})</a>'
         else:
-            result += f'{nsc["vorname"]} {nsc["nachname"]} ({nsc["art"]} von den {nsc["stamm"]})'+Newline(
-                language)
+            result += f'{nsc["vorname"]} {nsc["nachname"]} ({nsc["art"]} von den {nsc["stamm"]})'+Newline(language)
     result += BuildRelationships(packMemberNames, memberName, language)
     return result
 
@@ -607,8 +681,7 @@ def BuildRelationships(pack, activeName='', language='HTML'):
         others = random.sample([m for m in pack if m != member], 2)
         # print(relations)
         # print(others)
-        relString = [(relation + ' ' + other) if 'XX' not in relation else (
-            relation.replace('XX', other)) for relation, other in zip(relations, others)]
+        relString = [(relation + ' ' + other) if 'XX' not in relation else (relation.replace('XX', other)) for relation, other in zip(relations, others)]
         result += f'{Newline(language)}{member} {relString[0]} und {relString[1]}.'
     if activeName == '':
         return result
