@@ -2512,7 +2512,11 @@
 {
 "name":"Unnatürliches spüren",
 "fluffText":"Der Fomor kann die Anwesenheit übernatürlicher Kreaturen spüren, also etwa Vampire, Werwölfe, Magi und andere Geister.",
-"systemText":" Würfeln Sie Wahrnehmung + Okkultismus (Schwierigkeit 6). Ein zusätzlicher Wurf auf Intelligenz + Enigmas (Schwierigkeit 6) ist möglicherweise erforderlich, um festzustellen, welcher Art die übernatürliche Kreatur ist. Die Reichweite beträgt 20 m. Die Gabe Geruch des fließenden Wassers der Ragabash hebelt diese Kraft aus.• Unsichtbarkeit: Der Fomor ist so verändert, dass sich das Licht tatsächlich um ihn bricht, wenn er diese Kraft einsetzt. Solange er sich konzentriert und niemanden angreift, bleibt er unsichtbar.",
+"systemText":" Würfeln Sie Wahrnehmung + Okkultismus (Schwierigkeit 6). Ein zusätzlicher Wurf auf Intelligenz + Enigmas (Schwierigkeit 6) ist möglicherweise erforderlich, um festzustellen, welcher Art die übernatürliche Kreatur ist. Die Reichweite beträgt 20 m. Die Gabe Geruch des fließenden Wassers der Ragabash hebelt diese Kraft aus."
+},
+{
+"name":"Unsichtbarkeit",
+"fluffText":" Der Fomor ist so verändert, dass sich das Licht tatsächlich um ihn bricht, wenn er diese Kraft einsetzt. Solange er sich konzentriert und niemanden angreift, bleibt er unsichtbar.",
 "systemText":" Der Fomor setzt einen Willenskraftpunkt ein und würfelt Geistesschärfe + Heimlichkeit (Schwierigkeit 7). Jeder, der spezifisch nach einem verborgenen Fomor sucht, kann versuchen, Wahrnehmung + Aufmerksamkeit (Schwierigkeit 8) dagegen zu würfeln. Wyrmgespür erfordert keinen Wurf gegen Widerstand, kann aber nicht genau feststellen, wo sich der Fomor befindet. Die Kraft wirkt bis zum Ende der Szene, oder bis der Fomor sich in den Kampf stürzt."
 },
 {

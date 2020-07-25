@@ -14,7 +14,8 @@ from .LookGen import *
 from .PackNameGen import *
 from .SpielHinweise import *
 from .bsdFomorGen import *
-from .config import baseURL,headerPart
+from .config import baseURL
+from .htmlCSSStuff import headerPart
 
 
 def MakePage(content, url=''):
@@ -99,7 +100,7 @@ def createGarouPackLinks(args):
 
 
 @app.route('/nsc/<art>/<powerlevel>/<language>/')
-@use_args({'packname': fields.Str(required=False)}, location="query")
+@use_args({'packname': fields.Str(required=False),'treeSeed': fields.Str(required=False)}, location="query")
 def HandleNSCCalls(args, art, powerlevel, language):
     if art in ['kinfolk', 'garou', 'Human']:
         return MakePage(CreateRandom(seed=-1, Art=art[0].upper()+art[1:], Powerlevel=int(powerlevel), language=language.upper(), packname=args, shortPrint=False), f'/nsc/{art}/')
@@ -115,7 +116,7 @@ def HandleNSCCalls(args, art, powerlevel, language):
 
 
 @app.route('/nsc/<art>/<powerlevel>/<language>/<seed>/')
-@use_args({'packname': fields.Str(required=False)}, location="query")
+@use_args({'packname': fields.Str(required=False),'treeSeed': fields.Str(required=False)}, location="query")
 def HandleNSCCallsWithSeed(args, art, powerlevel, language, seed):
     print(f'seed: {seed}')
     if art in ['kinfolk', 'garou', 'human']:
@@ -129,6 +130,7 @@ def HandleNSCCallsWithSeed(args, art, powerlevel, language, seed):
     elif art == 'fomor':
         return MakePage(str(CreateFomor(seed=seed, Powerlevel=int(powerlevel), language=language.upper())), f'/nsc/{art}/')
     return 'TODO'
+
 
 
 @app.route('/encounter/<gelaende>/<language>/')

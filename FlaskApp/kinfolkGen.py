@@ -405,7 +405,11 @@ def PrintNSC(nsc, packname, language='Plain', shortPrint=False):
     if 'rang' in nsc:
         result += f'{nsc["rang"]} '
 
-    result += f'{nsc["art"].upper()}'
+    if 'Clan' in nsc:        
+        result += f'{nsc["Clan"]} '
+    else:
+        result += f'{nsc["art"].upper()}'
+    
     if 'stamm' in nsc:
         result += f' {nsc["stamm"]}'
     if 'brut' in nsc and len(nsc['brut']) > 0:
@@ -526,21 +530,30 @@ def PrintNSC(nsc, packname, language='Plain', shortPrint=False):
     return result
 
 
-def BuildNSC(seed=-1, Art='Kinfolk', Stamm='', Powerlevel=0, language='Plain', packname='', occupation='', brut='', shortPrint=True):
+def BuildNSC(seed=-1, Art='Kinfolk', Stamm='', Powerlevel=0, language='HTML', packname='', occupation='', brut='', shortPrint=True ):
     nsc = MakeBase(seed, Art, Stamm, Powerlevel, occupation)
+    
+    packString = ''
+    treeSeed =''
+    nsc['treeSeed'] = -1
+    if packname != '' and 'packname' in packname:
+        packString = f'?packname={packname["packname"]}'
+    elif packname != '' and 'treeSeed' in packname:
+        treeSeed = f'?treeSeed={packname["treeSeed"]}'
+        nsc['treeSeed'] = packname["treeSeed"].replace("__","#").replace("_"," ")
+    
+
     nsc = MakeBeschreibung(nsc)
     nsc = MakeBreed(nsc, brut)
     nsc = MakePlayAdvise(nsc)
     nsc = MakeExpertise(nsc)
     nsc = MakeDescriptions(nsc)
     nsc = MakeValue(nsc)
+    if nsc['art']=='vampir':
+        nsc = MakeVampire(nsc)
     art = nsc["art"].lower() if nsc["art"] == "Kinfolk" or nsc["art"] == "Human" else "garou"
     seed = (nsc["vorname"]+" "+nsc["nachname"]).replace(" ", "_")
-    if packname != '' and 'packname' in packname:
-        packString = f'?packname={packname["packname"]}'
-    else:
-        packString = ''
-    nsc['link'] = f'<a href="{baseURL}/nsc/{art}/{nsc["Powerlevel"]}/{language.lower()}/{seed}{packString}">{nsc["vorname"]+" "+nsc["nachname"]}</a>'
+    nsc['link'] = f'<a href="{baseURL}/nsc/{art}/{nsc["Powerlevel"]}/{language.lower()}/{seed}{packString}{treeSeed}">{nsc["vorname"]+" "+nsc["nachname"]}</a>'
 
     return nsc
 
