@@ -557,7 +557,6 @@ def BuildBSD(seed=-1, Powerlevel=0, language='Plain', packname=None):
     tänzerMotivationen = {'Wahnsinn': 5}
     tänzerMotivationen.update(motivation)
     bsd['motivation'] = DrawWithWeights(tänzerMotivationen)
-    bsd['motto'] = DrawWithWeightsUnique(richtlinien, ['Bedacht statt Übermut'])
     seed = (bsd["vorname"]+" "+bsd["nachname"]).replace(" ", "_")
     if packname is not None and 'packname' in packname:
         packString = f'?packname={packname["packname"]}'
@@ -579,7 +578,6 @@ def BuildFomor(seed, Powerlevel, language):
     tänzerMotivationen = {'Wahnsinn': 5}
     tänzerMotivationen.update(motivation)
     fomor['motivation'] = DrawWithWeights(tänzerMotivationen)
-    fomor['motto'] = DrawWithWeightsUnique(richtlinien, ['Bedacht statt Übermut'])
     return fomor
 
 
