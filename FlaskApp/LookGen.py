@@ -1,5 +1,6 @@
 import hashlib
 import random
+from .NSCGenUtils import NameToSeed
 
 Kleidung ={'abgerissene ','modische ','sportliche ', 'Arbeits-','Militär-','durchschnittliche ','zweckmäßige '}
 Kleidungsfärbung = {'ausgeblichenen', 'bunten', 'gedeckten','tarnenden', 'extravaganten' ,'dunklen', 'hellen','braunen','grauen'}
@@ -18,10 +19,7 @@ Augen = {'blau','grün','braun','stahlblau','blaugrau','blaubraun','grau','dunke
 Haut = {'wettergegerbt','faltig','blass','braungebrannt','unsauber','durchschnittlich'}
 Zähne = {'gepflegt','gelblich','heruntergekommen','lückenhaft','strahlend weiß','dreckig'}
 
-def NameToSeed(name):
-    seed = int(hashlib.shake_256(name.encode('utf8')).hexdigest(10), 16)
-    #print(f'{name}:{seed}')
-    random.seed(seed)
+
 
 def MakeBeschreibung(beschreibung):
     NameToSeed(beschreibung['vorname']+' '+beschreibung['nachname'])
@@ -41,7 +39,7 @@ def MakeBeschreibung(beschreibung):
     return beschreibung
 
 def PrintBeschreibung(beschreibung,Newline):
-    result = f'{beschreibung["vorname"]} tragt {beschreibung["beschreibungKleidung"]}Kleidung in {beschreibung["beschreibungKleidungsFarbe"]} Farbtönen. '
+    result = f'{beschreibung["vorname"]} trägt {beschreibung["beschreibungKleidung"]}Kleidung in {beschreibung["beschreibungKleidungsFarbe"]} Farbtönen. '
     result += f'Diese Kleidung lässt darunter einen Körper erkennen, der eher {beschreibung["beschreibungKörperbau"]} ist. '
     result += f'{beschreibung["possesivpronomen"][0].upper()+beschreibung["possesivpronomen"][1:]} Haare sind {beschreibung["beschreibungFrisur"]}'
     result += f' und {beschreibung["beschreibungMerkmal"][1]} trägt {beschreibung["pronomen"]} {beschreibung["beschreibungMerkmal"][0]}. '+Newline

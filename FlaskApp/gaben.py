@@ -2,10 +2,11 @@ import json
 
 import codecs
 import os
+from .config import basePath
 
 print('Aktueller Pfad: '+os.getcwd())
 
-gabenTexte = json.load(codecs.open('/var/www/FlaskApp/FlaskApp/gabenTexte.json', 'r', 'utf-8-sig'))
+gabenTexte = json.load(codecs.open(basePath+'/FlaskApp/gabenTexte.json', 'r', 'utf-8-sig'))
 
 
 print(f'{len(gabenTexte["alleGabenTexte"])} Gaben geladen')

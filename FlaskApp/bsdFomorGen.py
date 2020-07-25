@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import random
+from .NSCGenUtils import DrawWithWeights,DrawWithWeightsUnique
 
 
 # =================================================================
@@ -135,10 +136,10 @@ def MakeBSD(seed):
         'Mutationen':{},
     }
     nrEntstellungen = DrawWithWeights(Entstellung['Anzahl'])
-    for i in range(nrEntstellungen):
+    for _ in range(nrEntstellungen):
         bsd['Entstellungen'].append(DrawWithWeightsUnique(Entstellung['Art'],bsd['Entstellungen']))
     nrMutationen = DrawWithWeights(Mutation['Anzahl'])
-    for i in range(nrMutationen):
+    for _ in range(nrMutationen):
         art = DrawWithWeights(Mutation['Art'])
         bsd['Mutationen'][DrawWithWeightsUnique(Mutation['Merkmal'],list(bsd['Mutationen'].keys()))] = [art,DrawWithWeights(Mutation[art])]
     return bsd
@@ -209,39 +210,11 @@ def MakeFomor(seed):
         'Sünde':DrawWithWeights(PrägendeSünde)
     }
     nrMutationen = max(0,DrawWithWeights(Mutation['Anzahl'])-1)
-    for i in range(nrMutationen):
+    for _ in range(nrMutationen):
         art = DrawWithWeights(Mutation['Art'])
         fomor['Mutationen'][DrawWithWeightsUnique(Mutation['Merkmal'],list(fomor['Mutationen'].keys()))] = [art,DrawWithWeights(Mutation[art])]
     return fomor
 
-
-# =================================================================
-# RANDOM SELECTION METHODS
-# =================================================================
-
-def DrawWithWeightsUnique(possibilities,exceptions):
-    draw = DrawWithWeights(possibilities)
-    while(draw in exceptions and len(exceptions)<len(possibilities)):
-        draw = DrawWithWeights(possibilities)
-    return draw
-
-def DrawWithWeights(possibilities):
-    #Normalize
-    sumP = sum(possibilities.values())
-
-    draw = random.uniform(0, sumP)
-    counter = 0
-    for choice in possibilities.keys():
-        counter += possibilities[choice]
-        if draw <=counter or counter==sumP:
-            return choice
-
-def DrawKey(theDict):
-    return list(theDict.keys())[random.randint(0, len(theDict.keys()) - 1)]
-
-# =================================================================
-# TEST METHODS
-# =================================================================
 
 
 

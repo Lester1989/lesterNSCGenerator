@@ -1,8 +1,10 @@
 
 import hashlib
 import random
-from Formatting import Bold,Newline,Header,ListLines
-import gaben
+from .Formatting import Bold,Newline,Header,ListLines
+from .gaben import LookUpTexteByName
+from .config import baseURL
+from .NSCGenUtils import NameToSeed
 
 
 baneType = {'der Eitelkeit','des Geizes','der Wolllust','des Jähzorn',' der Völlerei','des Neid','der Ignoranz','der Arroganz','der Selbstgerechtigkeit','des Hochmuts',
@@ -32,9 +34,7 @@ spiritSpells ={
 }
 
 
-def NameToSeed(name):
-    seed = int(hashlib.shake_256(name.encode('utf8')).hexdigest(10), 16)
-    random.seed(seed)
+
 
 def MakeBane(seed=-1,powerlevel=0):
     if (seed != -1):
@@ -68,25 +68,23 @@ def MakeBane(seed=-1,powerlevel=0):
     spells += random.sample(spiritSpells['häufig'],1 if powerlevel<4 else 4)
     spells += random.sample(spiritSpells['besonders'],min(len(spiritSpells['besonders']),spiritPower[strength][2]))
     spirit['Zauber'] = spells
-    spirit['link'] = f'<a href="http://lester89.pythonanywhere.com/nsc/bane/{spirit["powerlevel"]}/html/{spirit["Name"].replace(" ","_")}"> {spirit["Name"]} </a>'
+    spirit['link'] = f'<a href="{baseURL}/nsc/bane/{spirit["powerlevel"]}/html/{spirit["Name"].replace(" ","_")}"> {spirit["Name"]} </a>'
     return spirit
-    pass
 
 def PrintBane(bane,language='HTML'):
     result = Header(bane['Name'][0].upper()+bane['Name'][1:],f'({bane["Machtstufe"]})',language,3)
     result += Bold('Essenz: ',language)+str(bane['Essenz']) +Newline(language)
     result += Bold('Zorn: ',language)+str(bane['Zorn'])+Bold('  Gnosis: ',language)+str(bane['Gnosis'])+Bold('  Willenskraft: ',language)+str(bane['Willenskraft']) +Newline(language)
-    result += ListLines([f'{Bold(spell,language)}: {gaben.LookUpTexteByName(spell)["fluffText"]}' for spell in bane['Zauber']],language)
+    result += ListLines([f'{Bold(spell,language)}: {LookUpTexteByName(spell)["fluffText"]}' for spell in bane['Zauber']],language)
     result += f'Da Plagen extrem unterschiedlich und oft abstrakt sind, ist hier keine feste Beschreibung, '
     result += f'sondern nur die Empfehlung über den Namen {bane["Name"].split(" ")[-1]} eine Umschreibung für die Spieler zu finden.'+Newline(language)
     result += f'Vergiss nicht die Gefühle der Charaktere anzusprechen. Das Adjektiv {bane["Name"].split(" ")[0]} kann hierbei '
     result += f'als Inspiration dienen. Versuche dir auch einen Geruch und ein Geräusch zu dieser Plage zu überlegen.'+Newline(language)
 
     result += Newline(language)+bane['link']
-    result += Newline(language)+f'<a href="http://lester89.pythonanywhere.com/nsc/bane/{bane["powerlevel"]+1}/{language.lower()}/{bane["Name"].replace(" ","_")}"> stärker </a>'
-    result += Newline(language)+f'<a href="http://lester89.pythonanywhere.com/nsc/bane/{bane["powerlevel"]-1}/{language.lower()}/{bane["Name"].replace(" ","_")}"> schwächer </a>'
-    result += Newline(language)+Newline(language)+f'<a href="http://lester89.pythonanywhere.com/nsc/bane/{bane["powerlevel"]}/{language.lower()}/"> zufällige Plage </a>'
-    result += Newline(language)+f'<a href="http://lester89.pythonanywhere.com/"> home </a>'
+    result += Newline(language)+f'<a href="{baseURL}/nsc/bane/{bane["powerlevel"]+1}/{language.lower()}/{bane["Name"].replace(" ","_")}"> stärker </a>'
+    result += Newline(language)+f'<a href="{baseURL}/nsc/bane/{bane["powerlevel"]-1}/{language.lower()}/{bane["Name"].replace(" ","_")}"> schwächer </a>'
+    result += Newline(language)+Newline(language)+f'<a href="{baseURL}/nsc/bane/{bane["powerlevel"]}/{language.lower()}/"> zufällige Plage </a>'
 
     return result
 
