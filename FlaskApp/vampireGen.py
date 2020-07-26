@@ -8,21 +8,21 @@ import json
 einstellungVamp = {
     'Trinken': {
         'Praktik': [
-            'trinkt Blut meist indirekt (Gläser, Spritzen, Blutbeutel o.ä.)',
-            'trinkt Blut meist  aus dem Hals',
-            'trinkt Blut meist aus dem Handgelenk',
-            'trinkt Blut meist an anderen Körperstellen',
-            'trinkt Blut meist über einen Kuss (beisst in Lippe oder Zunge)',
-            'tötet beim Bluttrinken',
-            'trinkt meist Tierblut',
-            'trinkt nur von bekannten Gefäßen (Herde)',
-            'trinkt nur Blut aus Blutbanken',
+            '<b>trinkt</b> Blut meist indirekt (Gläser, Spritzen, Blutbeutel o.ä.)',
+            '<b>trinkt</b> Blut meist  aus dem Hals',
+            '<b>trinkt</b> Blut meist aus dem Handgelenk',
+            '<b>trinkt</b> Blut meist an anderen Körperstellen',
+            '<b>trinkt</b> Blut meist über einen Kuss (beisst in Lippe oder Zunge)',
+            'tötet beim <b>Bluttrinken</b>',
+            '<b>trinkt</b> meist Tierblut',
+            '<b>trinkt</b> nur von bekannten Gefäßen (Herde)',
+            '<b>trinkt</b> nur Blut aus Blutbanken',
         ],
         'Einstellung': [
             'verabscheut das Bluttrinken und trinkt nur im Notfall indirekt oder in Raserei',
             'hasst das Bluttrinken',
             'liebt das Bluttrinken',
-            'betrachtet es nüchtern als Nahrungsaufnahme'
+            'betrachtet es nüchtern als Nahrungsaufnahme',
             'liebt Blut mit Rauschmitteln (Drogen, Alkohol o.ä.)',
             'liebt Blut mit starken Emotionen (Angst, Leidenschaft o.ä.)',
             'bevorzugt sehr exotischen Bluttyp (wie Ventrue)',
@@ -30,14 +30,14 @@ einstellungVamp = {
         ]
     },
     'Sterbliche': [
-        'verabscheut Sterbliche',
-        'sieht sich selbst auf demselben Level wie Sterbliche',
-        'genießt die Gesellschaft von Sterblichen',
-        'betrachtet Sterbliche als niedere Kreaturen',
-        'betrachtet Sterbliche als dumme unwissende Kreaturen',
-        'hat Angst vor Menschen',
-        'fühlt sich von Menschen verfolgt (Paranoia)',
-        'sieht Sterbliche als Schützdenswert an',
+        'verabscheut <b>Sterbliche</b>',
+        'sieht sich selbst auf demselben Level wie <b>Sterbliche</b>',
+        'genießt die Gesellschaft von <b>Sterblichen</b>',
+        'betrachtet <b>Sterbliche</b> als niedere Kreaturen',
+        'betrachtet <b>Sterbliche</b> als dumme unwissende Kreaturen',
+        'hat Angst vor <b>Menschen</b>',
+        'fühlt sich von <b>Menschen</b> verfolgt (Paranoia)',
+        'sieht <b>Sterbliche</b> als Schützdenswert an',
     ],
     'Maskerade': [],
     'Camarilla': [],
@@ -170,7 +170,7 @@ def MakeRelationTree(nsc):
         maxDepth = min(4, 11-int(nsc['treeSeed'].split('#')[1]))
     NameToSeed(nsc['treeSeed'])
     Creator = MakeVampireName(nsc)
-    tree = {Creator: [{nsc['treeSeed'].split('#')[0]:MakeChildren(nsc['treeSeed'])}]+MakeChildren(Creator)}
+    tree = {Creator: [{nsc['treeSeed'].split('#')[0]:MakeChildren(nsc['treeSeed'],max(0,int(nsc['treeSeed'].split('#')[1])+1))}]+MakeChildren(Creator)}
     while CheckDepth(tree) < maxDepth:
         Creator = MakeVampireName(list(tree.keys())[0])
         tree = {Creator: [tree]+MakeChildren(Creator, CheckDepth(tree))}
@@ -252,7 +252,7 @@ def MakeUnleben(nsc):
     liebschaften = []
     aemter = []
     ungezeugteKinder = nsc['Kinder'] if nsc['Kinder'] is not None else []
-    nrEreignisse = 5+nsc['Powerlevel']
+    nrEreignisse = nsc['Powerlevel']+random.randint(4,8)
     nsc['Unleben'] = []
 
     while nrEreignisse > 0:
@@ -323,34 +323,34 @@ def MakeUnleben(nsc):
 
 def PrintEreignis(nsc, ereignis, language):
     if ereignis[0] == 'Starre':
-        return f'{nsc["vorname"]} war {ereignis[1]} in Starre.'
+        return f'{nsc["vorname"]} war {ereignis[1]} in <b>Starre</b>.'
     elif ereignis[0] == 'Umzug in neue Domäne':
-        return f'Eine Domäne {ereignis[1]} wurde die neue Heimat von {nsc["vorname"]}.'
+        return f'Eine Domäne {ereignis[1]} wurde die <b>neue Heimat</b> von {nsc["vorname"]}.'
     elif ereignis[0] == 'Verlust des Erzeugers':
         reaktion = 'ein schwerer Schlag.' if not ereignis[1] else 'eine Erleichterung.'
         if nsc['Erzeuger'] is None:
-            return f'Der Verlust von {nsc["possesivpronomen"]}m Erzeuger war für {nsc["vorname"]} {reaktion}'
-        return f'Der Verlust von <a href={MakeLink(nsc,nsc["Erzeuger"],nsc["Powerlevel"]+1)}>{nsc["Erzeuger"]}</a> war für {nsc["vorname"]} {reaktion}'
+            return f'Der <b>Verlust</b> von {nsc["possesivpronomen"]}m Erzeuger war für {nsc["vorname"]} {reaktion}'
+        return f'Der <b>Verlust</b> von <a href={MakeLink(nsc,nsc["Erzeuger"],nsc["Powerlevel"]+1)}>{nsc["Erzeuger"]}</a> war für {nsc["vorname"]} {reaktion}'
     elif ereignis[0] == 'Lossagung vom Erzeuger':
-        return f'Irgendwann verlässt jedes Küken das Nest, manchmal sogar endgültig. So hat sich {nsc["vorname"]} von {nsc["possesivpronomen"]}m Erzeuger gelöst.'
+        return f'Irgendwann verlässt jedes Küken das Nest, manchmal sogar endgültig. So hat sich {nsc["vorname"]} <b>von {nsc["possesivpronomen"]}m Erzeuger gelöst</b>.'
     elif ereignis[0] == 'Aufnehmen eines Amtes':
-        return f'Der Aufstieg in {ereignis[1]} festigte {nsc["vorname"]}s Weg zur Macht'
+        return f'Der <b>Aufstieg in {ereignis[1]}</b> festigte {nsc["vorname"]}s Weg zur Macht'
     elif ereignis[0] == 'Niederlegen eines Amtes':
-        return f'{nsc["vorname"]} musste {nsc["possesivpronomen"][:-1]} Amt abgeben'
+        return f'{nsc["vorname"]} musste {nsc["possesivpronomen"][:-1]} <b>Amt abgeben</b>'
     elif ereignis[0] == 'Beginn eines Streites mit anderem Vampir':
-        return f'Es keimte eine Rivalität zwischen {nsc["vorname"]} und <a href={MakeLink(nsc,ereignis[1],nsc["Powerlevel"],True)}>{ereignis[1]}</a> auf.'
+        return f'Es keimte eine <b>Rivalität</b> zwischen {nsc["vorname"]} und <a href={MakeLink(nsc,ereignis[1],nsc["Powerlevel"],True)}>{ereignis[1]}</a> auf.'
     elif ereignis[0] == 'Sieg in einem Streit':
-        return f'Im Streit mit <a href={MakeLink(nsc,ereignis[1],nsc["Powerlevel"],True)}>{ereignis[1]}</a> erzielte {nsc["vorname"]} einen Sieg.'
+        return f'Im Streit mit <a href={MakeLink(nsc,ereignis[1],nsc["Powerlevel"],True)}>{ereignis[1]}</a> erzielte {nsc["vorname"]} einen <b>Sieg</b>.'
     elif ereignis[0] == 'Niederlage in einem Streit':
-        return f'Im Streit mit <a href={MakeLink(nsc,ereignis[1],nsc["Powerlevel"],True)}>{ereignis[1]}</a> erlitt {nsc["vorname"]} eine Niederlage.'
+        return f'Im Streit mit <a href={MakeLink(nsc,ereignis[1],nsc["Powerlevel"],True)}>{ereignis[1]}</a> erlitt {nsc["vorname"]} eine <b>Niederlage</b>.'
     elif ereignis[0] == 'Ende eines Streites mit anderem Vampir':
-        return f'Die Rivalität zwischen {nsc["vorname"]} und <a href={MakeLink(nsc,ereignis[1],nsc["Powerlevel"],True)}>{ereignis[1]}</a> endet.'
+        return f'Die <b>Rivalität</b> zwischen {nsc["vorname"]} und <a href={MakeLink(nsc,ereignis[1],nsc["Powerlevel"],True)}>{ereignis[1]}</a> <b>endet</b>.'
     elif ereignis[0] == 'Beginn einer Liebschaft':
-        return f'Obwohl Liebe selten ist, glaubte {nsc["vorname"]} in <a href={MakeLink(nsc,ereignis[1],nsc["Powerlevel"],True)}>{ereignis[1]}</a> eine echte Liebe gefunden zu haben.'
+        return f'Obwohl Liebe selten ist, glaubte {nsc["vorname"]} in <a href={MakeLink(nsc,ereignis[1],nsc["Powerlevel"],True)}>{ereignis[1]}</a> eine echte <b>Liebe gefunden</b> zu haben.'
     elif ereignis[0] == 'Ende einer Liebschaft':
-        return f'Der Durst übertrifft alles, so auch die Liebe von {nsc["vorname"]} für <a href={MakeLink(nsc,ereignis[1],nsc["Powerlevel"],True)}>{ereignis[1]}</a>.'
+        return f'Der Durst übertrifft alles, so kam es zum <b>Ende der Liebe</b> von {nsc["vorname"]} für <a href={MakeLink(nsc,ereignis[1],nsc["Powerlevel"],True)}>{ereignis[1]}</a>.'
     elif ereignis[0] == 'Zeugen eines Kindes':
-        return f'Um die Einsamkeit zu überbrücken, oder auch nur, um einen Untergebenen zu besitzen: {nsc["vorname"]} verwandelt <a href={MakeLink(nsc,ereignis[1],nsc["Powerlevel"]-1)}>{ereignis[1]}</a> in ein Kainskind.'
+        return f'Um die Einsamkeit zu überbrücken, oder auch nur, um einen Untergebenen zu besitzen: {nsc["vorname"]} <b>verwandelt</b> <a href={MakeLink(nsc,ereignis[1],nsc["Powerlevel"]-1)}>{ereignis[1]}</a> in ein Kainskind.'
     else:
         return f'TODO {ereignis}'
 # endregion
@@ -391,4 +391,4 @@ def PrintVampire(nsc, language):
     Diese Erfahrungen prägen {nsc["vorname"]}. {StartCapital(nsc["pronomen"])} {nsc["TrinkPraktik"]} und {nsc["TrinkMoral"]}.{Newline(language)}
     Außerdem {InsertWordAtSpace(nsc["Ansichten"]["Sterbliche"],nsc["pronomen"])}.{Newline(language)}
     '''
-    return result + f'<div class="clearfix"></div>\n Dieser Abschnitt ist aktuell noch in Bearbeitung...{Newline(language)} {Newline(language)} Vorschläge gerne an mich!'
+    return result + f'{Newline(language)}Dieser Abschnitt ist aktuell noch in Bearbeitung...{Newline(language)} {Newline(language)} Vorschläge gerne an mich!<div class="clearfix"></div>\n '

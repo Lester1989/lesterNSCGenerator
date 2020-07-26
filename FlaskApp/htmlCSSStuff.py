@@ -113,12 +113,14 @@ a:hover{
   float: left;
   white-space: nowrap;
   overflow-x:auto;
-  max-width: 600px;
+  max-width: 800px;
+  margin-right:20px;
+  border-right: 2px solid #ccc;
 }
 
 .tree { 
   display: inline-block;
-  width:1000px;
+  width:1200px;
 }
 
 .tree * {
