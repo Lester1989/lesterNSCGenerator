@@ -189,22 +189,32 @@ stadtEncounter = [
         'text': 'Als ein SC den Blick zur Seite schweifen lässt, fällt ihr eine Hand auf, welche hinter einem Müllcontainer hervorragt; Ein junger Mann (CHAR0). Wenn das Rudel den jungen Mann untersucht (Medizinprobe) stellt es fest, dass er am Leben ist.NEWLINE'
                 ' Er ist blass und an seinem Hemdkragen ist etwas Blut. Es sind jedoch keine Wunden zu entdecken.NEWLINE'
                 ' Als er zu sich kommt erzählt er, dass er auf einer Party war und da einen echt heißen Typen kennengelernt hat. Allerdings ist die Party wohl ausgeufert und er hat zu viel getrunken. Er will nach Hause gehen um sich auszuschlafen.NEWLINE '
-                ' Er wurde von einem Vampir (COMING SOON) gebissen und liegen gelassen. Kann das Rudel die Verfolgung aufnehmen? Kommen sie überhaupt darauf, dass es ein Vampir war?',
+                ' Er wurde von einem Vampir (CHAR1) gebissen und liegen gelassen. Kann das Rudel die Verfolgung aufnehmen? Kommen sie überhaupt darauf, dass es ein Vampir war?',
         'nscConditions': [
             {
                 'art': 'Human',
                 'pronomen': 'er',
                 'alter': ['gerade Volljährig', 'zwischen 20 und 30'],
             },
+            {
+                'art':'vampir',
+            }
         ]
     },
     {
         'name': 'Vampir auf der Jagd',
-        'text': 'Das Rudel kann die Spur von einem Vampir (COMING SOON) auf der Jagd aufnehmen.NEWLINE'
+        'text': 'Das Rudel kann die Spur von einem Vampir (CHAR0) auf der Jagd aufnehmen.NEWLINE'
                 ' Stellen sie ihn zur Rede? Schlagen sie zu, bevor er trinken kann? Versucht er zu fliehen, oder zu verhandeln?NEWLINE'
-                ' Trinkt er von einem Ghul (COMING SOON), der sein Blut freiwillig gibt?NEWLINE'
+                ' Trinkt er von einem Ghul (CHAR1), der sein Blut freiwillig gibt?NEWLINE'
                 ' Vielleicht gibt er den SC auch noch Informationen zu den Geschehnissen in der Stadt.',
-        'nscConditions': []
+        'nscConditions': [
+            {
+                'art':'vampir',
+            },
+            {
+                'art': 'Human',
+            },
+        ]
     },
     {
         'name': 'Gassi Geher',
@@ -719,7 +729,7 @@ def BuildEncounter(encounter, gelaende, language):
                 tokenStart = encounterText.find(token)
                 nscNumber = int(
                     encounterText[tokenStart + len(token):encounterText.find(')', tokenStart)])
-                if encounter['nscConditions'][nscNumber]['art'] in ['Human', 'Kinfolk', 'Garou', 'Ragabash', 'Theurge', 'Philodox', 'Galliard', 'Ahroun']:
+                if encounter['nscConditions'][nscNumber]['art'] in ['Human', 'Kinfolk', 'Garou', 'Ragabash', 'Theurge', 'Philodox', 'Galliard', 'Ahroun','vampir']:
                     #result += f'TRYING: {HandleSeed(encounter,nscNumber,chars,token)}'
                     nsc = BuildNSC(
                         seed=HandleSeed(encounter, nscNumber, chars, token),

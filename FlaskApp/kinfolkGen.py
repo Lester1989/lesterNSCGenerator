@@ -228,8 +228,6 @@ def MakeDescriptions(nsc):
     nsc['familie'] = DrawWithWeights(hintergründe["Familie"])
     nsc['motivation'] = DrawWithWeights(motivation)
     nsc['pläne'] = DrawWithWeights(pläne)
-    #nsc['motto'] = DrawWithWeights(richtlinien)
-    print(f'Ziehe Motto für {nsc["art"]}')
     mottos = namedMotivation['Alle']
     if nsc['art'] in vorzeichen:
         mottos.update(namedMotivation['Garou'])
@@ -552,7 +550,7 @@ def BuildNSC(seed=-1, Art='Kinfolk', Stamm='', Powerlevel=0, language='HTML', pa
     nsc = MakeValue(nsc)
     if nsc['art']=='vampir':
         nsc = MakeVampire(nsc)
-    art = nsc["art"].lower() if nsc["art"] == "Kinfolk" or nsc["art"] == "Human" else "garou"
+    art = nsc["art"].lower() if nsc["art"] in ["Kinfolk","Human",'vampir'] else "garou"
     seed = (nsc["vorname"]+" "+nsc["nachname"]).replace(" ", "_")
     nsc['link'] = f'<a href="{baseURL}/nsc/{art}/{nsc["Powerlevel"]}/{language.lower()}/{seed}{packString}{treeSeed}">{nsc["vorname"]+" "+nsc["nachname"]}</a>'
 
