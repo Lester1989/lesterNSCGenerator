@@ -20,7 +20,6 @@ h2   { font-family:"Balthazar";font-size: 36px;}
 h3   { font-family:"Garamond"; color: darkred;font-variant: small-caps;border-top: 2px solid darkred;}
 h4   { font-family:"Garamond"; color: darkred;font-variant: small-caps;border-top: 2px solid darkred;}
 hr   { border: none; background: darkred; height:2px;}
-div {border-style: none; padding:5px;}
 a {
     font-weight:400;
 }
@@ -104,7 +103,16 @@ a:hover{
   text-decoration: none;
 }
 
-.tree * {margin: 0; padding: 0;}
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.tree * {
+  margin: 0;
+  padding: 0;
+}
 
 .tree ul {
 	padding-top: 20px; position: relative;
@@ -119,7 +127,6 @@ a:hover{
 	list-style-type: none;
 	position: relative;
 	padding: 20px 5px 0 5px;
-	
 	transition: all 0.5s;
 	-webkit-transition: all 0.5s;
 	-moz-transition: all 0.5s;
@@ -199,6 +206,15 @@ a:hover{
 div.content {
   margin-left: 320px;
   padding: 1px 16px;
+}
+
+div.content a {
+  text-decoration: none;
+  color:darkred;
+  font-size:large;
+  font-weight: bold;
+	border: 1px solid #ccc;
+	border-radius: 5px;
 }
 
 @media screen and (max-width: 700px) {

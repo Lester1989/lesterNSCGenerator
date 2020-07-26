@@ -406,7 +406,7 @@ def PrintNSC(nsc, packname, language='Plain', shortPrint=False):
         result += f'{nsc["rang"]} '
 
     if 'Clan' in nsc:        
-        result += f'{nsc["Clan"]} '
+        result += f'{nsc["Clan"]} {nsc["Generation"]}. Generation'
     else:
         result += f'{nsc["art"].upper()}'
     
@@ -434,6 +434,7 @@ def PrintNSC(nsc, packname, language='Plain', shortPrint=False):
     result += TextWithImage(PrintBeschreibung(nsc, Newline(language)), GetFace(nsc))
 
     # Beschreibung
+    result += '<div class="clearfix"></div>'
     result += Header('Beschreibung:', '', language, 3)
     result += f'{nsc["vorname"]} ({nsc["alter"]}), ist {nsc["zeit"]} und aktuell {Bold(nsc["familie"],language)}. {StartCapital(nsc["pronomen"])} arbeitet(e) als {nsc["job"]}. {Newline(language)}'
     result += f'{nsc["possesivpronomen"][0].upper()+nsc["possesivpronomen"][1:]} eigentliche Motivation ist {nsc["motivation"]} und der zur Zeit verfolgte Plan hat {nsc["pläne"]} als Ziel.{Newline(language)}'
@@ -514,7 +515,7 @@ def PrintNSC(nsc, packname, language='Plain', shortPrint=False):
 
     if not shortPrint:
         baseLink = Newline("HTML") + f'<a class="no-print" href="{baseURL}/nsc/'
-        art = nsc["art"].lower() if nsc["art"] == "Kinfolk" or nsc["art"] == "Human" or nsc["art"] == "Fomor" else "garou"
+        art = nsc["art"].lower() if nsc["art"] in ["Kinfolk","Human", "Fomor","vampir"] else "garou"
         if 'stamm' in nsc and nsc['stamm'] == 'Tänzer der schwarzen Spirale':
             art = 'bsd'
         seed = (nsc["vorname"]+" "+nsc["nachname"]).replace(" ", "_")
@@ -522,10 +523,10 @@ def PrintNSC(nsc, packname, language='Plain', shortPrint=False):
         result += baseLink + f'{art}/{nsc["Powerlevel"]}/{language.lower()}/{seed}{packString}">Dieser NCS ({nsc["vorname"]+" "+nsc["nachname"]})</a>'
         result += baseLink + f'{art}/{nsc["Powerlevel"]+1}/{language.lower()}/{seed}{packString}">Stärker</a>'
         result += baseLink + f'{art}/{nsc["Powerlevel"]-1}/{language.lower()}/{seed}{packString}">Schwächer</a>{Newline("HTML")}'
-        if language == 'HTML':
-            result += baseLink + f'{art}/{nsc["Powerlevel"]}/latex/{seed}{packString}">Dieser NCS ({seed}) als LaTeX Subsection</a>'
-        else:
-            result += baseLink + f'{art}/{nsc["Powerlevel"]}/html/{seed}{packString}">Dieser NCS ({seed}) als HTML Subsection</a>'
+        # if language == 'HTML':
+        #     result += baseLink + f'{art}/{nsc["Powerlevel"]}/latex/{seed}{packString}">Dieser NCS ({seed}) als LaTeX Subsection</a>'
+        # else:
+        #     result += baseLink + f'{art}/{nsc["Powerlevel"]}/html/{seed}{packString}">Dieser NCS ({seed}) als HTML Subsection</a>'
         result += baseLink + f'{art}/{nsc["Powerlevel"]}/{language.lower()}">Zufall neu</a>'
     return result
 
