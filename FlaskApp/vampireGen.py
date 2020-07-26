@@ -100,6 +100,7 @@ GhulLookup = {
     1: [0, 2],
     2: [1, 2],
     3: [1, 3],
+    4: [1, 3],
     5: [1, 4],
     6: [2, 5],
     7: [3, 6],
@@ -116,12 +117,13 @@ GenerationLookup = {
     1: 13,
     2: 12,
     3: 11,
-    5: 10,
-    6: 9,
-    7: 8,
-    8: 7,
-    9: 6,
-    10: 5,
+    4: 10,
+    5: 9,
+    6: 8,
+    7: 7,
+    8: 6,
+    9: 5,
+    10: 4,
     11: 4,
     12: 4,
 }
@@ -162,7 +164,7 @@ def MakeRelationTree(nsc):
     if nsc['treeSeed'] == -1:
         nsc['Clan'] = DrawWithWeights(clans)
         nsc['treeSeed'] = f'{nsc["vorname"]} {nsc["nachname"]}#{nsc["Powerlevel"]}#{nsc["Clan"]}'
-        maxDepth = min(4, 11-nsc['Powerlevel'])
+        maxDepth = min(4, 10-nsc['Powerlevel'])
     else:
         nsc['Clan'] = nsc['treeSeed'].split('#')[2]
         maxDepth = min(4, 11-int(nsc['treeSeed'].split('#')[1]))
