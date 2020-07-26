@@ -348,7 +348,7 @@ def PrintEreignis(nsc, ereignis, language):
     elif ereignis[0] == 'Beginn einer Liebschaft':
         return f'Obwohl Liebe selten ist, glaubte {nsc["vorname"]} in <a href={MakeLink(nsc,ereignis[1],nsc["Powerlevel"],True)}>{ereignis[1]}</a> eine echte <b>Liebe gefunden</b> zu haben.'
     elif ereignis[0] == 'Ende einer Liebschaft':
-        return f'Der Durst übertrifft alles, so kam es zum <b>Ende der Liebe</b> von {nsc["vorname"]} für <a href={MakeLink(nsc,ereignis[1],nsc["Powerlevel"],True)}>{ereignis[1]}</a>.'
+        return f'Der Durst übertrifft alles, so kam es zum <b>Ende der Liebe</b> zwischen {nsc["vorname"]} und <a href={MakeLink(nsc,ereignis[1],nsc["Powerlevel"],True)}>{ereignis[1]}</a>.'
     elif ereignis[0] == 'Zeugen eines Kindes':
         return f'Um die Einsamkeit zu überbrücken, oder auch nur, um einen Untergebenen zu besitzen: {nsc["vorname"]} <b>verwandelt</b> <a href={MakeLink(nsc,ereignis[1],nsc["Powerlevel"]-1)}>{ereignis[1]}</a> in ein Kainskind.'
     else:
