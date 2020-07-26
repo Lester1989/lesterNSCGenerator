@@ -112,7 +112,7 @@ einstellung = {
 wissen = {'volles Wissen und Verstehen': .5, 'Wissen und Ahnung über Bedeutung': 1,
           'lückenhaftes Wissen': 2, 'wenig Ahnung': 2, 'nur Gerüchte gehört': 5, 'kein Wissen': 4, }
 ausbildung = {
-    'Art': {'im Nahkampf': 2, 'im Fernkampf': 4, 'in Selbstverteidigung': 2, 'im Handwerk': 3, 'als Führungsperson': 1, 'in Medizin': 3,                      'über altes Wissen': .5},
+    'Art': {'im Nahkampf': 2, 'im Fernkampf': 4, 'in Selbstverteidigung': 2, 'im Handwerk': 3, 'als Führungsperson': 1, 'in Medizin': 3, 'über altes Wissen': .5},
     'Güte': {'exzellente': 2, 'fortgeschrittene': 5, 'grundlegende': 4, 'schlechte': 2, 'fehlerhafte': .5},
     'Anzahl': {1: 1, 2: 2, 3: 1, 4: .5}
 }
@@ -403,11 +403,11 @@ def PrintNSC(nsc, packname, language='Plain', shortPrint=False):
     if 'rang' in nsc:
         result += f'{nsc["rang"]} '
 
-    if 'Clan' in nsc:        
+    if 'Clan' in nsc:
         result += f'{nsc["Clan"]} {nsc["Generation"]}. Generation'
     else:
         result += f'{nsc["art"].upper()}'
-    
+
     if 'stamm' in nsc:
         result += f' {nsc["stamm"]}'
     if 'brut' in nsc and len(nsc['brut']) > 0:
@@ -491,15 +491,15 @@ def PrintNSC(nsc, packname, language='Plain', shortPrint=False):
             result += f'In der Siedlung arbeitet {nsc["vorname"]} als {Bold(nsc["occupation"],language)}'+Newline(language)
 
     # ausbildung
-    if nsc['art']!= 'vampir':
+    if nsc['art'] != 'vampir':
         if not shortPrint:
             result += f'Um einen Platz in der Gesellschaft einzunehmen gab es {len(nsc["ausbildung"])} Ausbildung{"en" if len(nsc["ausbildung"])>1 else ""} für {nsc["pronomen"] if nsc["pronomen"]=="sie" else "ihn"}:{Newline(language)}'
             result += ListLines([f'{güte} Ausbildung {Bold(ausb,language)}' for ausb,                                güte in nsc["ausbildung"]], language)
     else:
-        result += PrintVampire(nsc,language)
+        result += PrintVampire(nsc, language)
 
     # Würfelpools
-    result += Header('Würfelpools','', language, 3)
+    result += Header('Würfelpools', '', language, 3)
     result += Table(6, [f'{cell}' for pool in nsc['dicePools'] for cell in [pool, nsc["dicePools"][pool]]], language)
 
     # Gaben
@@ -513,7 +513,7 @@ def PrintNSC(nsc, packname, language='Plain', shortPrint=False):
 
     if not shortPrint:
         baseLink = Newline("HTML") + f'<a class="no-print" href="{baseURL}/nsc/'
-        art = nsc["art"].lower() if nsc["art"] in ["Kinfolk","Human", "Fomor","vampir"] else "garou"
+        art = nsc["art"].lower() if nsc["art"] in ["Kinfolk", "Human", "Fomor", "vampir"] else "garou"
         if 'stamm' in nsc and nsc['stamm'] == 'Tänzer der schwarzen Spirale':
             art = 'bsd'
         seed = (nsc["vorname"]+" "+nsc["nachname"]).replace(" ", "_")
@@ -529,18 +529,17 @@ def PrintNSC(nsc, packname, language='Plain', shortPrint=False):
     return result
 
 
-def BuildNSC(seed=-1, Art='Kinfolk', Stamm='', Powerlevel=0, language='HTML', packname='', occupation='', brut='', shortPrint=True ):
+def BuildNSC(seed=-1, Art='Kinfolk', Stamm='', Powerlevel=0, language='HTML', packname='', occupation='', brut='', shortPrint=True):
     nsc = MakeBase(seed, Art, Stamm, Powerlevel, occupation)
-    
+
     packString = ''
-    treeSeed =''
+    treeSeed = ''
     nsc['treeSeed'] = -1
     if packname != '' and 'packname' in packname:
         packString = f'?packname={packname["packname"]}'
     elif packname != '' and 'treeSeed' in packname:
         treeSeed = f'?treeSeed={packname["treeSeed"]}'
-        nsc['treeSeed'] = packname["treeSeed"].replace("__","#").replace("_"," ")
-    
+        nsc['treeSeed'] = packname["treeSeed"].replace("__", "#").replace("_", " ")
 
     nsc = MakeBeschreibung(nsc)
     nsc = MakeBreed(nsc, brut)
@@ -548,9 +547,9 @@ def BuildNSC(seed=-1, Art='Kinfolk', Stamm='', Powerlevel=0, language='HTML', pa
     nsc = MakeExpertise(nsc)
     nsc = MakeDescriptions(nsc)
     nsc = MakeValue(nsc)
-    if nsc['art']=='vampir':
+    if nsc['art'] == 'vampir':
         nsc = MakeVampire(nsc)
-    art = nsc["art"].lower() if nsc["art"] in ["Kinfolk","Human",'vampir'] else "garou"
+    art = nsc["art"].lower() if nsc["art"] in ["Kinfolk", "Human", 'vampir'] else "garou"
     seed = (nsc["vorname"]+" "+nsc["nachname"]).replace(" ", "_")
     nsc['link'] = f'<a href="{baseURL}/nsc/{art}/{nsc["Powerlevel"]}/{language.lower()}/{seed}{packString}{treeSeed}">{nsc["vorname"]+" "+nsc["nachname"]}</a>'
 

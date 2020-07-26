@@ -2,6 +2,13 @@ import random
 from  hashlib import md5
 
 
+def StartCapital(text):
+    return text[0].upper() + text[1:]
+
+def InsertWordAtSpace(text,word,space=1):
+    textwords = text.split(' ')
+    return ' '.join(textwords[:space]) + ' '+ word+ ' '+' '.join(textwords[space:])
+
 def NameToSeed(name):
     seed = int(md5(name.encode('utf8')).hexdigest(), 16)
     random.seed(seed)

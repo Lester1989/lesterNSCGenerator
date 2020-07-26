@@ -1,9 +1,59 @@
 from .Formatting import Bold, Newline, Header, ListLines
-from .NSCGenUtils import NameToSeed, DrawWithWeights
+from .NSCGenUtils import NameToSeed, DrawWithWeights,StartCapital,InsertWordAtSpace
 from .config import baseURL
 
 import random
 import json
+
+einstellungVamp = {
+    'Trinken': {
+        'Praktik': [
+            'trinkt Blut meist indirekt (Gläser, Spritzen, Blutbeutel o.ä.)',
+            'trinkt Blut meist  aus dem Hals',
+            'trinkt Blut meist aus dem Handgelenk',
+            'trinkt Blut meist an anderen Körperstellen',
+            'trinkt Blut meist über einen Kuss (beisst in Lippe oder Zunge)',
+            'tötet beim Bluttrinken',
+            'trinkt meist Tierblut',
+            'trinkt nur von bekannten Gefäßen (Herde)',
+            'trinkt nur Blut aus Blutbanken',
+        ],
+        'Einstellung': [
+            'verabscheut das Bluttrinken und trinkt nur im Notfall indirekt oder in Raserei',
+            'hasst das Bluttrinken',
+            'liebt das Bluttrinken',
+            'betrachtet es nüchtern als Nahrungsaufnahme'
+            'liebt Blut mit Rauschmitteln (Drogen, Alkohol o.ä.)',
+            'liebt Blut mit starken Emotionen (Angst, Leidenschaft o.ä.)',
+            'bevorzugt sehr exotischen Bluttyp (wie Ventrue)',
+            'hat Angst vor dem Bluttrinken und braucht das Überwindung',
+        ]
+    },
+    'Sterbliche': [
+        'verabscheut Sterbliche',
+        'sieht sich selbst auf demselben Level wie Sterbliche',
+        'genießt die Gesellschaft von Sterblichen',
+        'betrachtet Sterbliche als niedere Kreaturen',
+        'betrachtet Sterbliche als dumme unwissende Kreaturen',
+        'hat Angst vor Menschen',
+        'fühlt sich von Menschen verfolgt (Paranoia)',
+        'sieht Sterbliche als Schützdenswert an',
+    ],
+    'Maskerade': [],
+    'Camarilla': [],
+    'Anarchen': [],
+    'Sabbat': [],
+}
+
+sekten = {
+    'Camarilla': 1,
+    'Anarchen': 1,
+    'Sabbat': 1
+}
+
+disziplinen = {
+
+}
 
 clans = {
     'Assamiten': 1,
@@ -25,23 +75,23 @@ clans = {
 unleben = {
     'Verlust des Erzeugers': '',
     'Zeugen eines Kindes': '',
-    'Starre': ['für ein paar Tage','über einige Monate hinweg','längere Zeit'],
+    'Starre': ['für ein paar Tage', 'über einige Monate hinweg', 'längere Zeit'],
     'Lossagung vom Erzeuger': '',
-    'Umzug in neue Domäne': ['in eine andere Stadt','in ein anderes Land','auf einen anderen Kontinent'],
-    'Aufnehmen eines Amtes': ['ein niederes Amt','ein inoffizielles Amt', 'ein höheres Amt'],
-    'Niederlegen eines Amtes': '',    
+    'Umzug in neue Domäne': ['in eine andere Stadt', 'in ein anderes Land', 'auf einen anderen Kontinent'],
+    'Aufnehmen eines Amtes': ['ein niederes Amt', 'ein inoffizielles Amt', 'ein höheres Amt'],
+    'Niederlegen eines Amtes': '',
     'Beginn eines Streites mit anderem Vampir': '',
     'Sieg in einem Streit': '',
     'Niederlage in einem Streit': '',
     'Ende eines Streites mit anderem Vampir': '',
-    'Beginn einer Liebschaft':'',
-    'Ende einer Liebschaft':'',
+    'Beginn einer Liebschaft': '',
+    'Ende einer Liebschaft': '',
 }
 
 # region stuff
 kuss = {
-    'legalität':['mit Erlaubnis','im Geheimen','ohne Erlaubnis'],
-    'beweggrund':['Liebe','Bewunderung','einem Bedürfnis','Gier nach Macht','Hang zur Rebellion','Pflichtgefühl']
+    'legalität': ['mit Erlaubnis', 'im Geheimen', 'ohne Erlaubnis'],
+    'beweggrund': ['Liebe', 'Bewunderung', 'einem Bedürfnis', 'Gier nach Macht', 'Hang zur Rebellion', 'Pflichtgefühl']
 }
 
 GhulLookup = {
@@ -85,6 +135,8 @@ kinderChances = {
 # endregion
 
 # region Family Tree
+
+
 def MakeVampireName(nsc):
     from .kinfolkGen import GetRandomVorname, GetRandomNachname
     return GetRandomVorname()+' '+GetRandomNachname()
@@ -162,7 +214,7 @@ def PrintLineageTree(nsc):
     return result
 
 
-def MakeLink(nsc, Name, Powerlevel,extern=False):
+def MakeLink(nsc, Name, Powerlevel, extern=False):
     if extern:
         return baseURL+f'/nsc/vampir/{Powerlevel}/html/{Name.replace(" ","_")}/'
     else:
@@ -187,86 +239,87 @@ def PrintTreeRecursion(nsc, tree=None):
 
 # endregion
 
+# region undead history
+
 
 def MakeUnleben(nsc):
     NameToSeed(nsc['vorname']+' '+nsc['nachname'])
-    erzeugerLebt =True
-    erzeugerLosgesagt =False
-    feinde =[]
-    liebschaften=[]
-    aemter =[]
+    erzeugerLebt = True
+    erzeugerLosgesagt = False
+    feinde = []
+    liebschaften = []
+    aemter = []
     ungezeugteKinder = nsc['Kinder'] if nsc['Kinder'] is not None else []
     nrEreignisse = 5+nsc['Powerlevel']
     nsc['Unleben'] = []
 
-    
     while nrEreignisse > 0:
-        possibilities = ['Starre','Beginn eines Streites mit anderem Vampir','Beginn einer Liebschaft']
+        possibilities = ['Starre', 'Beginn eines Streites mit anderem Vampir', 'Beginn einer Liebschaft']
         if erzeugerLebt:
             possibilities.append('Verlust des Erzeugers')
             if not erzeugerLosgesagt:
                 possibilities.append('Lossagung vom Erzeuger')
-        if len(ungezeugteKinder)>0:
+        if len(ungezeugteKinder) > 0:
             possibilities.append('Zeugen eines Kindes')
         if len(feinde) > 0:
             possibilities.append('Sieg in einem Streit')
             possibilities.append('Niederlage in einem Streit')
             possibilities.append('Ende eines Streites mit anderem Vampir')
-        if len(liebschaften) >0:
+        if len(liebschaften) > 0:
             possibilities.append('Ende einer Liebschaft')
-        if len(aemter) >0:
+        if len(aemter) > 0:
             possibilities.append('Niederlegen eines Amtes')
         else:
             possibilities.append('Umzug in neue Domäne')
             possibilities.append('Aufnehmen eines Amtes')
         ereignis = random.choice(possibilities)
         nrEreignisse -= 1
-        if ereignis in ['Starre','Umzug in neue Domäne']:
-            nsc['Unleben'].append([ereignis,random.choice(unleben[ereignis])])
+        if ereignis in ['Starre', 'Umzug in neue Domäne']:
+            nsc['Unleben'].append([ereignis, random.choice(unleben[ereignis])])
         elif ereignis == 'Verlust des Erzeugers':
             erzeugerLebt = False
-            nsc['Unleben'].append([ereignis,erzeugerLosgesagt])
+            nsc['Unleben'].append([ereignis, erzeugerLosgesagt])
         elif ereignis == 'Lossagung vom Erzeuger':
             erzeugerLosgesagt = True
             nsc['Unleben'].append([ereignis])
-        elif ereignis=='Aufnehmen eines Amtes':
-            aemter.append (random.choice(unleben[ereignis]))
-            nsc['Unleben'].append([ereignis,aemter[0]])
-        elif ereignis=='Niederlegen eines Amtes':
+        elif ereignis == 'Aufnehmen eines Amtes':
+            aemter.append(random.choice(unleben[ereignis]))
+            nsc['Unleben'].append([ereignis, aemter[0]])
+        elif ereignis == 'Niederlegen eines Amtes':
             amt = random.choice(aemter)
             aemter.remove(amt)
-            nsc['Unleben'].append([ereignis,amt])
+            nsc['Unleben'].append([ereignis, amt])
         elif ereignis == 'Beginn eines Streites mit anderem Vampir':
             feinde.append(MakeVampireName(nsc))
-            nsc['Unleben'].append([ereignis,feinde[-1]])
-        elif ereignis in ['Sieg in einem Streit','Niederlage in einem Streit']:
+            nsc['Unleben'].append([ereignis, feinde[-1]])
+        elif ereignis in ['Sieg in einem Streit', 'Niederlage in einem Streit']:
             feind = random.choice(feinde)
-            nsc['Unleben'].append([ereignis,feind])
+            nsc['Unleben'].append([ereignis, feind])
         elif ereignis == 'Ende eines Streites mit anderem Vampir':
             feind = random.choice(feinde)
             feinde.remove(feind)
-            nsc['Unleben'].append([ereignis,feind])
+            nsc['Unleben'].append([ereignis, feind])
         elif ereignis == 'Beginn einer Liebschaft':
             liebschaften.append(MakeVampireName(nsc))
-            nsc['Unleben'].append([ereignis,liebschaften[-1]])
+            nsc['Unleben'].append([ereignis, liebschaften[-1]])
         elif ereignis == 'Ende einer Liebschaft':
             ex = random.choice(liebschaften)
             liebschaften.remove(ex)
-            nsc['Unleben'].append([ereignis,ex])
+            nsc['Unleben'].append([ereignis, ex])
         elif ereignis == 'Zeugen eines Kindes':
             kind = random.choice(ungezeugteKinder)
             ungezeugteKinder.remove(kind)
-            nsc['Unleben'].append([ereignis,kind])
-        
-    while len(ungezeugteKinder)>0:
+            nsc['Unleben'].append([ereignis, kind])
+
+    while len(ungezeugteKinder) > 0:
         kind = random.choice(ungezeugteKinder)
         ungezeugteKinder.remove(kind)
-        nsc['Unleben'].insert(random.randint(2,len(nsc['Unleben'])),['Zeugen eines Kindes',kind])
+        nsc['Unleben'].insert(random.randint(2, len(nsc['Unleben'])), ['Zeugen eines Kindes', kind])
 
     return nsc
 
 
-def PrintEreignis(nsc,ereignis,language):
+def PrintEreignis(nsc, ereignis, language):
     if ereignis[0] == 'Starre':
         return f'{nsc["vorname"]} war {ereignis[1]} in Starre.'
     elif ereignis[0] == 'Umzug in neue Domäne':
@@ -276,15 +329,15 @@ def PrintEreignis(nsc,ereignis,language):
         return f'Der Verlust von <a href={MakeLink(nsc,nsc["Erzeuger"],nsc["Powerlevel"]+1)}>{nsc["Erzeuger"]}</a> war für {nsc["vorname"]} {reaktion}'
     elif ereignis[0] == 'Lossagung vom Erzeuger':
         return f'Irgendwann verlässt jedes Küken das Nest, manchmal sogar endgültig. So hat sich {nsc["vorname"]} von {nsc["possesivpronomen"]}m Erzeuger gelöst.'
-    elif ereignis[0] =='Aufnehmen eines Amtes':
+    elif ereignis[0] == 'Aufnehmen eines Amtes':
         return f'Der Aufstieg in {ereignis[1]} festigte {nsc["vorname"]}s Weg zur Macht'
-    elif ereignis[0]=='Niederlegen eines Amtes':
+    elif ereignis[0] == 'Niederlegen eines Amtes':
         return f'{nsc["vorname"]} musste {nsc["possesivpronomen"][:-1]} Amt abgeben'
     elif ereignis[0] == 'Beginn eines Streites mit anderem Vampir':
         return f'Es keimte eine Rivalität zwischen {nsc["vorname"]} und <a href={MakeLink(nsc,ereignis[1],nsc["Powerlevel"],True)}>{ereignis[1]}</a> auf.'
-    elif ereignis[0] =='Sieg in einem Streit':
+    elif ereignis[0] == 'Sieg in einem Streit':
         return f'Im Streit mit <a href={MakeLink(nsc,ereignis[1],nsc["Powerlevel"],True)}>{ereignis[1]}</a> erzielte {nsc["vorname"]} einen Sieg.'
-    elif ereignis[0] =='Niederlage in einem Streit':
+    elif ereignis[0] == 'Niederlage in einem Streit':
         return f'Im Streit mit <a href={MakeLink(nsc,ereignis[1],nsc["Powerlevel"],True)}>{ereignis[1]}</a> erlitt {nsc["vorname"]} eine Niederlage.'
     elif ereignis[0] == 'Ende eines Streites mit anderem Vampir':
         return f'Die Rivalität zwischen {nsc["vorname"]} und <a href={MakeLink(nsc,ereignis[1],nsc["Powerlevel"],True)}>{ereignis[1]}</a> endet.'
@@ -294,17 +347,22 @@ def PrintEreignis(nsc,ereignis,language):
         return f'Der Durst übertrifft alles, so auch die Liebe von {nsc["vorname"]} für <a href={MakeLink(nsc,ereignis[1],nsc["Powerlevel"],True)}>{ereignis[1]}</a>.'
     elif ereignis[0] == 'Zeugen eines Kindes':
         return f'Um die Einsamkeit zu überbrücken, oder auch nur, um einen Untergebenen zu besitzen: {nsc["vorname"]} verwandelt <a href={MakeLink(nsc,ereignis[1],nsc["Powerlevel"]-1)}>{ereignis[1]}</a> in ein Kainskind.'
-    else:        
+    else:
         return f'TODO {ereignis}'
+# endregion
+
 
 def MakeVampire(nsc):
     nsc = MakeRelationTree(nsc)
     NameToSeed(nsc['vorname']+' '+nsc['nachname'])
     nsc['Erzeuger'] = FindCreator(nsc)
-    nsc['Kuss'] = [random.choice(kuss['legalität']),random.choice(kuss['beweggrund'])]
+    nsc['Kuss'] = [random.choice(kuss['legalität']), random.choice(kuss['beweggrund'])]
     nsc['Kinder'] = FindChildren(nsc)
     nsc['Gouhle'] = random.randint(GhulLookup[nsc['Powerlevel']][0], GhulLookup[nsc['Powerlevel']][0])
     nsc['Generation'] = GenerationLookup[nsc['Powerlevel']]
+    nsc['TrinkPraktik'] = random.choice(einstellungVamp['Trinken']['Praktik'])
+    nsc['TrinkMoral'] = random.choice(einstellungVamp['Trinken']['Einstellung'])
+    nsc['Ansichten'] = {'Sterbliche':random.choice(einstellungVamp['Sterbliche'])}
     nsc = MakeUnleben(nsc)
     return nsc
 
@@ -321,4 +379,5 @@ def PrintVampire(nsc, language):
     for ereignis in nsc['Unleben']:
         result += f'<li>{PrintEreignis(nsc,ereignis,language)}</li>'
     result += '</ul>'
+    result += f'Diese Erfahrungen prägen {nsc["vorname"]}. {StartCapital(nsc["pronomen"])} {nsc["TrinkPraktik"]} und {nsc["TrinkMoral"]}.{Newline(language)} Außerdem {InsertWordAtSpace(nsc["Ansichten"]["Sterbliche"],nsc["pronomen"])}.{Newline(language)} '
     return result + f' Dieser Abschnitt ist aktuell noch in Bearbeitung...{Newline(language)} {Newline(language)} Vorschläge gerne an mich!'
