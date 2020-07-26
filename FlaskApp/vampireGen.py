@@ -26,7 +26,7 @@ einstellungVamp = {
             'liebt Blut mit Rauschmitteln (Drogen, Alkohol o.ä.)',
             'liebt Blut mit starken Emotionen (Angst, Leidenschaft o.ä.)',
             'bevorzugt sehr exotischen Bluttyp (wie Ventrue)',
-            'hat Angst vor dem Bluttrinken und braucht das Überwindung',
+            'hat Angst vor dem Bluttrinken und braucht dazu Überwindung',
         ]
     },
     'Sterbliche': [
@@ -212,7 +212,7 @@ def GetLevelInTree(nsc, tree=None, level=0):
 def PrintLineageTree(nsc):
     result = '\n<div class="tree"><ul>'
     result += PrintTreeRecursion(nsc)
-    result += '</ul></div><div class="clearfix"></div>\n'
+    result += '</ul></div>\n'
     return result
 
 
@@ -391,4 +391,4 @@ def PrintVampire(nsc, language):
     Diese Erfahrungen prägen {nsc["vorname"]}. {StartCapital(nsc["pronomen"])} {nsc["TrinkPraktik"]} und {nsc["TrinkMoral"]}.{Newline(language)}
     Außerdem {InsertWordAtSpace(nsc["Ansichten"]["Sterbliche"],nsc["pronomen"])}.{Newline(language)}
     '''
-    return result + f' Dieser Abschnitt ist aktuell noch in Bearbeitung...{Newline(language)} {Newline(language)} Vorschläge gerne an mich!'
+    return result + f'<div class="clearfix"></div>\n Dieser Abschnitt ist aktuell noch in Bearbeitung...{Newline(language)} {Newline(language)} Vorschläge gerne an mich!'
