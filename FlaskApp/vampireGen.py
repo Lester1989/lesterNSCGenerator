@@ -111,8 +111,8 @@ GhulLookup = {
 }
 
 GenerationLookup = {
-    -1: 14,
-    0: 13,
+    -1: 15,
+    0: 14,
     1: 13,
     2: 12,
     3: 11,
@@ -326,6 +326,8 @@ def PrintEreignis(nsc, ereignis, language):
         return f'Eine Domäne {ereignis[1]} wurde die neue Heimat von {nsc["vorname"]}.'
     elif ereignis[0] == 'Verlust des Erzeugers':
         reaktion = 'ein schwerer Schlag.' if not ereignis[1] else 'eine Erleichterung.'
+        if nsc['Erzeuger'] is None:
+            return f'Der Verlust von {nsc["possesivpronomen"]}m Erzeuger war für {nsc["vorname"]} {reaktion}'
         return f'Der Verlust von <a href={MakeLink(nsc,nsc["Erzeuger"],nsc["Powerlevel"]+1)}>{nsc["Erzeuger"]}</a> war für {nsc["vorname"]} {reaktion}'
     elif ereignis[0] == 'Lossagung vom Erzeuger':
         return f'Irgendwann verlässt jedes Küken das Nest, manchmal sogar endgültig. So hat sich {nsc["vorname"]} von {nsc["possesivpronomen"]}m Erzeuger gelöst.'
@@ -370,8 +372,12 @@ def MakeVampire(nsc):
 def PrintVampire(nsc, language):
     result = Header('Unleben', '', language, 3)
     result += PrintLineageTree(nsc)
-    result += f'''
-    {nsc["vorname"]} wurde von {nsc["Erzeuger"]} {nsc["Kuss"][0]} geschaffen. Die Motivation zu diesem Kuss bestand aus {nsc["Kuss"][1]}.{Newline(language)}
+    if nsc['Erzeuger'] is not None:
+        Zeugung = f'{nsc["vorname"]} wurde von {nsc["Erzeuger"] if nsc[]} {nsc["Kuss"][0]} geschaffen. Die Motivation zu diesem Kuss bestand aus {nsc["Kuss"][1]}.{Newline(language)}'
+    else:
+        Zeugung = f'Über den Erzeuger von {nsc["vorname"]} ist nichts bekannt, jedoch Erfahren Vertraute {nsc["vorname"]} der Kuss aus {nsc["Kuss"][1]} geschenkt wurde.{Newline(language)}'
+    result += f'''    
+    {Zeugung}
     Als neues Kainskind der {nsc["Generation"]}. Generation begann das Unleben mit dem niemals endenden Durst.{Newline(language)}
     Seit dieser Nacht gab es einige Ereignisse im Dasein von {nsc["vorname"]}:{Newline(language)}
     <ul>
