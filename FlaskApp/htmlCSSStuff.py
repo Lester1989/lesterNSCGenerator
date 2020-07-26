@@ -109,6 +109,18 @@ a:hover{
   clear: both;
 }
 
+.tree-container{
+  float: left;
+  white-space: nowrap;
+  overflow-x:auto;
+  max-width: 600px;
+}
+
+.tree { 
+  display: inline-block;
+  width:1000px;
+}
+
 .tree * {
   margin: 0;
   padding: 0;

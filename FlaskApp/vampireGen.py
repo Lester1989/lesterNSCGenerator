@@ -210,9 +210,9 @@ def GetLevelInTree(nsc, tree=None, level=0):
 
 
 def PrintLineageTree(nsc):
-    result = '\n<div class="tree"><ul>'
+    result = '\n<div class="tree-container">\n<div class="tree"><ul>'
     result += PrintTreeRecursion(nsc)
-    result += '</ul></div>\n'
+    result += '</ul></div></div>\n'
     return result
 
 
