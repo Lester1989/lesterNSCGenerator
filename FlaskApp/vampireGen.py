@@ -358,10 +358,10 @@ def MakeVampire(nsc):
     nsc = MakeRelationTree(nsc)
     NameToSeed(nsc['vorname']+' '+nsc['nachname'])
     nsc['Erzeuger'] = FindCreator(nsc)
-    nsc['Kuss'] = [random.choice(kuss['legalität']), random.choice(kuss['beweggrund'])]
-    nsc['Kinder'] = FindChildren(nsc)
-    nsc['Gouhle'] = random.randint(GhulLookup[nsc['Powerlevel']][0], GhulLookup[nsc['Powerlevel']][0])
     nsc['Generation'] = GenerationLookup[nsc['Powerlevel']]
+    nsc['Kuss'] = [random.choice(kuss['legalität']) if nsc['Generation']<=14 else 'ohne Erlaubnis', random.choice(kuss['beweggrund'])]
+    nsc['Kinder'] = FindChildren(nsc)
+    nsc['Guhle'] = random.randint(GhulLookup[nsc['Powerlevel']][0], GhulLookup[nsc['Powerlevel']][0])
     nsc['TrinkPraktik'] = random.choice(einstellungVamp['Trinken']['Praktik'])
     nsc['TrinkMoral'] = random.choice(einstellungVamp['Trinken']['Einstellung'])
     nsc['Ansichten'] = {'Sterbliche':random.choice(einstellungVamp['Sterbliche'])}
@@ -373,7 +373,7 @@ def PrintVampire(nsc, language):
     result = Header('Unleben', '', language, 3)
     result += PrintLineageTree(nsc)
     if nsc['Erzeuger'] is not None:
-        Zeugung = f'{nsc["vorname"]} wurde von {nsc["Erzeuger"] if nsc[]} {nsc["Kuss"][0]} geschaffen. Die Motivation zu diesem Kuss bestand aus {nsc["Kuss"][1]}.{Newline(language)}'
+        Zeugung = f'{nsc["vorname"]} wurde von {nsc["Erzeuger"]} {nsc["Kuss"][0]} geschaffen. Die Motivation zu diesem Kuss bestand aus {nsc["Kuss"][1]}.{Newline(language)}'
     else:
         Zeugung = f'Über den Erzeuger von {nsc["vorname"]} ist nichts bekannt, jedoch Erfahren Vertraute {nsc["vorname"]} der Kuss aus {nsc["Kuss"][1]} geschenkt wurde.{Newline(language)}'
     result += f'''    
@@ -385,5 +385,8 @@ def PrintVampire(nsc, language):
     for ereignis in nsc['Unleben']:
         result += f'<li>{PrintEreignis(nsc,ereignis,language)}</li>'
     result += '</ul>'
-    result += f'Diese Erfahrungen prägen {nsc["vorname"]}. {StartCapital(nsc["pronomen"])} {nsc["TrinkPraktik"]} und {nsc["TrinkMoral"]}.{Newline(language)} Außerdem {InsertWordAtSpace(nsc["Ansichten"]["Sterbliche"],nsc["pronomen"])}.{Newline(language)} '
+    result += f'''
+    Diese Erfahrungen prägen {nsc["vorname"]}. {StartCapital(nsc["pronomen"])} {nsc["TrinkPraktik"]} und {nsc["TrinkMoral"]}.{Newline(language)}
+    Außerdem {InsertWordAtSpace(nsc["Ansichten"]["Sterbliche"],nsc["pronomen"])}.{Newline(language)}
+    '''
     return result + f' Dieser Abschnitt ist aktuell noch in Bearbeitung...{Newline(language)} {Newline(language)} Vorschläge gerne an mich!'
