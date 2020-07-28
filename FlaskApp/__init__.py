@@ -6,6 +6,7 @@ from webargs import fields
 from webargs.flaskparser import use_args
 from datetime import datetime
 
+
 from .kinfolkGen import PrintBSDPack,PrintPack,CreateRandom,CreateBSD,CreateFomor
 from .baneGen import CreateBane
 from .EncounterGen import CreateEncounter
@@ -170,7 +171,7 @@ def my_form_post():
     contact = request.form['Contact']    
     print(repr(feedback))
     if len(feedback) > 0:
-        with open(basePath+'/feedBacks.csv','a') as saveFile:
+        with open(basePath+'/feedBacks.csv','a',encoding='utf-8') as saveFile:
             saveFile.write(f'{datetime.now().strftime("%H:%M:%S")};"{submitter}";"{contact}";"{repr(feedback)}"')
     return MakePage(feedbackResponse, '',False)
 
