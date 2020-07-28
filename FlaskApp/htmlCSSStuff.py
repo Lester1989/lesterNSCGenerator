@@ -1,3 +1,19 @@
+feedbackForm = '''
+<form method="POST">
+  <p>Name(optional):<input type="text" name="Submitter"/></p>
+   <p>Feedback: </p>
+  <textarea name="Feedback" style="min-width:50vw;min-height:20vh;"></textarea>
+  <p>Kontaktmöglichkeit (optional) <input name="Contact"/></p>
+  <input type="submit"/>
+</form>
+'''
+
+feedbackResponse = '''
+<h2>Vielen Dank für dein Feedback!</h2>
+<p> Falls du mir eine Emailadresse oder andere Antwortmöglichkeit hinterlassen hast, werde ich dich kontaktieren, sobald ich dein Feedback durchgehe.</p>
+'''
+
+
 headerPart ='''
 <!DOCTYPE html>
 <html>

@@ -1,10 +1,11 @@
 
 # A very simple Flask Hello World app for you to get started with...
 # -*- coding: iso-8859-1 -*-
-
-from flask import Flask
+from flask import Flask, request, render_template
 from webargs import fields
 from webargs.flaskparser import use_args
+from datetime import datetime
+
 from .kinfolkGen import PrintBSDPack,PrintPack,CreateRandom,CreateBSD,CreateFomor
 from .baneGen import CreateBane
 from .EncounterGen import CreateEncounter
@@ -15,10 +16,10 @@ from .PackNameGen import *
 from .SpielHinweise import *
 from .bsdFomorGen import *
 from .config import baseURL
-from .htmlCSSStuff import headerPart
+from .htmlCSSStuff import headerPart,feedbackForm,feedbackResponse
 
 
-def MakePage(content, url=''):
+def MakePage(content, url='',canPrintPage=True):
     linkActivity = {
         'kinfolk': ' class="active" ' if '/kinfolk/' in url.lower() else '',
         'garou': ' class="active" ' if '/garou/' in url.lower() else '',
@@ -62,7 +63,8 @@ def MakePage(content, url=''):
         </div>
 
         <hr>
-        <p>Schicke Feedback oder Wünsche oder Vorschläge an mich <a class="mailTo" href="mailto:l.ester@gmx.de?Subject=[NSC Generator] Feedback" target="_top">&#x1f4e8; (l.ester@gmx.de) &#x1f4e8;</a>(l.ester@gmx.de)</p>
+        <p>Schicke Feedback oder Wünsche oder Vorschläge an mich via Mail<a class="mailTo" href="mailto:l.ester@gmx.de?Subject=[NSC Generator] Feedback" target="_top">&#x1f4e8; (l.ester@gmx.de) &#x1f4e8;</a>(l.ester@gmx.de)</p>
+        <a href="{baseURL}/feedback/"> Feedback</a>
         <img src="https://hitcounter.pythonanywhere.com/count/tag.svg?url=http%3A%2F%2Flester89.pythonanywhere.com%2F" alt="Hits" >
     </div>
     '''
@@ -70,8 +72,12 @@ def MakePage(content, url=''):
     result = headerPart+menuPart+'<div class="content">'+content+f'''
         <br>
             {encounterDisclaimer}
-        <br>
+        <br>'''
+    if canPrintPage:
+        result += '''
         <button onclick="window.print()" class="button no-print" style="vertical-align:middle"><span>Ausdrucken </span></button>
+        '''
+    result += '''
     </div>
     '''
     return result
@@ -151,14 +157,22 @@ def HandleNamedEncounterCalls(gelaende, language, encounterName):
     ''', f'/encounter/{gelaende}/')
 
 
-@app.route('/test/')
+@app.route('/feedback/')
 @use_args({'bla': fields.Str(required=False)}, location="query")
 def myview(args):
-    if 'bla' in args:
-        bla = args['bla']
-    else:
-        bla = f'no arg found:{args}'
-    return str(f'''<h1>{bla}</h1>''')
+    return MakePage(feedbackForm, '',False)
+
+    
+@app.route('/feedback/', methods=['POST'])
+def my_form_post():
+    submitter = request.form['Submitter']
+    feedback = request.form['Feedback']
+    contact = request.form['Contact']    
+    print(repr(feedback))
+    if len(feedback) > 0:
+        with open('feedBacks.csv','a') as saveFile:
+            saveFile.write(f'{datetime.now().strftime("%H:%M:%S")};"{submitter}";"{contact}";"{repr(feedback)}"')
+    return MakePage(feedbackResponse, '',False)
 
 
 @app.route('/')
