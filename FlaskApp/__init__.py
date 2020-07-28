@@ -15,7 +15,7 @@ from .LookGen import *
 from .PackNameGen import *
 from .SpielHinweise import *
 from .bsdFomorGen import *
-from .config import baseURL
+from .config import baseURL,basePath
 from .htmlCSSStuff import headerPart,feedbackForm,feedbackResponse
 
 
@@ -170,7 +170,7 @@ def my_form_post():
     contact = request.form['Contact']    
     print(repr(feedback))
     if len(feedback) > 0:
-        with open('feedBacks.csv','a') as saveFile:
+        with open(basePath+'/feedBacks.csv','a') as saveFile:
             saveFile.write(f'{datetime.now().strftime("%H:%M:%S")};"{submitter}";"{contact}";"{repr(feedback)}"')
     return MakePage(feedbackResponse, '',False)
 
