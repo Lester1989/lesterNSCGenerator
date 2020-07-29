@@ -3,7 +3,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,visualstudiocode,flask,linux,windows
 
 ### CONFIG File ###
-FlaskApp/config.py
+FlaskApp\config.py
 
 ### Flask ###
 instance/*
