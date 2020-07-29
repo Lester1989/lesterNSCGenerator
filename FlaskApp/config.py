@@ -1,5 +1,11 @@
+
 basePath = '/var/www/FlaskApp'
 baseURL = 'http://v22018117165076045.happysrv.de'
+
+
+
+feedbackLoginCode = 'lesterliestfeedbacks'
+
 
 headerPart ='''
 <!DOCTYPE html>
