@@ -16,7 +16,7 @@ from .LookGen import *
 from .PackNameGen import *
 from .SpielHinweise import *
 from .bsdFomorGen import *
-from .config import baseURL, basePath
+from .config import baseURL, basePath,feedbackLoginCode
 from .htmlCSSStuff import headerPart, feedbackForm, feedbackResponse
 
 
@@ -175,13 +175,48 @@ def my_form_post():
     print(repr(feedback))
     if len(feedback) > 0:
         with open(basePath+'/feedBacks.csv', 'a', encoding='utf-8') as saveFile:
-            saveFile.write(f'{datetime.now().strftime("%H:%M:%S")};"{submitter}";"{contact}";"{repr(feedback)}"')
+            saveFile.write(f'{datetime.now().strftime("%H:%M:%S")}";"{submitter}";"{contact}";"{repr(feedback)}')
 
     count = len(open(basePath+'/feedBacks.csv', 'r', encoding='utf-8').readlines())
     counterPart = f'''
     <p> Bisher wurde {count} mal Feedback abgegeben</p>
     '''
     return MakePage(feedbackResponse + counterPart, '', False)
+
+
+ 
+@app.route('/Readfeedback/')
+def readFeedbackAnonymous():
+    LoginForm = '''    
+    <form method="POST">
+        <input type="text" name="pwLogin"/>
+        <input type="submit"/>
+    </form>
+    '''
+    return MakePage(LoginForm,'', False)
+    
+@app.route('/Readfeedback/',methods=['POST'])
+def readFeedbackLogin():
+    response = ''
+    login = request.form['pwLogin']
+    if login == feedbackLoginCode:
+        with open(basePath+'/feedBacks.csv', 'r', encoding='utf-8') as fbFile:
+            Lines = fbFile.readlines()
+            for line in Lines:
+                fields = line.split('";"')
+                if len(fields)!=4:
+                    print(line)
+                    continue
+                response += f'''
+<hr>
+<p>{fields[0]} - Von {fields[1]}</p>
+<p>{fields[3]}</p>
+<p>Antwort an: {fields[2]}</p>
+<br>
+'''
+    else:
+        response = 'under Construction'
+    return MakePage(response,'', False)
 
 
 @app.route('/')
