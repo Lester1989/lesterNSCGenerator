@@ -7,7 +7,7 @@ from webargs.flaskparser import use_args
 from datetime import datetime
 
 
-from .kinfolkGen import PrintBSDPack,PrintPack,CreateRandom,CreateBSD,CreateFomor
+from .kinfolkGen import PrintBSDPack, PrintPack, CreateRandom, CreateBSD, CreateFomor
 from .baneGen import CreateBane
 from .EncounterGen import CreateEncounter
 from .gaben import *
@@ -16,11 +16,11 @@ from .LookGen import *
 from .PackNameGen import *
 from .SpielHinweise import *
 from .bsdFomorGen import *
-from .config import baseURL,basePath
-from .htmlCSSStuff import headerPart,feedbackForm,feedbackResponse
+from .config import baseURL, basePath
+from .htmlCSSStuff import headerPart, feedbackForm, feedbackResponse
 
 
-def MakePage(content, url='',canPrintPage=True):
+def MakePage(content, url='', canPrintPage=True):
     linkActivity = {
         'kinfolk': ' class="active" ' if '/kinfolk/' in url.lower() else '',
         'garou': ' class="active" ' if '/garou/' in url.lower() else '',
@@ -107,7 +107,7 @@ def createGarouPackLinks(args):
 
 
 @app.route('/nsc/<art>/<powerlevel>/<language>/')
-@use_args({'packname': fields.Str(required=False),'treeSeed': fields.Str(required=False)}, location="query")
+@use_args({'packname': fields.Str(required=False), 'treeSeed': fields.Str(required=False)}, location="query")
 def HandleNSCCalls(args, art, powerlevel, language):
     if art in ['kinfolk', 'garou', 'Human']:
         return MakePage(CreateRandom(seed=-1, Art=art[0].upper()+art[1:], Powerlevel=int(powerlevel), language=language.upper(), packname=args, shortPrint=False), f'/nsc/{art}/')
@@ -123,7 +123,7 @@ def HandleNSCCalls(args, art, powerlevel, language):
 
 
 @app.route('/nsc/<art>/<powerlevel>/<language>/<seed>/')
-@use_args({'packname': fields.Str(required=False),'treeSeed': fields.Str(required=False)}, location="query")
+@use_args({'packname': fields.Str(required=False), 'treeSeed': fields.Str(required=False)}, location="query")
 def HandleNSCCallsWithSeed(args, art, powerlevel, language, seed):
     print(f'seed: {seed}')
     if art in ['kinfolk', 'garou', 'human']:
@@ -137,7 +137,6 @@ def HandleNSCCallsWithSeed(args, art, powerlevel, language, seed):
     elif art == 'fomor':
         return MakePage(str(CreateFomor(seed=seed, Powerlevel=int(powerlevel), language=language.upper())), f'/nsc/{art}/')
     return 'TODO'
-
 
 
 @app.route('/encounter/<gelaende>/<language>/')
@@ -161,19 +160,28 @@ def HandleNamedEncounterCalls(gelaende, language, encounterName):
 @app.route('/feedback/')
 @use_args({'bla': fields.Str(required=False)}, location="query")
 def myview(args):
-    return MakePage(feedbackForm, '',False)
+    count = len(open(basePath+'/feedBacks.csv', 'r', encoding='utf-8').readlines())
+    counterPart = f'''
+    <p> Bisher wurde {count} mal Feedback abgegeben</p>
+    '''
+    return MakePage(feedbackForm + counterPart, '', False)
 
-    
+
 @app.route('/feedback/', methods=['POST'])
 def my_form_post():
     submitter = request.form['Submitter']
     feedback = request.form['Feedback']
-    contact = request.form['Contact']    
+    contact = request.form['Contact']
     print(repr(feedback))
     if len(feedback) > 0:
-        with open(basePath+'/feedBacks.csv','a',encoding='utf-8') as saveFile:
+        with open(basePath+'/feedBacks.csv', 'a', encoding='utf-8') as saveFile:
             saveFile.write(f'{datetime.now().strftime("%H:%M:%S")};"{submitter}";"{contact}";"{repr(feedback)}"')
-    return MakePage(feedbackResponse, '',False)
+
+    count = len(open(basePath+'/feedBacks.csv', 'r', encoding='utf-8').readlines())
+    counterPart = f'''
+    <p> Bisher wurde {count} mal Feedback abgegeben</p>
+    '''
+    return MakePage(feedbackResponse + counterPart, '', False)
 
 
 @app.route('/')
