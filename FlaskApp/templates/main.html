@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Lesters NSC Generator</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="{{ url_for('static', filename='css/mainStyle.css') }}" rel="stylesheet">
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+{% set navigation_bar = [
+    ('/nsc/kinfolk/0/html', 'kinfolk', 'Kinfolk'),
+    ('/nsc/garou/0/html', 'garou', 'Garou'),
+    ('/nsc/Human/0/html', 'human', 'Mensch'),
+    ('/nsc/vampir/0/html', 'vampir', 'Vampir'),
+    ('/nsc/bsd/0/html', 'bsd', 'Tänzer der schwarzen Spirale'),
+    ('/nsc/fomor/0/html', 'fomor', 'Fomor'),
+    ('/nsc/bsdpack/0/html', 'bsdpack', 'Tänzer-Rudel'),
+    ('/nsc/garoupack/0/html', 'garoupack', 'Gaour-Rudel'),
+    ('/nsc/bane/0/html', 'bane', 'Plagengeist')
+] -%}
+{% set active_page = active_page|default('') -%}
+<header>
+	<div class="no-print sidenav">
+		<h1>Lesters NSC Generator</h1>
+		<h4>NSC</h4>
+		<div>			
+			{% for href, id, caption in navigation_bar %}
+			<a {% if id == active_page %} class="active" {% endif %} href="{{ href|e }}"> {{ caption|e }} </a>			
+			{% endfor %}
+		</div>
+		<h4>zufällige Encounter</h4>
+		<div>
+			<a {% if "stadt" == active_page %} class="active" {% endif %} href="/encounter/stadt/html/"> in der Stadt </a><br>
+			<a {% if "wildnis" == active_page %} class="active" {% endif %} href="/encounter/wildnis/html/"> in der Wildnis </a><br>
+			<a {% if "umbra" == active_page %} class="active" {% endif %} href="/encounter/umbra/html/"> im Umbra </a><br>
+		</div>
+
+		<hr>
+		<p>Schicke Feedback oder Wünsche oder Vorschläge an mich via Mail<a class="mailTo"
+				href="mailto:l.ester@gmx.de?Subject=[NSC Generator] Feedback" target="_top">&#x1f4e8; (l.ester@gmx.de)
+				&#x1f4e8;</a>(l.ester@gmx.de)</p>
+		<a href="/feedback/"> Feedback</a>
+		<img src="https://hitcounter.pythonanywhere.com/count/tag.svg?url=http%3A%2F%2Flester89.pythonanywhere.com%2F"
+			alt="Hits">
+	</div>
+
+
+</header>
+
+
+
+
+
+
+
+
+
+
+</html>

@@ -18,6 +18,8 @@ headerPart ='''
 <!DOCTYPE html>
 <html>
 <head>
+
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 <style>
 body {
     background-color: whitesmoke;
