@@ -16,146 +16,53 @@ from .Formatting import Bold, Newline, Header, ListLines, Table, StartCapital
 from .config import baseURL, basePath
 from .NSCGenUtils import NameToSeed, DrawWithWeightsUnique, DrawWithWeights, DrawKey, DrawKeyUnique
 from .vampireGen import PrintVampire, MakeVampire
+from .ImageGen import TextWithImage, GetFace
 # =================================================================
 # INIT TABLES
 # =================================================================
 
-hintergründe = {
-    'Zeit': {'neu in der Gemeinschaft': 1, 'voll eingearbeitet': 3, 'seit langer Zeit dabei': 4, 'von Geburt an indoktriniert': 5},
-    'Familie': {'Single': 2, 'In einer Beziehung': 2, 'Verheiratet': 2, 'Verwitwet': 1, 'Geschieden': 1},
-    'Familienzufriedenheit': {'glücklich': 2, 'zufrieden': 3, 'verbittert': 1, 'auf der Suche nach Veränderung': 2},
-    'Alter': {'gerade Volljährig': 2, 'zwischen 20 und 30': 6, 'anfang 30': 4, 'mitte 30': 3, 'anfang 40': 2, 'mitte 40': 2, 'zwischen 40 und 50': 2, 'ende 50': 1, 'über 60': 1, }
-}
-namedMotivation = {
-    'Alle': {
-        'Anführerin': ' muss das Sagen haben.',
-        'Händlerin': ' will ein gutes Geschäft machen.',
-        'Gigolo': ' will im Mittelpunkt stehen.',
-        'Tyrannin': ' will andere einschüchtern.',
-        'Guru': ' strebt nach metaphysischer Erkenntnis.',
-        'Punk': ' will gesellschaftliche Konventionen brechen.',
-        'Schlaubergerin': ' glaubt alles zu wissen und will andere lehren.',
-        'Rebellin': ' ist gegen Autorität.',
-        'Perfektionistin': ' hat sehr hohe Maßstäbe und erwartet diese auch bei Anderen.',
-        'Altmodisch': ' hält am Altbewährten fest.',
-        'Rohling': ' bevorzugt Macht und Gewalt als Werkzeug.',
-        'Schmarotzerin': ' ist zu faul zum arbeiten und läßt Andere die Dinge erledigen.',
-        'Soldatin': ' mag klare Ziele und Abläufe.',
-        'Überlebenskünstlerin': ' gibt niemals auf.',
-        'kindliches Verhalten': ' ist nicht bereit Verantwortung zu übernehmen, unreif oder will beschützt werden.',
-        'Wissenschaftlerin': ' will alles verstehen und handelt seht methodisch und logisch.',
-        'Partyheldin': ' will bei allem Spaß haben und das Leben genießen.',
-    },
-    'Garou': {
-        'militanter Krieger': ' sieht den Kampf als oberste Priorität, ordnet andere Punkte der Litanei diesem Ziel unter.',
-        'Pazifist': ' verteidigt sich nur und versucht Konflikte mit Worten zu lösen.',
-        'Totalitärer Rudelführer': ' verhängt einen permanenten Kriegszustand, damit keine Herausforderung ausgesprochen werden kann.',
-        'Isolierte Politik': ' Kümmert sich nur um das eigene Rudelterritorium.',
-        'Wanderer': ' wandert meist von Septe zu Septe.',
-        'Umbraforscher': ' erkundet gerne das Umbra.',
-        'Agent der Geister': ' erledigt oft Angelegenheiten der Geister in der materiellen Welt.',
-        'Kind der Wyldnis': ' nutzt, so oft es geht Gestaltwandel und Gaben.',
-        'Kind der Weberin': ' handelt sehr strukturiert und mag Regeln.',
-        'Planer': ' hat für alles einen Plan.',
-        'Hobbyhandwerker': '  bastelt gerne herum.',
-        'Welpensucher': ' sucht Welpen nach der ersten Wandlung, um diese dann zu ihren Stämmen zu führen.',
-        'Einsamer Wolf': ' ist meist allein unterwegs.',
-        'Rudelkämpfer': ' ist meistens mit seinem Rudel unterweg.',
-        'Ehrenwolf': ' ist sehr auf die eigene Ehre bedacht.',
-        'fieser Kämpfer': ' ist kein Trick zu schmutzig, um zu gewinnen.',
-        'Aktivist': ' setzt sich hingebungsvoll für ein Ziel ein.',
-        'Faulpelz': ' ist träge, muss immer von Anderen motiviert werden.',
-        'Hobbyhistoriker': ' beschäftigt sich mit der Geschichte.',
-        'Egoist': ' ist nur auf den eigenen Vorteil bedacht.',
-        'neugierig': ' steckt die Nase gerne in fremde Angelegenheiten.',
-        'Antikapitalist': ' sieht in den Konzernen die Wurzel des Bösen.',
-        'Rätselfreund': ' liebt es geistige Herausforderungen zu lösen.',
-        'Sünden der Vergangenheit': ' wird von den eigenen Sünden oder denen der Vorfahren oder Familie verfolgt.',
-        'Architekt': ' will etwas Dauerhaftes errichten.',
-    },
-    'Vampire': {
-        'Einsamer Wolf': ' ist meist allein unterwegs.',
-        'Pazifist': ' verteidigt sich nur, versucht Konflikte mit Worten zu lösen.',
-        'Isolierte Politik': ' kümmert sich nur um das eigene Territorium.',
-        'Wanderer': ' zieht meist herum und bleibt nirgends dauerhaft.',
-        'Okkultist': ' studiert die okkulten Mythen.',
-        'Teamplayer': ' arbeitet lieber in der Gruppe.',
-        'Ehrenmann/frau': ' ist sehr auf Ehre bedacht.',
-        'fieser Taktiker': ' ist kein Trick zu schmutzig, um zu gewinnen.',
-        'Aktivist': ' setzt sich hingebungsvoll für ein Ziel ein.',
-        'Faulpelz': ' ist träge und muss immer von Anderen motiviert werden.',
-        'Hobbyhistoriker': ' beschäftigt sich mit der Geschichte.',
-        'Egoist': ' ist nur auf den eigenen Vorteil bedacht.',
-        'Neugierig': ' steckt die Nase gerne in fremde Angelegenheiten.',
-        'Antikapitalist': ' sieht in den Konzernen die Wurzel des Bösen.',
-        'Rätselfreund': ' liebt es geistige Herausforderungen zu lösen.',
-        'Sünden der Vergangenheit': ' wird von den eigenen Sünden oder denen der Vorfahren oder Familie verfolgt.',
-        'Architekt': ' will etwas Dauerhaftes errichten.',
-        'Kind der Magie': ' nutzt, so oft es geht, übernatürliche Kräfte.',
-        'Struktur und Ordnung': ' handelt sehr strukturiert und mag Regeln.',
-        'Planer': ' hat für alles einen Plan.',
-        'Hobbyhandwerker': ' bastelt gerne herum.',
-    },
-}
-
-motivation = {'Persönlicher Machtgewinn': 1, 'Anerkennung': 3, 'Neugierde': 1, 'Familiengründung': 2, 'Beschützen': 3,
-              'Selbstlose Opferbereitschaft': 2, 'Angst vor Bösem/Weltuntergang': 1, 'Pflichtgefühl': 6, 'Rache': 1}
-pläne = {'Rang aufstieg': 3, 'Vermögenszuwachs': 1, 'Partner finden und Kinder machen': 2,
-         'Nachforschungen': 1, 'Training (Fähigkeitssteigerung)': 2, 'auf Befehle warten': 4, 'Flucht': .5, 'Rache': 1}
-richtlinien = {'Ich vor allem': 2, 'Familie vor allem': 4, 'Ehre vor allem': 1,
-               'Bedacht statt Übermut': 3, 'Für das höhere Wohl': 2, 'Gerechtigkeit für alle': 1, }
-einstellung = {
-    'Wyrm': {'Sofort vernichten': 6, 'Verstehen um zu vernichten': 5, 'Verstehen um zu verhindern': 2, 'Heilen/bekehren': 1},
-    'Rangordnung': {'Unantastbar': 2, 'von Gaia gewollt': 2, 'nötig für das Überleben': 3, 'wie sie ist': 3, 'ein Relikt und Hindernis aus alter Zeit': 2, 'die Wurzel des Untergangs': .5},
-    'Rudel': {'Liebevoll': .5, 'Freundlich': 1, 'Offen': 3, 'Neutral': 3, 'Verschlossen': 2, 'Misstrauisch': 1, 'Feindselig': .5, 'Hass': .25}
-}
-wissen = {'volles Wissen und Verstehen': .5, 'Wissen und Ahnung über Bedeutung': 1,
-          'lückenhaftes Wissen': 2, 'wenig Ahnung': 2, 'nur Gerüchte gehört': 5, 'kein Wissen': 4, }
-ausbildung = {
-    'Art': {'im Nahkampf': 2, 'im Fernkampf': 4, 'in Selbstverteidigung': 2, 'im Handwerk': 3, 'als Führungsperson': 1, 'in Medizin': 3, 'über altes Wissen': .5},
-    'Güte': {'exzellente': 2, 'fortgeschrittene': 5, 'grundlegende': 4, 'schlechte': 2, 'fehlerhafte': .5},
-    'Anzahl': {1: 1, 2: 2, 3: 1, 4: .5}
-}
-schwerpunkte = {
-    'Attribute': {'Körperlich': 1, 'Sozial': 1, 'Geistig': 1},
-    'Strategie': {'Offensiv': 1, 'Defensiv': 1, 'Passiv': 1}
-}
-factor = {'exzellente': 3, 'fortgeschrittene': 2,
-          'grundlegende': 1, 'schlechte': 0, 'fehlerhafte': -2}
-skills = {
-    'im Nahkampf': ['Nahkampf', 'Widerstand'],
-    'im Fernkampf': ['Fernkampf', 'Wahrnehmen'],
-    'in Selbstverteidigung': ['Widerstand', 'Wille', 'Verstecken'],
-    'im Handwerk': ['Handwerk'],
-    'als Führungsperson': ['Wille', 'Lügen', 'Wahrnehmen'],
-    'in Medizin': ['Medizin'],
-    'über altes Wissen': ['Wahrnehmen']}
-poolMaxes = {'Nahkampf': 7, 'Fernkampf': 7, 'Widerstand': 5, 'Wille': 3,
-             'Lügen': 6, 'Wahrnehmen': 6, 'Verstecken': 6, 'Handwerk': 6, 'Medizin': 6}
-stämme = {'Fianna': 1, 'Glaswandler': 1, 'Kinder Gaias': 1, 'Knochenbeißer': 1, 'Nachfahren des Fenris': 1, 'Rote Klauen': 1,
-          'Schattenlords': 1, 'Schwarze Furien': 1, 'Silberfänge': 1, 'Sternenträumer': 1, 'Stillen Wanderer': 1, 'Uktena': 1, 'Wendigo': 1}
-vorzeichen = {'Ragabash': 1, 'Theurge': 1,
-              'Philodox': 1, 'Galliard': 1, 'Ahroun': 1, }
-bruten = {'Menschling': 4, 'Metis': 1, 'Lupus': 1}
-
-Ränge = {-1: 'Cliath', 0: 'Cliath', 1: 'Cliath', 2: 'Pflegling', 3: 'Pflegling', 4: 'Pflegling', 5: 'Adren',
-         6: 'Adren', 7: 'Athro', 8: 'Athro', 9: 'Ältester', 10: 'Ältester', 11: 'Ältester', 12: 'Legende'}
+# region INIT TABLES
 
 
-beziehungen = {'liebt', 'mag', 'lehrt', 'bewundert', 'beneidet', 'mag XX nicht', 'belächelt', 'bemitleidet',
-               'ist verwandt mit', 'würde das eigene Leben für XX opfern', 'rivalisiert mit', 'streitet häufig mit', 'vertraut XX blind'}
+# with open('baneType.json', 'w', encoding='utf-8') as outfile:
+#     json.dump(baneType,outfile,indent=2)
+# with open('hintergruende.json', 'r', encoding='utf-8') as infile:
+#     hintergründe = json.load(infile)
 
-berufe = {
-    'Maurer', 'Ingenieur', 'Hausmeister', 'Trainer', 'Lehrer', 'Grundschullehrer', 'Kindergärtner', 'Buchhalter', 'Wirtschaftspartner', 'Apotheker',
-    'Chemiker', 'Architekt', 'Webdesigner', 'Produktdesigner', 'Babysitter', 'Hundesitter', 'Kosmetiker', 'Friseur', 'Hostess', 'Reiningskraft', 'Yogalehrer',
-    'Optiker', 'Bäcker', 'Fleischer', 'Florist', 'Kassierer', 'Verkaufer', 'Store Manager', 'Banker', 'Kredithai', 'Beikoch', 'Kellner', 'Koch', 'Tellerwäscher',
-    'Altenpfleger', 'Arzt', 'Zahnarzt', 'Krankenpfleger', 'Arzthelfer', 'Mechaniker', 'Gärtner', 'Heizungsbauer', 'Maler', 'Schneider', 'Steinmetz', 'Schmied',
-    'Klempner', 'Schlosser', 'Monteur', 'Installateur', 'Schuster', 'Techniker', 'Tischler', 'Schlosser', 'Glaser', 'Zimmerer', 'Makler', 'Vermieter',
-    'Elektroniker', 'Schleifer', 'Schweißer', 'Data Scientist', 'Programmierer', 'Empfangsmitarbeiter', 'Flugbegleiter', 'Fotograg', 'Model', 'Tänzer',
-    'Schauspieler', 'Regisseur', 'Bauer', 'Erntehelfer', 'Influencer', 'Eventmanager', 'PR Manager', 'Flyerverteiler', 'Dreher', 'Maschinenenbauer',
-    'Dolmetscher', 'Pressereferent', 'HR Manager', 'Anwalt', 'Richter', 'Notar', 'Detektiv', 'Türsteher', 'Busfahrer', 'Einkäufer', 'Fahrer', 'Lagerist',
-    'Trucker', 'Postbote', 'Versicherungsmakler', 'Handelsvertreter', 'Archivar', 'Sekretär', 'Projekt Manager', 'Biologe', 'Geologe', 'Physiker',
-}
+with open('hintergruende.json', 'r', encoding='utf-8') as infile:
+    hintergründe = json.load(infile)
+with open('namedMotivation.json', 'r', encoding='utf-8') as infile:
+    namedMotivation = json.load(infile)
+with open('motivation.json', 'r', encoding='utf-8') as infile:
+    motivation = json.load(infile)
+with open('plaene.json', 'r', encoding='utf-8') as infile:
+    pläne = json.load(infile)
+with open('richtlinien.json', 'r', encoding='utf-8') as infile:
+    richtlinien = json.load(infile)
+with open('einstellung.json', 'r', encoding='utf-8') as infile:
+    einstellung = json.load(infile)
+with open('wissen.json', 'r', encoding='utf-8') as infile:
+    wissen = json.load(infile)
+with open('ausbildung.json', 'r', encoding='utf-8') as infile:
+    ausbildung = json.load(infile)
+with open('factor.json', 'r', encoding='utf-8') as infile:
+    factor = json.load(infile)
+with open('skills.json', 'r', encoding='utf-8') as infile:
+    skills = json.load(infile)
+with open('poolMaxes.json', 'r', encoding='utf-8') as infile:
+    poolMaxes = json.load(infile)
+with open('staemme.json', 'r', encoding='utf-8') as infile:
+    stämme = json.load(infile)
+with open('vorzeichen.json', 'r', encoding='utf-8') as infile:
+    vorzeichen = json.load(infile)
+with open('bruten.json', 'r', encoding='utf-8') as infile:
+    bruten = json.load(infile)
+with open('Raenge.json', 'r', encoding='utf-8') as infile:
+    Ränge = json.load(infile)
+with open('beziehungen.json', 'r', encoding='utf-8') as infile:
+    beziehungen = json.load(infile)
+with open('berufe.json', 'r', encoding='utf-8') as infile:
+    berufe = json.load(infile)
 
 names = {}
 surnames = []
@@ -170,6 +77,7 @@ with open(basePath+'/FlaskApp/us.txt', 'r') as file:
     for line in file:
         surnames.append(line[:-1])
     print(f'Nachnamen: {len(surnames)}')
+# endregion
 
 # =================================================================
 # RANDOM SELECTION METHODS
@@ -238,7 +146,6 @@ def MakeDescriptions(nsc):
     nsc['rangordnung'] = DrawWithWeights(einstellung['Rangordnung'])
     nsc['scRudel'] = DrawWithWeights(einstellung['Rudel'])
     nsc['plot'] = DrawWithWeights(wissen)
-    nsc['reaktion'] = DrawWithWeights(schwerpunkte['Strategie'])
     return nsc
 
 
@@ -275,7 +182,7 @@ def MakeBreed(nsc, brut=''):
 
 def MakeExpertise(nsc):
     NameToSeed(nsc['vorname']+' '+nsc['nachname'])
-    nrAusbildung = DrawWithWeights(ausbildung['Anzahl']) + (0 if nsc['art'] == "Kinfolk" else 1)
+    nrAusbildung = int(DrawWithWeights(ausbildung['Anzahl'])) + (0 if nsc['art'] == "Kinfolk" else 1)
     nscAusbildungen = []
     nscGüte = []
     for _ in range(nrAusbildung):
@@ -307,6 +214,9 @@ def MakeBase(seed=-1, Art='Kinfolk', Stamm='', Powerlevel=0, occupation=''):
     if 'vorname' not in nameData:
         print(f'VORNAME not recognised returning random ({seed})')
         return MakeBase(-1, Art, Stamm, Powerlevel, occupation)
+
+    NameToSeed(nameData['vorname'].replace('_', ' ')+' '+surname)
+
     nsc = {
         'vorname': nameData['vorname'].replace('_', ' '),
         'nachname': surname,
@@ -316,22 +226,19 @@ def MakeBase(seed=-1, Art='Kinfolk', Stamm='', Powerlevel=0, occupation=''):
         'occupation': occupation,
         'job': random.sample(berufe, 1)[0]
     }
-    if Art == 'Human' or Art == 'vampir':
-        nsc['art'] = Art
-        return nsc
 
-    NameToSeed(nsc['vorname']+' '+nsc['nachname'])
-    if Art != 'Kinfolk':
-        drawnArt = DrawWithWeights(vorzeichen)
-        if Art == 'Garou':
-            nsc['art'] = drawnArt
-        else:
-            nsc['art'] = Art
-    else:
-        nsc['art'] = Art
+    nsc['art'] = Art
+    if Art in ['Human', 'vampir']:
+        return nsc
     if Art == 'Fomor':
         nsc.update(MakeFomor(seed))
         return nsc
+    #if Art == 'Kinfolk':
+    if Art in vorzeichen:
+        nsc['art'] = 'Garou'
+        nsc['vorzeichen'] = Art
+    if Art == 'Garou':
+        nsc['vorzeichen'] = DrawWithWeights(vorzeichen)
     if Stamm == '':
         nsc['stamm'] = DrawWithWeights(stämme)
     elif Stamm == 'Tänzer der schwarzen Spirale':
@@ -340,53 +247,6 @@ def MakeBase(seed=-1, Art='Kinfolk', Stamm='', Powerlevel=0, occupation=''):
     else:
         nsc['stamm'] = Stamm
     return nsc
-
-
-def TextWithImage(text, imageURL):
-    if imageURL == 'https://cdn.pixabay.com/photo/2020/06/05/16/27/excuse-me-5263696_960_720.jpg':
-        return f'''
-    <figure style="float:left;margin-right: 10px;margin-top:0px;margin-left:0px">
-    <img src="{imageURL}"  width="300" height="200" title=" Source: Pixabay.com" style="filter: grayscale(75%); ">
-      <figcaption>Generated.Photos is not whitelisted by Pythonanywhere yet </figcaption>
-    </figure>
-    <p style="min-height:200px;">{text}</p><br>'''
-
-    return f'''
-    <figure style="float:left;margin-right: 10px;margin-top:0px;margin-left:0px">
-    <img src="{imageURL}"  width="256" height="256" title="AI Generated Image, Source: Generated Photos" style="filter: grayscale(75%); ">
-      <figcaption>Photo by <a href="https://generated.photos">Generated Photos</a></figcaption>
-    </figure>
-    <p style="min-height:200px;">{text}</p><br>
-    </p><br>
-
-    '''
-
-
-def GetFace(nsc):
-    NameToSeed(nsc['vorname']+' '+nsc['nachname'])
-    url = "https://api.generated.photos/api/v1/faces?api_key=9431GheN9YeSBMHadx2bow"
-    if nsc['alter'] in ['gerade Volljährig', 'zwischen 20 und 30']:
-        bildAlter = 'young-adult'
-    elif nsc['alter'] in ['anfang 30', 'mitte 30', 'anfang 40', 'mitte 40']:
-        bildAlter = 'adult'
-    else:
-        bildAlter = 'elderly'
-    if nsc["scRudel"] in ['Liebevoll', 'Freundlich', 'Offen']:
-        bildEmotion = 'joy'
-    else:
-        bildEmotion = 'neutral'
-    gender = 'male'if nsc['pronomen'] == 'er' else 'female'
-    print(f'getting Image for ({gender}) {nsc["vorname"]+" "+nsc["nachname"]}')
-    try:
-        url = f'https://generated.photos/faces/{bildAlter}/{bildEmotion}/{gender}'
-        soup = BeautifulSoup(requests.get(url).text, "html.parser")
-        imgs = []
-        for post in soup.findAll('div', {'class': 'card-image'}):
-            imgs.append(str(post.find('img')).split('"')[-2])
-        return random.choice(imgs)
-    except:
-        pass
-    return 'https://cdn.pixabay.com/photo/2020/06/05/16/27/excuse-me-5263696_960_720.jpg'
 
 
 def PrintNSC(nsc, packname, language='Plain', shortPrint=False):
@@ -449,8 +309,7 @@ def PrintNSC(nsc, packname, language='Plain', shortPrint=False):
             result += f' Über den Wyrm denkt {nsc["pronomen"]}: {nsc["wyrm"]}.{Newline(language)}'
             result += f'Die Rangordnung ist für {nsc["pronomen"] if nsc["pronomen"]=="sie" else "ihn"} {nsc["rangordnung"]} und gegenüber dem SC Rudel ist {nsc["pronomen"]} {Bold(nsc["scRudel"],language)}. '
 
-    result += f'Über den {Bold("Plot",language)} hat {nsc["vorname"]} {nsc["plot"]}. '
-    result += f'In Konflikten reagiert {nsc["pronomen"]} meist {Bold(nsc["reaktion"],language)}.{Newline(language)}'
+    result += f'Über den {Bold("Plot",language)} hat {nsc["vorname"]} {nsc["plot"]}. {Newline(language)}'
 
     if 'stamm' in nsc and nsc['stamm'] == 'Tänzer der schwarzen Spirale':
         result += f'{nsc["vorname"]} leidet an {nsc["Geistesstörung"]["Grad"]}{nsc["Geistesstörung"]["Art"]}{Newline(language)}'
@@ -494,7 +353,7 @@ def PrintNSC(nsc, packname, language='Plain', shortPrint=False):
     if nsc['art'] != 'vampir':
         if not shortPrint:
             result += f'Um einen Platz in der Gesellschaft einzunehmen gab es {len(nsc["ausbildung"])} Ausbildung{"en" if len(nsc["ausbildung"])>1 else ""} für {nsc["pronomen"] if nsc["pronomen"]=="sie" else "ihn"}:{Newline(language)}'
-            result += ListLines([f'{güte} Ausbildung {Bold(ausb,language)}' for ausb,                                güte in nsc["ausbildung"]], language)
+            result += ListLines([f'{güte} Ausbildung {Bold(ausb,language)}' for ausb, güte in nsc["ausbildung"]], language)
     else:
         result += PrintVampire(nsc, language)
 
@@ -519,9 +378,9 @@ def PrintNSC(nsc, packname, language='Plain', shortPrint=False):
         seed = (nsc["vorname"]+" "+nsc["nachname"]).replace(" ", "_")
 
         result += baseLink + f'{art}/{nsc["Powerlevel"]}/{language.lower()}/{seed}{packString}">Dieser NCS ({nsc["vorname"]+" "+nsc["nachname"]})</a>'
-        if nsc["Powerlevel"]<12:
+        if nsc["Powerlevel"] < 12:
             result += baseLink + f'{art}/{nsc["Powerlevel"]+1}/{language.lower()}/{seed}{packString}">Stärker</a>'
-        if nsc["Powerlevel"]>-1:
+        if nsc["Powerlevel"] > -1:
             result += baseLink + f'{art}/{nsc["Powerlevel"]-1}/{language.lower()}/{seed}{packString}">Schwächer</a>{Newline("HTML")}'
         # if language == 'HTML':
         #     result += baseLink + f'{art}/{nsc["Powerlevel"]}/latex/{seed}{packString}">Dieser NCS ({seed}) als LaTeX Subsection</a>'

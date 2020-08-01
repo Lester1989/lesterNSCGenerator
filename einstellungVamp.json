@@ -1,0 +1,39 @@
+{
+  "Trinken": {
+    "Praktik": [
+      "<b>trinkt</b> Blut meist indirekt (Gl\u00e4ser, Spritzen, Blutbeutel o.\u00e4.)",
+      "<b>trinkt</b> Blut meist  aus dem Hals",
+      "<b>trinkt</b> Blut meist aus dem Handgelenk",
+      "<b>trinkt</b> Blut meist an anderen K\u00f6rperstellen",
+      "<b>trinkt</b> Blut meist \u00fcber einen Kuss (beisst in Lippe oder Zunge)",
+      "t\u00f6tet beim <b>Bluttrinken</b>",
+      "<b>trinkt</b> meist Tierblut",
+      "<b>trinkt</b> nur von bekannten Gef\u00e4\u00dfen (Herde)",
+      "<b>trinkt</b> nur Blut aus Blutbanken"
+    ],
+    "Einstellung": [
+      "verabscheut das Bluttrinken und trinkt nur im Notfall indirekt oder in Raserei",
+      "hasst das Bluttrinken",
+      "liebt das Bluttrinken",
+      "betrachtet es n\u00fcchtern als Nahrungsaufnahme",
+      "liebt Blut mit Rauschmitteln (Drogen, Alkohol o.\u00e4.)",
+      "liebt Blut mit starken Emotionen (Angst, Leidenschaft o.\u00e4.)",
+      "bevorzugt sehr exotischen Bluttyp (wie Ventrue)",
+      "hat Angst vor dem Bluttrinken und braucht dazu \u00dcberwindung"
+    ]
+  },
+  "Sterbliche": [
+    "verabscheut <b>Sterbliche</b>",
+    "sieht sich selbst auf demselben Level wie <b>Sterbliche</b>",
+    "genie\u00dft die Gesellschaft von <b>Sterblichen</b>",
+    "betrachtet <b>Sterbliche</b> als niedere Kreaturen",
+    "betrachtet <b>Sterbliche</b> als dumme unwissende Kreaturen",
+    "hat Angst vor <b>Menschen</b>",
+    "f\u00fchlt sich von <b>Menschen</b> verfolgt (Paranoia)",
+    "sieht <b>Sterbliche</b> als Sch\u00fctzdenswert an"
+  ],
+  "Maskerade": [],
+  "Camarilla": [],
+  "Anarchen": [],
+  "Sabbat": []
+}

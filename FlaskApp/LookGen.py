@@ -1,41 +1,43 @@
 import hashlib
 import random
-from .NSCGenUtils import NameToSeed
-
-Kleidung ={'abgerissene ','modische ','sportliche ', 'Arbeits-','Militär-','durchschnittliche ','zweckmäßige '}
-Kleidungsfärbung = {'ausgeblichenen', 'bunten', 'gedeckten','tarnenden', 'extravaganten' ,'dunklen', 'hellen','braunen','grauen'}
-Frisur={'hell','dunkel','blond','schwarz','rot','grau','gefärbt','bunt','dünn','fein','glatt','kraus','lockig','strähnig','zerzaust','gekämmt','gebürstet','kahl','hochgestylt','lang','kurz','in einem Zopf zusammengebunden'}
-Körperbau ={'schlank','dünn','mager','groß','klein','schwach','stark','kräftig','stämmig','untersetzt','dick','muskulös','übergewichtig','durchtrainiert'}
-Merkmale ={
-    'eine Narbe':['im Gesicht','am Arm','an der Hand','auf der Brust','auf dem Rücken','am Hals'],
-    'ein Muttermal':['im Gesicht','am Arm','an der Hand','auf der Brust','auf dem Rücken','am Hals'],
-    'eine Warze':['im Gesicht','am Arm','an der Hand','auf der Brust','auf dem Rücken','am Hals'],
-    'eine Tätowierung':['im Gesicht','am Arm','an der Hand','auf der Brust','auf dem Rücken','am Hals'],
-    'ein Piercing':['in der Lippe','in der Nase','in der Braue','im Ohr'],
-    'eine Brille':['im Gesicht','auf der Nasenspitze']
-}
-Kopf = {'abstehende Ohren','spitze Ohren','kleine Ohren','runde Ohren','Hakennase','Stupsnase','schiefe Nase','breite Nase','schielend','dichte Brauen','feine Brauen','volle Lippen','vorgeschobenes Kinn','breites Kinn','spitzes Kinn','hohe Wangenknochen'}
-Augen = {'blau','grün','braun','stahlblau','blaugrau','blaubraun','grau','dunkelgrün','grünbraun','rot'}
-Haut = {'wettergegerbt','faltig','blass','braungebrannt','unsauber','durchschnittlich'}
-Zähne = {'gepflegt','gelblich','heruntergekommen','lückenhaft','strahlend weiß','dreckig'}
+from .NSCGenUtils import NameToSeed, DrawWithWeights
+import json
 
 
+with open('Kleidung.json', 'r', encoding='utf-8') as infile:
+    Kleidung = json.load(infile)
+with open('Kleidungsfaerbung.json', 'r', encoding='utf-8') as infile:
+    Kleidungsfärbung = json.load(infile)
+with open('Frisur.json', 'r', encoding='utf-8') as infile:
+    Frisur = json.load(infile)
+with open('Koerperbau.json', 'r', encoding='utf-8') as infile:
+    Körperbau = json.load(infile)
+with open('Merkmale.json', 'r', encoding='utf-8') as infile:
+    Merkmale = json.load(infile)
+with open('Kopf.json', 'r', encoding='utf-8') as infile:
+    Kopf = json.load(infile)
+with open('Augen.json', 'r', encoding='utf-8') as infile:
+    Augen = json.load(infile)
+with open('Haut.json', 'r', encoding='utf-8') as infile:
+    Haut = json.load(infile)
+with open('Zaehne.json', 'r', encoding='utf-8') as infile:
+    Zähne = json.load(infile)
 
 def MakeBeschreibung(beschreibung):
     NameToSeed(beschreibung['vorname']+' '+beschreibung['nachname'])
-    beschreibung['beschreibungKleidung'] = random.choice(sorted(Kleidung))
-    beschreibung['beschreibungKleidungsFarbe'] = random.choice(sorted(Kleidungsfärbung))
-    beschreibung['beschreibungFrisur'] = random.choice(sorted(Frisur))
-    beschreibung['beschreibungKörperbau'] = random.choice(sorted(Körperbau))
+    beschreibung['beschreibungKleidung'] = DrawWithWeights(Kleidung)
+    beschreibung['beschreibungKleidungsFarbe'] = DrawWithWeights(Kleidungsfärbung)
+    beschreibung['beschreibungFrisur'] = DrawWithWeights(Frisur)
+    beschreibung['beschreibungKörperbau'] = DrawWithWeights(Körperbau)
     beschreibung['beschreibungMerkmal'] = [random.choice(sorted(Merkmale))]
     beschreibung['beschreibungMerkmal'].append(random.choice(Merkmale[beschreibung['beschreibungMerkmal'][0]]))
-    beschreibung['beschreibungKopf'] = random.choice(sorted(Kopf))
-    beschreibung['beschreibungAugen'] = random.choice(sorted(Augen))
+    beschreibung['beschreibungKopf'] = DrawWithWeights(Kopf)
+    beschreibung['beschreibungAugen'] = DrawWithWeights(Augen)
     additional = random.randint(0,4)
     if additional == 1:
-        beschreibung['beschreibungHaut'] = random.choice(sorted(Haut))
+        beschreibung['beschreibungHaut'] = DrawWithWeights(Haut)
     elif additional == 2:
-        beschreibung['beschreibungZähne'] = random.choice(sorted(Zähne))
+        beschreibung['beschreibungZähne'] = DrawWithWeights(Zähne)
     return beschreibung
 
 def PrintBeschreibung(beschreibung,Newline):

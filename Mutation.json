@@ -1,0 +1,62 @@
+{
+  "Anzahl": {
+    "0": 1,
+    "1": 2,
+    "2": 6,
+    "3": 2,
+    "4": 1,
+    "5": 0.3
+  },
+  "Art": {
+    "Tierisch": 1,
+    "Verderbnis": 1,
+    "Verzerrung": 1
+  },
+  "Merkmal": {
+    "Die Haut": 1,
+    "Der Sch\u00e4del": 1,
+    "Das Maul": 1,
+    "Das eine Ohr": 1,
+    "Eine Hand": 1,
+    "Ein Arm": 1,
+    "Ein Bein": 1,
+    "Die Haare": 1,
+    "Die Augen": 1,
+    "Die Nase": 1
+  },
+  "Tierisch": {
+    "einem Affe": 1,
+    "einem B\u00e4r": 1,
+    "einem Elefant": 1,
+    "einem Fisch": 1,
+    "einer Katze": 1,
+    "einem Elch": 1,
+    "einem Lama": 1,
+    "einer Ziege": 1,
+    "einem Insekt": 1,
+    "einer Ratte": 1,
+    "einem Frosch": 1,
+    "einem Krokodil": 1,
+    "einer Schlange": 1,
+    "einem Schwein": 1,
+    "einem Vogel": 1,
+    "einer Fledermaus": 1,
+    "einem Pferd": 1,
+    "einem Nashorn": 1,
+    "einer Schnecke": 1
+  },
+  "Verderbnis": {
+    "schleimig": 1,
+    "blass": 1,
+    "gr\u00fcnlich": 1,
+    "gelblich": 1,
+    "fahl": 1,
+    "blasig": 1
+  },
+  "Verzerrung": {
+    "zu gr\u00f6\u00df": 1,
+    "zu klein": 1,
+    "unformig": 1,
+    "aufgebl\u00e4ht": 1
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "Art": {
+    "im Nahkampf": 2,
+    "im Fernkampf": 4,
+    "in Selbstverteidigung": 2,
+    "im Handwerk": 3,
+    "als F\u00fchrungsperson": 1,
+    "in Medizin": 3,
+    "\u00fcber altes Wissen": 0.5
+  },
+  "G\u00fcte": {
+    "exzellente": 2,
+    "fortgeschrittene": 5,
+    "grundlegende": 4,
+    "schlechte": 2,
+    "fehlerhafte": 0.5
+  },
+  "Anzahl": {
+    "1": 1,
+    "2": 2,
+    "3": 1,
+    "4": 0.5
+  }
+}

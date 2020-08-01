@@ -1,0 +1,35 @@
+{
+  "Zeit": {
+    "neu in der Gemeinschaft": 1,
+    "voll eingearbeitet": 3,
+    "seit langer Zeit dabei": 4,
+    "von Geburt an indoktriniert": 5
+  },
+  "Familie": {
+    "Single": 2,
+    "In einer Beziehung": 2,
+    "Verheiratet": 2,
+    "Verwitwet": 1,
+    "Geschieden": 1
+  },
+  "Familienzufriedenheit": {
+    "gl\u00fccklich": 2,
+    "zufrieden": 3,
+    "verbittert": 1,
+    "auf der Suche nach Ver\u00e4nderung": 2
+  },
+  "Alter": {
+    "kleinkind": 0,
+    "Kind": 0,
+    "Teenager": 0,
+    "gerade Vollj\u00e4hrig": 2,
+    "zwischen 20 und 30": 6,
+    "anfang 30": 4,
+    "mitte 30": 3,
+    "anfang 40": 2,
+    "mitte 40": 2,
+    "zwischen 40 und 50": 2,
+    "ende 50": 1,
+    "\u00fcber 60": 1
+  }
+}

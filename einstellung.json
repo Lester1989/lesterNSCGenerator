@@ -1,0 +1,26 @@
+{
+  "Wyrm": {
+    "Sofort vernichten": 6,
+    "Verstehen um zu vernichten": 5,
+    "Verstehen um zu verhindern": 2,
+    "Heilen/bekehren": 1
+  },
+  "Rangordnung": {
+    "Unantastbar": 2,
+    "von Gaia gewollt": 2,
+    "n\u00f6tig f\u00fcr das \u00dcberleben": 3,
+    "wie sie ist": 3,
+    "ein Relikt und Hindernis aus alter Zeit": 2,
+    "die Wurzel des Untergangs": 0.5
+  },
+  "Rudel": {
+    "Liebevoll": 0.5,
+    "Freundlich": 1,
+    "Offen": 3,
+    "Neutral": 3,
+    "Verschlossen": 2,
+    "Misstrauisch": 1,
+    "Feindselig": 0.5,
+    "Hass": 0.25
+  }
+}

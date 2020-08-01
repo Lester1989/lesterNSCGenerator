@@ -5,139 +5,25 @@ from .config import baseURL
 import random
 import json
 
-einstellungVamp = {
-    'Trinken': {
-        'Praktik': [
-            '<b>trinkt</b> Blut meist indirekt (Gläser, Spritzen, Blutbeutel o.ä.)',
-            '<b>trinkt</b> Blut meist  aus dem Hals',
-            '<b>trinkt</b> Blut meist aus dem Handgelenk',
-            '<b>trinkt</b> Blut meist an anderen Körperstellen',
-            '<b>trinkt</b> Blut meist über einen Kuss (beisst in Lippe oder Zunge)',
-            'tötet beim <b>Bluttrinken</b>',
-            '<b>trinkt</b> meist Tierblut',
-            '<b>trinkt</b> nur von bekannten Gefäßen (Herde)',
-            '<b>trinkt</b> nur Blut aus Blutbanken',
-        ],
-        'Einstellung': [
-            'verabscheut das Bluttrinken und trinkt nur im Notfall indirekt oder in Raserei',
-            'hasst das Bluttrinken',
-            'liebt das Bluttrinken',
-            'betrachtet es nüchtern als Nahrungsaufnahme',
-            'liebt Blut mit Rauschmitteln (Drogen, Alkohol o.ä.)',
-            'liebt Blut mit starken Emotionen (Angst, Leidenschaft o.ä.)',
-            'bevorzugt sehr exotischen Bluttyp (wie Ventrue)',
-            'hat Angst vor dem Bluttrinken und braucht dazu Überwindung',
-        ]
-    },
-    'Sterbliche': [
-        'verabscheut <b>Sterbliche</b>',
-        'sieht sich selbst auf demselben Level wie <b>Sterbliche</b>',
-        'genießt die Gesellschaft von <b>Sterblichen</b>',
-        'betrachtet <b>Sterbliche</b> als niedere Kreaturen',
-        'betrachtet <b>Sterbliche</b> als dumme unwissende Kreaturen',
-        'hat Angst vor <b>Menschen</b>',
-        'fühlt sich von <b>Menschen</b> verfolgt (Paranoia)',
-        'sieht <b>Sterbliche</b> als Schützdenswert an',
-    ],
-    'Maskerade': [],
-    'Camarilla': [],
-    'Anarchen': [],
-    'Sabbat': [],
-}
 
-sekten = {
-    'Camarilla': 1,
-    'Anarchen': 1,
-    'Sabbat': 1
-}
-
-disziplinen = {
-
-}
-
-clans = {
-    'Assamiten': 1,
-    'Brujah': 1,
-    'Gangrel': 1,
-    'Giovanni': 1,
-    'Jünger des Set': 1,
-    'Lasombra': 1,
-    'Malkavianer': 1,
-    'Nosferatu': 1,
-    'Ravnos': 1,
-    'Toreador': 1,
-    'Tremere': 1,
-    'Tzimisce': 1,
-    'Ventrue': 1,
-    'Caitiff': 1
-}
-
-unleben = {
-    'Verlust des Erzeugers': '',
-    'Zeugen eines Kindes': '',
-    'Starre': ['für ein paar Tage', 'über einige Monate hinweg', 'längere Zeit'],
-    'Lossagung vom Erzeuger': '',
-    'Umzug in neue Domäne': ['in eine andere Stadt', 'in ein anderes Land', 'auf einen anderen Kontinent'],
-    'Aufnehmen eines Amtes': ['ein niederes Amt', 'ein inoffizielles Amt', 'ein höheres Amt'],
-    'Niederlegen eines Amtes': '',
-    'Beginn eines Streites mit anderem Vampir': '',
-    'Sieg in einem Streit': '',
-    'Niederlage in einem Streit': '',
-    'Ende eines Streites mit anderem Vampir': '',
-    'Beginn einer Liebschaft': '',
-    'Ende einer Liebschaft': '',
-}
-
-# region stuff
-kuss = {
-    'legalität': ['mit Erlaubnis', 'im Geheimen', 'ohne Erlaubnis'],
-    'beweggrund': ['Liebe', 'Bewunderung', 'einem Bedürfnis', 'Gier nach Macht', 'Hang zur Rebellion', 'Pflichtgefühl']
-}
-
-GhulLookup = {
-    -1: [0, 1],
-    0: [0, 1],
-    1: [0, 2],
-    2: [1, 2],
-    3: [1, 3],
-    4: [1, 3],
-    5: [1, 4],
-    6: [2, 5],
-    7: [3, 6],
-    8: [3, 6],
-    9: [3, 7],
-    10: [2, 5],
-    11: [2, 4],
-    12: [1, 3],
-}
-
-GenerationLookup = {
-    -1: 15,
-    0: 14,
-    1: 13,
-    2: 12,
-    3: 11,
-    4: 10,
-    5: 9,
-    6: 8,
-    7: 7,
-    8: 6,
-    9: 5,
-    10: 4,
-    11: 4,
-    12: 4,
-}
-
-kinderChances = {
-    0: 13,
-    1: 15,
-    2: 1,
-    3: 1
-}
-# endregion
+with open('einstellungVamp.json', 'r', encoding='utf-8') as infile:
+    einstellungVamp = json.load(infile)
+with open('sekten.json', 'r', encoding='utf-8') as infile:
+    sekten = json.load(infile)
+with open('clans.json', 'r', encoding='utf-8') as infile:
+    clans = json.load(infile)
+with open('unleben.json', 'r', encoding='utf-8') as infile:
+    unleben = json.load(infile)
+with open('kuss.json', 'r', encoding='utf-8') as infile:
+    kuss = json.load(infile)
+with open('GhulLookup.json', 'r', encoding='utf-8') as infile:
+    GhulLookup = json.load(infile)
+with open('GenerationLookup.json', 'r', encoding='utf-8') as infile:
+    GenerationLookup = json.load(infile)
+with open('kinderChances.json', 'r', encoding='utf-8') as infile:
+    kinderChances = {int(key):int(val) for (key,val) in json.load(infile).items()}
 
 # region Family Tree
-
 
 def MakeVampireName(nsc):
     from .kinfolkGen import GetRandomVorname, GetRandomNachname
@@ -360,10 +246,10 @@ def MakeVampire(nsc):
     nsc = MakeRelationTree(nsc)
     NameToSeed(nsc['vorname']+' '+nsc['nachname'])
     nsc['Erzeuger'] = FindCreator(nsc)
-    nsc['Generation'] = GenerationLookup[nsc['Powerlevel']]
+    nsc['Generation'] = GenerationLookup[str(nsc['Powerlevel'])]
     nsc['Kuss'] = [random.choice(kuss['legalität']) if nsc['Generation']<=14 else 'ohne Erlaubnis', random.choice(kuss['beweggrund'])]
     nsc['Kinder'] = FindChildren(nsc)
-    nsc['Guhle'] = random.randint(GhulLookup[nsc['Powerlevel']][0], GhulLookup[nsc['Powerlevel']][0])
+    nsc['Guhle'] = random.randint(GhulLookup[str(nsc['Powerlevel'])][0], GhulLookup[str(nsc['Powerlevel'])][0])
     nsc['TrinkPraktik'] = random.choice(einstellungVamp['Trinken']['Praktik'])
     nsc['TrinkMoral'] = random.choice(einstellungVamp['Trinken']['Einstellung'])
     nsc['Ansichten'] = {'Sterbliche':random.choice(einstellungVamp['Sterbliche'])}

@@ -1,0 +1,419 @@
+[
+  {
+    "name": "Bettler",
+    "text": "Als die SC durch die Stra\u00dfen gehen, entdecken sie in kurzer Entfernung einen Menschen (CHAR0) in unsauberer Kleidung, dieser hebt den Kopf und schaut in Richtung der SC. Nach einem kurzem Z\u00f6gern wendet er sich komplett und geht auf die SC zu.NEWLINE Er m\u00f6chte nach etwas Geldfragen, um sich eine Fahrkarte zu seiner Tochter (CHAR1) zu kaufen, welche heute Geburtstag hat.NEWLINE Er wird sich vermutlich schnell vertr\u00f6sten lassen und sich neue Opfer suchen.",
+    "nscConditions": [
+      {
+        "art": "Human",
+        "beschreibungKleidung": [
+          "abgerissene ",
+          "alte ",
+          "verschmutzte ",
+          "verschlissene "
+        ],
+        "NICHTbeschreibungFrisur": [
+          "gef\u00e4rbt",
+          "hochgestylt"
+        ],
+        "NICHTalter": [
+          "gerade Vollj\u00e4hrig",
+          "ende 50",
+          "\u00fcber 60"
+        ]
+      },
+      {
+        "art": "Human",
+        "pronomen": "sie",
+        "nachname": "CHAR0.nachname"
+      }
+    ]
+  },
+  {
+    "name": "Ordnungsamt",
+    "text": "Die Beamten Herr (CHAR0) und Frau (CHAR1) vom Ordnungsamt kontrollieren die SC. Sie tragen dunkelblaue Jacken und Hosen, die Uniform.NEWLINE Ist die Gruppe auff\u00e4llig? K\u00f6nnen sich die SC ausweisen? Wird nach ihnen gesucht?NEWLINE Flieht die Gruppe: verfolgen die Beamten die SC bis zu 2 Stra\u00dfenecken, danach ggf. Fahndung.",
+    "nscConditions": [
+      {
+        "art": "Human",
+        "pronomen": "er",
+        "beschreibungKleidung": [
+          "Arbeits-"
+        ],
+        "beschreibungKleidungsFarbe": [
+          "dunklen"
+        ]
+      },
+      {
+        "art": "Human",
+        "pronomen": "sie",
+        "beschreibungKleidung": [
+          "Arbeits-"
+        ],
+        "beschreibungKleidungsFarbe": [
+          "dunklen"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Ortsfremder Autofahrer",
+    "text": "Ein dunkler Gel\u00e4ndewagen ist schon zweimal an den SC vorbeigefahren und kommt gerade das 3. mal an. Diesmal von Hinten. Und er wird langsamer. Er h\u00e4lt neben den SC an und \u00f6ffnet das Fenster.NEWLINE Im Gel\u00e4ndewagen sitzt eine verzweifelt schauende Frau (CHAR0), welche ihren Sohn (CHAR1) zu dem Geburtstag von einem Freund (CHAR2) fahren wollte, aber das Navi geht nicht. Deshalb sucht sie schon fast eine Stunde.NEWLINE Der Sohn quengelt derweil vor sich hin.",
+    "nscConditions": [
+      {
+        "art": "Human",
+        "pronomen": "sie",
+        "NICHTbeschreibungKleidung": [
+          "abgerissene ",
+          "alte ",
+          "verschmutzte ",
+          "verschlissene "
+        ]
+      },
+      {
+        "art": "Human",
+        "pronomen": "er",
+        "nachname": "CHAR0.nachname",
+        "NICHTbeschreibungKleidung": [
+          "abgerissene ",
+          "alte ",
+          "verschmutzte ",
+          "verschlissene "
+        ]
+      },
+      {
+        "art": "Human",
+        "pronomen": "er"
+      }
+    ]
+  },
+  {
+    "name": "Schl\u00e4ger",
+    "text": "Das Rudel wird von einer Stra\u00dfengang eingekreist und \u00fcberfallen. Dabei sind die SC erst in der \u00dcberzahl, merken jedoch erst zu sp\u00e4t, dass sie umzingelt sind.NEWLINE Da dies jedoch nur Menschen sind, fliehen sie recht schnell und lassen sich auch schnell einsch\u00fcchtern. Wenn die SC weniger werhaft aussehen, sind sie etwas mutiger.NEWLINE(Anzahl der Schl\u00e4ger variieren, hier ein paar Beispiele:)NEWLINE (CHAR0)NEWLINE (CHAR1)NEWLINE (CHAR2)NEWLINE (CHAR3)NEWLINE (CHAR4)NEWLINE (CHAR5)NEWLINE (CHAR6)NEWLINE (CHAR7)NEWLINE (CHAR8)NEWLINE (CHAR9)NEWLINE (CHAR10)",
+    "nscConditions": [
+      {
+        "art": "Human",
+        "alter": [
+          "gerade Vollj\u00e4hrig",
+          "zwischen 20 und 30",
+          "anfang 30",
+          "mitte 30"
+        ],
+        "Powerlevel": 3
+      },
+      {
+        "art": "Human",
+        "alter": [
+          "gerade Vollj\u00e4hrig",
+          "zwischen 20 und 30",
+          "anfang 30",
+          "mitte 30"
+        ]
+      },
+      {
+        "art": "Human",
+        "alter": [
+          "gerade Vollj\u00e4hrig",
+          "zwischen 20 und 30",
+          "anfang 30",
+          "mitte 30"
+        ]
+      },
+      {
+        "art": "Human",
+        "alter": [
+          "gerade Vollj\u00e4hrig",
+          "zwischen 20 und 30",
+          "anfang 30",
+          "mitte 30"
+        ]
+      },
+      {
+        "art": "Human",
+        "alter": [
+          "gerade Vollj\u00e4hrig",
+          "zwischen 20 und 30",
+          "anfang 30",
+          "mitte 30"
+        ]
+      },
+      {
+        "art": "Human",
+        "alter": [
+          "gerade Vollj\u00e4hrig",
+          "zwischen 20 und 30",
+          "anfang 30",
+          "mitte 30"
+        ]
+      },
+      {
+        "art": "Human",
+        "alter": [
+          "gerade Vollj\u00e4hrig",
+          "zwischen 20 und 30",
+          "anfang 30",
+          "mitte 30"
+        ]
+      },
+      {
+        "art": "Human",
+        "alter": [
+          "gerade Vollj\u00e4hrig",
+          "zwischen 20 und 30",
+          "anfang 30",
+          "mitte 30"
+        ]
+      },
+      {
+        "art": "Human",
+        "alter": [
+          "gerade Vollj\u00e4hrig",
+          "zwischen 20 und 30",
+          "anfang 30",
+          "mitte 30"
+        ]
+      },
+      {
+        "art": "Human",
+        "alter": [
+          "gerade Vollj\u00e4hrig",
+          "zwischen 20 und 30",
+          "anfang 30",
+          "mitte 30"
+        ]
+      },
+      {
+        "art": "Human",
+        "alter": [
+          "gerade Vollj\u00e4hrig",
+          "zwischen 20 und 30",
+          "anfang 30",
+          "mitte 30"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Betrunkener",
+    "text": "Als die SC gerade an einer Haust\u00fcr vorbeigeht, fliegt diese auf und ein Mann (CHAR0) stolpert gegen die SC und f\u00e4llt mit einem SC zu Boden.NEWLINE Er lallt nur Unverst\u00e4ndliches. Dann richtet er sich auf und kramt in seiner Jackentasche. Er holt ein Schl\u00fcsselbund zum Vorschein und wirft dabei eine Schachtel Zigaretten auf den Boden. Ein unverst\u00e4ndlicher Fluch und dann b\u00fcckt der sich um sie aufzuheben. Erst beim zweiten Versuch gelingt es ihm.NEWLINE Er lehnt sich an das hier parkende Auto. Dann beginnt er Schl\u00fcssel auszuprobieren um das Auto zu \u00f6ffnen. Er stutzt kurz, sieht sich um und geht dann zum n\u00e4chsten Auto. Dieses \u00f6ffnet er und steigt ein.NEWLINE Beim Ausparken streift er das andere Auto. Nach einiger Zeit h\u00f6rt man eine Vollbremsung und ein Scheppern.",
+    "nscConditions": [
+      {
+        "art": "Human",
+        "pronomen": "er",
+        "NICHTbeschreibungKleidung": [
+          "abgerissene ",
+          "alte ",
+          "verschlissene "
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Verirrtes Kind",
+    "text": "Ein etwa dreij\u00e4hriger Junge (CHAR0) steht pl\u00f6tzlich neben den SC und schaut sie erschreckt an. Dann f\u00e4ngt er an zu schluchzen und sieht sich hilfesuchend um.NEWLINE Er hat seine Mama (CHAR1) verloren und sucht sie.",
+    "nscConditions": [
+      {
+        "art": "Human",
+        "pronomen": "er",
+        "NICHTbeschreibungKleidung": [
+          "abgerissene ",
+          "alte ",
+          "verschlissene "
+        ]
+      },
+      {
+        "art": "Human",
+        "pronomen": "sie",
+        "nachname": "CHAR0.nachname",
+        "NICHTbeschreibungKleidung": [
+          "abgerissene ",
+          "alte ",
+          "verschlissene "
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Leiche",
+    "text": "Irgendetwas stimmt nicht. Tod. In einer Seitengasse liegt ein roter Stiefel. Der Absatz ist umgeknickt.NEWLINE(Hier bietet sich ein Wahrnehmungswurf an.) In einem Altpapiercontainer daneben liegt eine Frauenleiche (CHAR0). Sie hat hervor gequollene Augen und dunkle Lippen. Ihr Tanktop h\u00e4ngt nur noch so gerade eben an ihr und man kann ihren BH sehen. Billig und freiz\u00fcgig.NEWLINE Ihr Minirock ist so kurz, dass man erkennt, das ihre Unterw\u00e4sche ein Set ist. W\u00e4hrend ihr rechtes Bein noch im Stiefel steckt, ist ihr linkes nur noch von einer Netzstrumpfhose bedeckt.NEWLINE Sie wurde von ihrem Zuh\u00e4lter (CHAR1) get\u00f6tet, da sie einen Freund (CHAR2) gefunden hatte und mit ihm weggehen wollte.",
+    "nscConditions": [
+      {
+        "art": "Human",
+        "pronomen": "sie",
+        "NICHTbeschreibungKleidung": [
+          "Milit\u00e4r-",
+          "alte ",
+          "verschlissene "
+        ]
+      },
+      {
+        "art": "Human",
+        "pronomen": "er",
+        "NICHTbeschreibungKleidung": [
+          "abgerissene ",
+          "alte ",
+          "verschlissene "
+        ]
+      },
+      {
+        "art": "Human",
+        "pronomen": "er"
+      }
+    ]
+  },
+  {
+    "name": "Bewusstlose Person",
+    "text": "Als ein SC den Blick zur Seite schweifen l\u00e4sst, f\u00e4llt ihr eine Hand auf, welche hinter einem M\u00fcllcontainer hervorragt; Ein junger Mann (CHAR0). Wenn das Rudel den jungen Mann untersucht (Medizinprobe) stellt es fest, dass er am Leben ist.NEWLINE Er ist blass und an seinem Hemdkragen ist etwas Blut. Es sind jedoch keine Wunden zu entdecken.NEWLINE Als er zu sich kommt erz\u00e4hlt er, dass er auf einer Party war und da einen echt hei\u00dfen Typen kennengelernt hat. Allerdings ist die Party wohl ausgeufert und er hat zu viel getrunken. Er will nach Hause gehen um sich auszuschlafen.NEWLINE  Er wurde von einem Vampir (CHAR1) gebissen und liegen gelassen. Kann das Rudel die Verfolgung aufnehmen? Kommen sie \u00fcberhaupt darauf, dass es ein Vampir war?",
+    "nscConditions": [
+      {
+        "art": "Human",
+        "pronomen": "er",
+        "alter": [
+          "gerade Vollj\u00e4hrig",
+          "zwischen 20 und 30"
+        ]
+      },
+      {
+        "art": "vampir"
+      }
+    ]
+  },
+  {
+    "name": "Vampir auf der Jagd",
+    "text": "Das Rudel kann die Spur von einem Vampir (CHAR0) auf der Jagd aufnehmen.NEWLINE Stellen sie ihn zur Rede? Schlagen sie zu, bevor er trinken kann? Versucht er zu fliehen, oder zu verhandeln?NEWLINE Trinkt er von einem Ghul (CHAR1), der sein Blut freiwillig gibt?NEWLINE Vielleicht gibt er den SC auch noch Informationen zu den Geschehnissen in der Stadt.",
+    "nscConditions": [
+      {
+        "art": "vampir"
+      },
+      {
+        "art": "Human"
+      }
+    ]
+  },
+  {
+    "name": "Gassi Geher",
+    "text": "Den SC kommt eine Frau (CHAR0) mittleren Alters entgegen. Sie hat einen Deutschen Sch\u00e4ferhund(Rex) und einen Terrier(Cindy) dabei. Cindy zerrt und springt in eure Richtung und kl\u00e4fft die SC an(ggf. Zornwurf). W\u00e4hrend Rex euch argw\u00f6hnisch fixiert.NEWLINE Die Frau st\u00e4mmt sich dagegen aber weicht nicht aus. Sie ruft, \"keine Sorge, au\u00dfer einer gro\u00dfen Klappe macht sie nix, (CINDY jetzt sei endlich mal still)\".NEWLINE Als pl\u00f6tzlich der Wind dreht und nun von den SC zu den Hunden weht \u00e4ndert Cindy schlagartig ihre Meinung und will fliehen, w\u00e4hrend Rex sich klein macht und seine unterw\u00fcrfigste Haltung einnimmt.NEWLINE \"Na also, so ists Brav, (CINDY KOMM)\". Und so zieht sie ihre Hunde an vorbei.NEWLINE (Dieses Verhalten von den Tieren kann Aufmerksamkeit auf die SC ziehen, je nachdem wie viel Druck erzeugt werden soll, bzw. wer nach den SC sucht.)",
+    "nscConditions": [
+      {
+        "art": "Human",
+        "pronomen": "sie",
+        "NICHTalter": [
+          "gerade Vollj\u00e4hrig",
+          "zwischen 40 und 50",
+          "ende 50",
+          "\u00fcber 60"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Flyer Verteiler",
+    "text": "Zwei Junge Frauen (CHAR0) und (CHAR1) mit gro\u00dfen Rucks\u00e4cken kommen auf das Rudel zu.NEWLINE Die Blonde spricht zuerst: \"Hey habt ihr kurz Zeit f\u00fcr mich?\" und ohne Zeit f\u00fcr eine Antwort zu lassen \"Es geht um eine kleine Umfrage. Ich krieg daf\u00fcr dass ihr einen Fragebogen ausf\u00fcllt 5\u20ac. K\u00f6nnt ihr mir dabei helfen mein Studium zu finanzieren? Es gibt auch f\u00fcr euch eine kleine Nettigkeit\"NEWLINE Sie und ihre Kollegin sind sehr aufdringlich und lassen sich nicht so einfach abwimmeln.NEWLINE Falls die SC einwilligen muss jeder einen Fragebogen ausf\u00fcllen und bekommt daf\u00fcr ein T\u00fctchen mit Gummib\u00e4ren.NEWLINE Falls sie nicht einwilligen wollen m\u00fcssen sie sich Herausreden (Ausfl\u00fcchte mit erh\u00f6hter Schwierigkeit).",
+    "nscConditions": [
+      {
+        "art": "Human",
+        "pronomen": "sie",
+        "beschreibungFrisur": [
+          "blond"
+        ],
+        "alter": [
+          "gerade Vollj\u00e4hrig",
+          "zwischen 20 und 30"
+        ]
+      },
+      {
+        "art": "Human",
+        "pronomen": "sie",
+        "alter": [
+          "gerade Vollj\u00e4hrig",
+          "zwischen 20 und 30"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Sexarbeiter",
+    "text": "Das Rudel hat sich auf den Stra\u00dfenstrich verirrt und wird je nach Aussehen angegraben oder abwertend behandelt.NEWLINE Um Spannungen einzuf\u00fchren kann ein handgreiflicher, unfreundlicher Freier (CHAR0) eingef\u00fchrt werden,NEWLINE Oder ein Zuh\u00e4lter (CHAR1),NEWLINE oder minderj\u00e4hrige Sexarbeiter(CHAR2).NEWLINE L\u00e4sst sich ein SC \u00fcberreden? Greift das Rudel ein wenn ein Freier brutal wird? Wie reagieren die SC auf die Situation?",
+    "nscConditions": [
+      {
+        "art": "Human",
+        "pronomen": "er"
+      },
+      {
+        "art": "Human",
+        "pronomen": "er"
+      },
+      {
+        "art": "Human",
+        "pronomen": "sie",
+        "alter": [
+          "gerade Vollj\u00e4hrig"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Dealer",
+    "text": "Die SC k\u00f6nnen beobachten, wie ein Dealer (CHAR0) Drogen verkauft.NEWLINE Greifen die SC nicht ein, k\u00f6nnen sie vielleicht durch einen minderj\u00e4hrigen Kunden (CHAR1) dazu gebracht werden.NEWLINE Stellen sie K\u00e4ufer oder Kunden? K\u00f6nnen sie den Verk\u00e4ufer einsch\u00fcchtern oder m\u00fcssen sie ihn angreifen?",
+    "nscConditions": [
+      {
+        "art": "Human"
+      },
+      {
+        "art": "Human",
+        "alter": [
+          "gerade Vollj\u00e4hrig"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Ehemaliger Lehrer / Mitsch\u00fcler / Freund / Bekannter",
+    "text": "Ein Bekannter (CHAR0) aus dem fr\u00fcheren Leben eines SC begegnet dem Rudel und erkennt den SC wieder.NEWLINE Was wei\u00df er von dem Lebenswandel? Stellt er den SC zu Rede? Wurde der SC vermisst gemeldet? NEWLINE (Mit dieser Begegnung kann die Hintergrundgeschichte des SC in die Story verwoben werden. Oder es wird zumindest gezeigt, dass die Welt gr\u00f6\u00dfer ist, als dass was die SC sehen)",
+    "nscConditions": [
+      {
+        "art": "Human"
+      }
+    ]
+  },
+  {
+    "name": "Junggesellen Abschied",
+    "text": "Eine Gruppe laut gr\u00f6hlender M\u00e4nner n\u00e4hert sich dem Rudel und bietet ihnen Alkohol an, wenn sie mitspielen.NEWLINE(Hier k\u00f6nnen jegliche Junggesellen-Aufgaben und Spiele eingebaut werden. ggf. Inklusive Sexueller Bel\u00e4stigung und/oder Schl\u00e4gereien)NEWLINEBr\u00e4utigam: (CHAR0)NEWLINEG\u00e4ste:NEWLINE (CHAR1)NEWLINE (CHAR2)NEWLINE (CHAR3)NEWLINE (CHAR4)NEWLINE (CHAR5)NEWLINE (CHAR6)NEWLINE (CHAR7)NEWLINE (CHAR8)NEWLINE",
+    "nscConditions": [
+      {
+        "art": "Human",
+        "pronomen": "er"
+      },
+      {
+        "art": "Human",
+        "pronomen": "er"
+      },
+      {
+        "art": "Human",
+        "pronomen": "er"
+      },
+      {
+        "art": "Human",
+        "pronomen": "er"
+      },
+      {
+        "art": "Human",
+        "pronomen": "er"
+      },
+      {
+        "art": "Human",
+        "pronomen": "er"
+      },
+      {
+        "art": "Human",
+        "pronomen": "er"
+      },
+      {
+        "art": "Human",
+        "pronomen": "er"
+      },
+      {
+        "art": "Human",
+        "pronomen": "er"
+      }
+    ]
+  }
+]

@@ -1,0 +1,27 @@
+{
+  "gut": [
+    "Retter"
+  ],
+  "gewalt": [
+    "Rei\u00dfer",
+    "Brecher",
+    "Sprenger",
+    "Brenner",
+    "Schlachter",
+    "Rufer",
+    "Fresser",
+    "Schl\u00e4ger",
+    "T\u00f6ter"
+  ],
+  "neutral": [
+    "Bringer",
+    "Tr\u00e4umer"
+  ],
+  "b\u00f6se": [
+    "T\u00e4nzer",
+    "Zerst\u00f6rer",
+    "Verschlinger",
+    "Vergifter",
+    "R\u00e4cher"
+  ]
+}

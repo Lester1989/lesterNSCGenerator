@@ -1,0 +1,251 @@
+{
+  "Ragabash": {
+    "Cliath": [
+      "AnsteckendesLachen",
+      "Geruchdesflie\u00dfendenWassers",
+      "L\u00fcgengesicht",
+      "Siegel\u00f6ffnen",
+      "VerschwimmenvordemTr\u00fcbenAuge"
+    ],
+    "Pflegling": [
+      "Beutegesp\u00fcr",
+      "DiebstahldesVergessenen",
+      "SeligeUnwissenheit",
+      "Spinnenlied",
+      "Affenschwanz"
+    ],
+    "Adren": [
+      "GlaubhafteL\u00fcgen",
+      "Gremlins",
+      "Mondbr\u00fccke\u00f6ffnen",
+      "Pfadfinder"
+    ],
+    "Athro": [
+      "LunasSegen",
+      "VerbannunginsUmbra",
+      "Welpenk\u00f6rper"
+    ],
+    "\u00c4ltester": [
+      "KrallenderdiebischenElster",
+      "TausendGestalten"
+    ],
+    "Legende": [
+      "Feuerbringer"
+    ]
+  },
+  "Theurge": {
+    "Cliath": [
+      "Ber\u00fchrungderMutter",
+      "Geisterfalle",
+      "Geistersprache",
+      "Umbraleine",
+      "Wyrmgesp\u00fcr"
+    ],
+    "Pflegling": [
+      "BefehligenderGeister",
+      "Geistbenennen",
+      "Kampfmandala",
+      "DasZweiteGesicht"
+    ],
+    "Adren": [
+      "Exorzismus",
+      "Netzwandler",
+      "PulsdesUnsichtbaren",
+      "Umbratarnung"
+    ],
+    "Athro": [
+      "BeschlagenerSpiegel",
+      "ErfassendesJenseitigen",
+      "Essenzraub",
+      "SchutzzeichengegenGeister"
+    ],
+    "\u00c4ltester": [
+      "FormbarerGeist",
+      "TierischesWesen",
+      "UltimativeslogischesArgument"
+    ],
+    "Legende": [
+      "WieimAnfang"
+    ]
+  },
+  "Philodox": {
+    "Cliath": [
+      "F\u00e4ngedesRichtspruchs",
+      "GaiasWahrheit",
+      "GeruchderwahrenGestalt",
+      "Schmerzwiderstehen",
+      "\u00dcberzeugungskraft"
+    ],
+    "Pflegling": [
+      "BefehligenderVersammlung",
+      "K\u00f6nigderTiere",
+      "RufzurPflicht",
+      "Zielbewusstsein"
+    ],
+    "Adren": [
+      "GeistigeUnterredung",
+      "GeruchdesEidbrechers",
+      "Gleichgewichtsgesp\u00fcr",
+      "SchwacherArm",
+      "WeisheitderAltenWege"
+    ],
+    "Athro": [
+      "AnnehmenderwahrenGestalt",
+      "AufdenR\u00fccken",
+      "GeruchdesJenseitigen"
+    ],
+    "\u00c4ltester": [
+      "Geas",
+      "Granitwand"
+    ],
+    "Legende": [
+      "Bandebrechen"
+    ]
+  },
+  "Galliard": {
+    "Cliath": [
+      "ExakteErinnerung",
+      "GeistigeVerst\u00e4ndigung",
+      "Gesch\u00e4rfteSinne",
+      "RufderWyldnis",
+      "Tiersprache"
+    ],
+    "Pflegling": [
+      "Ablenkungen",
+      "N\u00e4chtlichesGeheul",
+      "RufdesWyrms",
+      "Traumsprache"
+    ],
+    "Adren": [
+      "AugederKobra",
+      "Heldenlied",
+      "LieddesZorns",
+      "Sirenengesang"
+    ],
+    "Athro": [
+      "Br\u00fcckeng\u00e4nger",
+      "GabederTr\u00e4ume",
+      "SchattenamFeuer"
+    ],
+    "\u00c4ltester": [
+      "Gedankenspiele",
+      "GewebedesGeistes"
+    ],
+    "Legende": [
+      "Bandebrechen"
+    ]
+  },
+  "Ahroun": {
+    "Cliath": [
+      "F\u00e4llendeBer\u00fchrung",
+      "Inspiration",
+      "Rasiermesserklauen",
+      "Rudeltaktiken",
+      "Spornklauen"
+    ],
+    "Pflegling": [
+      "Kampfgeist",
+      "Silbergesp\u00fcr",
+      "WahreFurcht",
+      "Zornschild"
+    ],
+    "Adren": [
+      "HerzderWut",
+      "Kampfheilung",
+      "Silberklauen",
+      "Windklauen"
+    ],
+    "Athro": [
+      "AnfachenderbrennendenWut",
+      "EisernerKiefer",
+      "K\u00f6rperver\u00e4nderung",
+      "LichtdesVollmondes"
+    ],
+    "\u00c4ltester": [
+      "KussdesHelios",
+      "Willensst\u00e4rke"
+    ],
+    "Legende": [
+      "UnaufhaltsamerKrieger"
+    ]
+  },
+  "Ragabash des Wyrms": {
+    "Cliath": [
+      "Verleihen des Raubtierschattens"
+    ],
+    "Pflegling": [],
+    "Adren": [
+      "Ber\u00fchrung des Aals"
+    ],
+    "Athro": [
+      "Kassandras Segen",
+      "Silberne Vergeltung"
+    ],
+    "\u00c4ltester": [
+      "Geduld des Wyrms"
+    ],
+    "Legende": []
+  },
+  "Theurge des Wyrms": {
+    "Cliath": [],
+    "Pflegling": [
+      "Tausend Stimmen",
+      "Vergifteter Todesg\u00fcrtel"
+    ],
+    "Adren": [
+      "Festmahl der Essenz"
+    ],
+    "Athro": [],
+    "\u00c4ltester": [],
+    "Legende": [
+      "Pr\u00e4ludium zur Apokalypse"
+    ]
+  },
+  "Philodox des Wyrms": {
+    "Cliath": [
+      "S\u00e4urekrallen"
+    ],
+    "Pflegling": [
+      "Angst riechen"
+    ],
+    "Adren": [],
+    "Athro": [],
+    "\u00c4ltester": [
+      "Omenklauen"
+    ],
+    "Legende": []
+  },
+  "Galliard des Wyrms": {
+    "Cliath": [],
+    "Pflegling": [
+      "Verb\u00fcndete aus der Tiefe",
+      "Heulen des J\u00e4gers",
+      "Schatten des Impergiums"
+    ],
+    "Adren": [],
+    "Athro": [
+      "Geheul des Todes"
+    ],
+    "\u00c4ltester": [
+      "Wahnsinn"
+    ],
+    "Legende": []
+  },
+  "Ahroun des Wyrms": {
+    "Cliath": [
+      "S\u00e4urekrallen"
+    ],
+    "Pflegling": [
+      "H\u00f6rner des Pf\u00e4hlers ",
+      "Teerschatten"
+    ],
+    "Adren": [
+      "Schmerz in den Eingeweiden"
+    ],
+    "Athro": [],
+    "\u00c4ltester": [
+      "Unbegrenzte St\u00e4rke"
+    ],
+    "Legende": []
+  }
+}

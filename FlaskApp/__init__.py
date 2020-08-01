@@ -20,6 +20,9 @@ from .config import baseURL, basePath,feedbackLoginCode
 from .htmlCSSStuff import headerPart, feedbackForm, feedbackResponse
 
 
+
+
+
 def MakePage(content, url='', canPrintPage=True):
     linkActivity = {
         'kinfolk': ' class="active" ' if '/kinfolk/' in url.lower() else '',
@@ -87,6 +90,10 @@ def MakePage(content, url='', canPrintPage=True):
 app = Flask(__name__)
 app.config["DEBUG"] = True
 
+
+@app.route('/clean/')
+def showClean():
+    return render_template("main.html")
 
 @app.route('/nsc/bsdpack/')
 @use_args({'packname': fields.Str(required=False)}, location="query")

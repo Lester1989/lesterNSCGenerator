@@ -1,0 +1,137 @@
+[
+  {
+    "name": "Plagengeist",
+    "text": "Das Umbra wirkt unfreundlicher. Karger. Die Unreinheit verzehrt einen Gnosispunkt bei den SC. Die Zeit vergeht langsamer oder die SC verlieren ihr Zeitgef\u00fchl.NEWLINE Es riecht ungewohnt. S\u00fc\u00dflich. Lecker.  Eine Spur Verwesung (Wahrnehmungswurf). Vor den SC erscheint ein Haufen von feinstem und wohlriechendem Essen.NEWLINE Braten, Speck, Pizza, Paradies\u00e4pfel, Schokoladeneiscreme, Torte, Waffeln. Direkt an dem Berg hockt eine kleine Gestalt mit dem R\u00fccken zu den SC. Die Gestalt schaufelt Essen mit beiden H\u00e4nden zum Kopf und man h\u00f6rt schmatzen.NEWLINE Wenn sich das Rudel weiter n\u00e4hert dreht sich die Gestalt ruckartig um und man sieht ein Gebilde wie bei einer Venusfliegenfalle.NEWLINE Ein Plagenngeist(CHAR0) das ist jedoch nur der Kopf, welche an einem schlangenartigem Hals aus dem Haufen zu ragen scheint. Der Haufen beginnt zu beben und sich auf das Rudel zu zubewegen.NEWLINE (ggf. die St\u00e4rke anpassen)",
+    "nscConditions": [
+      {
+        "art": "Plagengeist",
+        "adjectiv": [
+          "dr\u00f6hnende",
+          "sch\u00e4ndliche",
+          "h\u00f6llische",
+          "fiese",
+          "ruchlose",
+          "aggressive",
+          "verfressene",
+          "verlockende",
+          "leckere"
+        ],
+        "baneType": [
+          "Plage der V\u00f6llerei",
+          "Schlaraffenplage",
+          "Fallenplage",
+          "Plage des Genusses",
+          "Plage der S\u00e4ttigung",
+          "Plage der List"
+        ],
+        "Powerlevel": 3
+      }
+    ]
+  },
+  {
+    "name": "Umbrawahnsinn",
+    "text": "Man h\u00f6rt eine Melodie. Trompeten, Marschtrommeln, Stampfende F\u00fc\u00dfe.NEWLINE Direkt vor den SC ploppt ein Rosa Elefant auf. Ihm folgen in kurzem Abstand einige Weitere. Die Elefanten marschieren im Kreis um das herum.NEWLINE Jedes mal, wenn einer der SC aus dem Kreis ausbrechen will, versperren sie den Weg.NEWLINE(Handlungsvorschl\u00e4ge:)NEWLINEAngreifen -> Elefanten fliehen ver\u00e4rgert NEWLINEEinsch\u00fcchtern -> Elefanten fliehenNEWLINEVerhandeln (\u00dcberreden/Manipulieren) -> Weg wird freigegebenNEWLINEChiminage anbieten (ein Kunstst\u00fcck wie im Zirkus) -> Geleit f\u00fcr die Reise durch das Umbragebiet",
+    "nscConditions": [
+      {
+        "art": "Plagengeist",
+        "adjectiv": [
+          "dr\u00f6hnende",
+          "sch\u00e4ndliche",
+          "h\u00f6llische",
+          "fiese",
+          "ruchlose",
+          "aggressive",
+          "verfressene",
+          "verlockende",
+          "leckere"
+        ],
+        "baneType": [
+          "Plage der V\u00f6llerei",
+          "Schlaraffenplage",
+          "Fallenplage",
+          "Plage des Genusses",
+          "Plage der S\u00e4ttigung",
+          "Plage der List"
+        ],
+        "Powerlevel": 3
+      }
+    ]
+  },
+  {
+    "name": "Wyrmkontakt",
+    "text": "Wenn die SC seit einiger Zeit im Umbra unterwegs sind: Die SC bekommen ein wages Gef\u00fchl, dass sich irgendetwas ge\u00e4ndert hat.NEWLINE(Wahrnehmung und Okkultismus mit erh\u00f6hter Schwierigkeit)NEWLINEab 3 Erfolge: Hintereingang in einen Wyrmbau NEWLINEEs sind keine Wyldnisgeister zu sehen. Aber auch keine Plagen. Seltsam. Nur einmal Blinzeln sp\u00e4ter erscheinen Schlieren in der Luft.NEWLINE Etwas riesiges. Etwas riesiges Wyrm-verseuchtes. Und es ist auf dem Weg ins diesseits. Irgendetwas scheint es anzuziehen. In weniger als einer Stunde wird es ankommen.NEWLINE Kiebitzen (der Todesg\u00fcrtel ist hier extrem durchl\u00e4ssig): Man sieht 13 T\u00e4nzer in einem Raum sitzen, diese T\u00e4nzer sind \u00fcber und \u00fcber mit Blut beschmiert und mit Ged\u00e4rmen beh\u00e4ngt. In der Mitte ist ein T\u00e4nzer und die anderen sind in Spiralf\u00f6rmig um ihn herum angeordnet.NEWLINE Der mittlere T\u00e4nzer hat vor sich 3 blutige b\u00fcndel liegen. Aus einem Davon guckt eine winzige Hand heraus. Zwei Finger sind abgerissen. An jeder der vier W\u00e4nde h\u00e4ngt je ein Mann und eine Frau, mit gro\u00dfen Gleisn\u00e4geln an die Wand geschlagen.NEWLINE Die Gesichter sind geh\u00e4utet und die Brustk\u00f6rbe sind aufgebrochen. In jeder Ecke des Raums brennt ein gr\u00fcnes Baalsfeuer.NEWLINE Die T\u00e4nzer sind alle in Meditation versunken.NEWLINE NEWLINE1 Erfolg: T\u00e4nzerrudel im Diesseits NEWLINE Es sind keine Wyldnisgeister zu sehen. Auch keine Weberspinnen. Etwas scheint das Umbra aus dem diesseits zu verseuchen: NEWLINE Drei T\u00e4nzer sind gerade damit besch\u00e4ftigt einen Menschen zu foltern und zu fressenNEWLINE NEWLINE(Es z\u00e4hlt nur der h\u00f6chste Wahrnehmungswurf. Sollten die SC angreifen, k\u00f6nnen sie durch ihr \u00fcberraschendes Auftreten die meisten T\u00e4nzer t\u00f6ten, bevor diese reagieren k\u00f6nnen.)NEWLINEDeshalb nur drei T\u00e4nzer als Beispiel:NEWLINE(CHAR0) NEWLINE (CHAR1) NEWLINE (CHAR2)",
+    "nscConditions": [
+      {
+        "art": "bsd",
+        "Powerlevel": 3
+      },
+      {
+        "art": "bsd",
+        "Powerlevel": 3
+      },
+      {
+        "art": "bsd",
+        "Powerlevel": 3
+      }
+    ]
+  },
+  {
+    "name": "Weber gibt es auch",
+    "text": "Die Netze werden dichter. Die Zahl der Spinnengeister nimmt immer weiter zu. Die Netze werden noch dichter (Sportlichkeit zur fortbewegen n\u00f6tig)NEWLINEKiebitzen -> Baustelle von einem Umspannwerk, gerade kein Arbeiter da.NEWLINEEin Weberrinnengeist versperrt den Weg. Viele andere Beobachten die SC von allen Seiten.NEWLINESeitw\u00e4rts wechseln -> Todesg\u00fcrtelwert 9 NEWLINEVerhandeln: Chiminage f\u00fcr freies Geleit(Einige Kabel sind Total verheddert (Handwerkswurf) -> Hilfe im n\u00e4chsten Kampf oder Verzeihen falls Netz besch\u00e4digt wurde.",
+    "nscConditions": []
+  },
+  {
+    "name": "Auch andere K\u00e4mpfen",
+    "text": "Man h\u00f6rt Kampfrufe und Geheul. Als das Rudel n\u00e4her kommt sieht es ein Gefecht zwischen 10 Garou und 3 Plagen.NEWLINEDie Garou sind auf k\u00fcrzerer Distanz eindeutig in T\u00e4nzer und nicht T\u00e4nzer zu sortieren. Einer der nicht-T\u00e4nzer liegt bereits am Boden. NEWLINEGarou-Rudel: (CHAR0) NEWLINET\u00e4nzer-Rudel: (CHAR1) NEWLINEPlagen: (CHAR2) (CHAR3) (CHAR4)",
+    "nscConditions": [
+      {
+        "art": "garouPack",
+        "minMembers": 5,
+        "maxMembers": 5
+      },
+      {
+        "art": "bsdPack",
+        "minMembers": 5,
+        "maxMembers": 5
+      },
+      {
+        "art": "Plagengeist"
+      },
+      {
+        "art": "Plagengeist"
+      },
+      {
+        "art": "Plagengeist"
+      }
+    ]
+  },
+  {
+    "name": "Feuer",
+    "text": "Vor den SC taucht ein Feuerelementar auf. Und noch ein Weiteres. Und dann noch viele mehr.NEWLINE Kiebitzen -> Eine Feuerstelle in einem Wald. Niemand in der N\u00e4he. Sehr viel trockenes Holz/Bl\u00e4tter in der N\u00e4he.NEWLINE Kann das Feuer vom Rudel gel\u00f6scht werden, bevor ein Waldbrand entsteht?",
+    "nscConditions": []
+  },
+  {
+    "name": "Der Prototyp",
+    "text": "Ein Windgeist fliegt an dem Rudel vorbei. Ungef\u00e4hr 5m vor ihnen verschwindet der Geist.NEWLINE Ein weiterer Geist fliegt 3m neben den SC vorbei und verschwindet auf der gleichen H\u00f6he.NEWLINE Beide male mit einem lautem Zischen gefolgt von einem Knistern.NEWLINE Ein Wasserelementar h\u00e4lt bei euch an und bewegt sich langsam vorw\u00e4rts tastend. Ein leises Zischen und knistern und der Elementar taumelt zur\u00fcck, wird durchscheinender.NEWLINE Kiebitzen -> Eine Scheune. Mit Solarzellen auf dem Dach und zugenagelten Fenstern.NEWLINE Der Wasserelementar spricht die SC (falls keiner Geistersprache beherrscht auf Garou) an.NEWLINE \"Ich bin geschw\u00e4cht... Etwas vernichtet Geister... kein Schlummer... bitte Helft uns... Ich falle in den Schlummer... die Anderen sind f\u00fcr immer fort\"NEWLINEIn der Scheune arbeitet ein Wissenschaftler daran, ein Kraftfeld gegen B\u00f6se Geister zu entwickeln. Er hei\u00dft (CHAR0) und hat einen Doktortitel in Physik.NEWLINE Vor 5 Jahren hat eine Plage (CHAR1) seinen Geist kontrolliert und einen Mord begangen. Seit dem versucht er sich dagegen zu wappnen.NEWLINE In der Scheune baut er einen Prototypen zur Geisterabwehr. Gegen\u00fcber den Garou ist er misstrauisch aber nicht feindselig.NEWLINE Er erkl\u00e4rt seine Motive und will eigentlich nur die b\u00f6sen Geister vernichten.NEWLINE M\u00f6gliche Herangehensweisen des Rudels:NEWLINE \u00dcberreden den Prototypen nie wieder zu benutzen, abschalten des Apparats: (Sehr schwierige Probe, ggf. l\u00fcgt er um den Apparat sp\u00e4ter wieder zu benutzen oder weiter zu verbessern.)NEWLINE \u00dcberreden mit Blutgeschwistern zusammen zu arbeiten um ihn auf die Richtige Seite zu ziehen: (normale Probe, ggf. bietet sich hier Potential f\u00fcr weitere Abenteuer oder die Septe entschlie\u00dft sich ihn zu bewachen.)NEWLINE T\u00f6ten: wenn er genug Vorwarnung bekommt, versucht er zu fliehen und setzt dabei einen Flammenwerfer und Sprengs\u00e4tze ein. Ansonsten stirbt er wie ein normaler Mensch sehr schnell.NEWLINE Einsch\u00fcchtern: (erh\u00f6hte Schwierigkeit, ggf. setzt er seine Arbeit an einem anderen Ort fort)",
+    "nscConditions": [
+      {
+        "art": "Human",
+        "NICHTalter": [
+          "gerade Vollj\u00e4hrig"
+        ],
+        "pronomen": "er",
+        "scRudel": "Misstrauisch",
+        "motivation": "Angst vor B\u00f6sem/Weltuntergang",
+        "pl\u00e4ne": "Nachforschungen"
+      },
+      {
+        "art": "Plagengeist"
+      }
+    ]
+  },
+  {
+    "name": "Menschenwerk",
+    "text": "Das Rudel entdeckt einen Dachsgeist. Dieser zappelt und schl\u00e4gt wild um sich.NEWLINE (In der Stofflichen Welt) Ein Dachs hat sich in einer Schlinge verfangen und kommt nicht mehr frei.NEWLINEDen Dachs im Diesseits befreien:  zuerst Beruhigen (Tierkunde) und danach die Schlinge entfernen (Handwerk)NEWLINEDen Dachs beruhigen im Umbra (Empathie) und danach die Schlinge im diesseits entfernenNEWLINEDen Dachs T\u00f6ten / Erl\u00f6senNEWLINE (Ein Zeitlimit erh\u00f6ht die Spannung.NEWLINE Falls die Zeit abgelaufen ist, oder das Befreien fehlschl\u00e4gt, stirbt der Dachs und der Geist beginnt in Schlummer zu verfallen, da er dies nicht m\u00f6chte, ist er bereit, sich in einen Fetisch bannen zu lassen.NEWLINE Wenn das Befreien erfolgreich ist, gibt der Dachsgeist jedem SC ein Haar: \"Solltet ihr jemals graben m\u00fcssen, k\u00f6nnt ihr mich mit diesen Haaren rufen.\"",
+    "nscConditions": []
+  }
+]

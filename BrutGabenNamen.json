@@ -1,0 +1,146 @@
+{
+  "Menschling": {
+    "Cliath": [
+      "Primatendaumen",
+      "Stadtl\u00e4ufer",
+      "Herr\u00fcberdasFeuer",
+      "\u00dcberzeugungskraft",
+      "GeruchdesMenschen"
+    ],
+    "Pflegling": [
+      "Technologiest\u00f6ren",
+      "MaldesWolfs",
+      "Weltsprache",
+      "Niederstarren"
+    ],
+    "Adren": [
+      "BeruhigendeswildenTieres",
+      "Kugelneinsch\u00fcchtern",
+      "Unruhe",
+      "Gegenstandumformen"
+    ],
+    "Athro": [
+      "K\u00f6rperver\u00e4nderung",
+      "DenWolfbegraben",
+      "Kokon",
+      "SchutzzeichengegenGeister"
+    ],
+    "\u00c4ltester": [
+      "Einordnung",
+      "\u00dcbermenschlich",
+      "DenSchleierteilen"
+    ],
+    "Legende": []
+  },
+  "Metis": {
+    "Cliath": [
+      "Abstreifen",
+      "Elementerschaffen",
+      "Rattenkopf",
+      "Urwut",
+      "Wyrmgesp\u00fcr"
+    ],
+    "Pflegling": [
+      "FluchdesHasses",
+      "Graben",
+      "Herrschaft\u00fcberdieGestalt",
+      "Silbergesp\u00fcr",
+      "Cham\u00e4leon"
+    ],
+    "Adren": [
+      "GeistigeUnterredung",
+      "Katzenaugen",
+      "Schutzh\u00fclle"
+    ],
+    "Athro": [
+      "BissderKlapperschlange",
+      "GabedesStachelschweins",
+      "Gliedma\u00dfenverdorrenlassen",
+      "ZornigerSchlag"
+    ],
+    "\u00c4ltester": [
+      "Totemgabe",
+      "Vielgestaltigkeit",
+      "Wahnsinn"
+    ],
+    "Legende": []
+  },
+  "Lupus": {
+    "Cliath": [
+      "ArsenaldesRaubtiers",
+      "AxisMundi",
+      "Beuteaufsp\u00fcren",
+      "Beutedenken",
+      "Gesch\u00e4rfteSinne",
+      "Hasensprung"
+    ],
+    "Pflegling": [
+      "Adlerauge",
+      "Geistbenennen",
+      "Geruchssicht"
+    ],
+    "Adren": [
+      "Affenschwanz",
+      "GaiasKraft",
+      "Katzenpfoten",
+      "Knebelf\u00fcrdieWeberin",
+      "Unnat\u00fcrlichesf\u00fchlen"
+    ],
+    "Athro": [
+      "Bei\u00dfen",
+      "FauchendesSchreckenswolfs",
+      "GaiasSchrei",
+      "Tierleben"
+    ],
+    "\u00c4ltester": [
+      "Elementargabe",
+      "LieddesGro\u00dfenTiers"
+    ],
+    "Legende": []
+  },
+  "Menschling des Wyrms": {
+    "Cliath": [
+      "Aura des Giftes"
+    ],
+    "Pflegling": [
+      "Spannungsspitze"
+    ],
+    "Adren": [
+      "Rostruf"
+    ],
+    "Athro": [
+      "Festmahl des Menschenfleischs"
+    ],
+    "\u00c4ltester": [],
+    "Legende": []
+  },
+  "Metis des Wyrms": {
+    "Cliath": [
+      "Bluten"
+    ],
+    "Pflegling": [],
+    "Adren": [
+      "Der Bastard von Niemandem",
+      "Schmerz in den Eingeweiden"
+    ],
+    "Athro": [],
+    "\u00c4ltester": [],
+    "Legende": []
+  },
+  "Lupus des Wyrms": {
+    "Cliath": [
+      "Wege  des  Urbanen  Wolfs"
+    ],
+    "Pflegling": [
+      ""
+    ],
+    "Adren": [
+      "Tausend Z\u00e4hne"
+    ],
+    "Athro": [],
+    "\u00c4ltester": [
+      "Entfesselte  Instinkte"
+    ],
+    "Legende": []
+  }
+}

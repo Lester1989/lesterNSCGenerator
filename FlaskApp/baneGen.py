@@ -5,35 +5,21 @@ from .Formatting import Bold,Newline,Header,ListLines
 from .gaben import LookUpTexteByName
 from .config import baseURL
 from .NSCGenUtils import NameToSeed
+import json
 
 
-baneType = {'der Eitelkeit','des Geizes','der Wolllust','des Jähzorn',' der Völlerei','des Neid','der Ignoranz','der Arroganz','der Selbstgerechtigkeit','des Hochmuts',
-             'des Wuchers','der Raffgier','der Habsucht','der Begierde','der Lüsternheit','der Empörung','der Entrüstung','der Verstimmung','der Unbeherrschtheit','des Grolls',
-             'der Zecherei','der Zügellosigkeit','des Hasses','der Eifersucht','der Bosheit','des Gräuels','der Niedertracht','der Scheinheiligkeit','der Hinterhältigkeit',
-            'der Dummheit','der Unvernunft','der Verständnislosigkeit','der Bereicherung','der Vernichtung','des Zerfalls','des Verderbens','des Massakers','der Zersetzung',
-            'der Zerstörung','des Unheils','des Chaos','der Unruhe','der Leere','der Armut','des Unglücks','der Unwahrheit','der Spirale','des Egoismus','der Lüge','des Schwindels',
-            'der List','der Verzerrung','der Verfälschung','des Spottes','der Anmaßung','der Beleidigung','der Erniedrigung','der Schmach','der Verachtung','der Verwirrung',
-            'des Zwiespalts','der Schwäche','des Mangels','der Angst','der Panik','der Hysterie','aus Scherben','aus Schrott','der Befleckung','der Verunreinigung',
-            'des Gebrechens','der Qual','der Verwesung','des Siechtums','aus Schleim','aus Müll','aus Abfall','aus Unrat','aus Schweröl','aus Giftmüll','der Strahlung',
-            'des Baalsfeuers','des Smogs','der Krankheit','der Seuche','des Eiters',
-}
-
-adjektiv = {'stinkende','dröhnende','stechende','schwehlende','farblose','schmutzige','schändliche','brutale',
-            'widerwärtige','hässliche','faulige','grausame','entsetzliche','grässliche','schaurige','höllische',
-            'grausige','ätzende','abstoßende','ruchlose','fiese','angrifflustige','aufgebrachte','aggressive',
-            'erboste','verlockende','verfressene'}
-
-spiritPower = {'Gaffling':[9,18,1],'Zackling':[19,30,2],'Incarna-Avatar':[45,80,4],'Incarna':[120,200,20]}
-
-powerlevelLookUp =['Gaffling','Gaffling','Zackling','Zackling','Zackling','Zackling','Incarna-Avatar','Incarna-Avatar','Incarna-Avatar','Incarna']
-
-spiritSpells ={
-    'häufig':['Airtensinn','Materialisieren','Neubildung','Reichsinn'],
-    'besonders':['Aufwind','Einfrieren','Elektrische Systeme kontrollieren','Entladung','Erleuchten','Feuer erzeugen','Fluten','Gestaltwandel','Glas zerschlagen','Heilung','Kiebitzen','Kurzschluss','Mondbrücke öffnen','Rüstung','Schandfleck reinigen','Schnellflug','Spurenlesen','Umbrabeben','Wind erzeugen'],
-    'plagenzauber':['Besessenheit','Berührung der Fäulnis','Raserei hervorrufen','Verderbnis']
-}
 
 
+with open('baneType.json', 'r', encoding='utf-8') as infile:
+    baneType = json.load(infile)
+with open('adjektiv.json', 'r', encoding='utf-8') as infile:
+    adjektiv = json.load(infile)
+with open('spiritPower.json', 'r', encoding='utf-8') as infile:
+    spiritPower = json.load(infile)
+with open('powerlevelLookUp.json', 'r', encoding='utf-8') as infile:
+    powerlevelLookUp = json.load(infile)
+with open('spiritSpells.json', 'r', encoding='utf-8') as infile:
+    spiritSpells = json.load(infile)
 
 
 def MakeBane(seed=-1,powerlevel=0):

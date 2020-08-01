@@ -1,0 +1,17 @@
+{
+  "Grad": {
+    "kaum wahrnehmbare": 3,
+    "leichte": 7,
+    "stets pr\u00e4sente": 3,
+    "offensichtliche": 2,
+    "gravierende": 1
+  },
+  "Art": {
+    "n Filmrissen": 1,
+    "r Hysterie": 1,
+    "r Pers\u00f6nlichkeitsspaltung": 1,
+    "n Obsessionen": 1,
+    "r Paranoia": 1,
+    "r Schizophrenie": 1
+  }
+}

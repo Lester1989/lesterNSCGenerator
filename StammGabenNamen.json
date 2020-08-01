@@ -1,0 +1,478 @@
+{
+  "Fianna": {
+    "Cliath": [
+      "Feenlicht",
+      "Giftwiderstehen",
+      "Hasensprung",
+      "\u00dcberzeugungskraft",
+      "Giftwiderstehen",
+      "ZweiZungen"
+    ],
+    "Pflegling": [
+      "Flammentanz",
+      "GeheulderTodesfee",
+      "GeheuldesUnsichtbaren",
+      "Herrschaft\u00fcberdieGestalt",
+      "Schlangenzunge"
+    ],
+    "Adren": [
+      "Feenverwandte",
+      "Gegenstandumformen",
+      "Gl\u00fcckskind",
+      "Leylinien",
+      "Sirenengesang"
+    ],
+    "Athro": [
+      "BalorsBlick",
+      "Trugbild"
+    ],
+    "\u00c4ltester": [
+      "GabedesSpriggans",
+      "Nebel\u00fcberdemMoor",
+      "RufderWildenJagd"
+    ],
+    "Legende": []
+  },
+  "Glaswandler": {
+    "Cliath": [
+      "Diagnose",
+      "EinfacheMaschinekontrollieren",
+      "PlugandPlay",
+      "Trickschuss",
+      "\u00dcberzeugungskraft"
+    ],
+    "Pflegling": [
+      "Cybersinne",
+      "H\u00e4ndevollerDonner",
+      "Spannungsspitze",
+      "Stahlfell",
+      "Technologiest\u00f6ren"
+    ],
+    "Adren": [
+      "Eindringen",
+      "Elektroschock",
+      "Elementargunst",
+      "KomplexeMaschinekontrollieren"
+    ],
+    "Athro": [
+      "Doppelg\u00e4nger",
+      "Einstimmung",
+      "Funkwellenreiter",
+      "Technobabbel"
+    ],
+    "\u00c4ltester": [
+      "Netzspinnebeschw\u00f6ren",
+      "OrdnungimChaos"
+    ],
+    "Legende": []
+  },
+  "Kinder Gaias": {
+    "Cliath": [
+      "Barmherzigkeit",
+      "Ber\u00fchrungderMutter",
+      "GeruchdesBruders",
+      "Schmerzwiderstehen",
+      "Waffeblockieren"
+    ],
+    "Pflegling": [
+      "ArsenaldesEinhorns,Namen.Ber\u00fchrungderGro\u00dfmutter",
+      "LunasR\u00fcstung",
+      "ParaBellum",
+      "Ruhe"
+    ],
+    "Adren": [
+      "BeruhigendeswildenTieres",
+      "Geisterfreund",
+      "LiebendeBer\u00fchrung",
+      "\u00dcberw\u00e4ltigen"
+    ],
+    "Athro": [
+      "FreiwiederWindseitdemerstenTag",
+      "Gelassenheit",
+      "SchlaginsLeere",
+      "Tierleben"
+    ],
+    "\u00c4ltester": [
+      "Korona",
+      "DerlebendeWald"
+    ],
+    "Legende": []
+  },
+  "Knochenbei\u00dfer": {
+    "Cliath": [
+      "Giftwiderstehen",
+      "Kochen",
+      "KraftderVerzweiflung",
+      "Sch\u00e4tzeimM\u00fcll",
+      "S\u00fc\u00dferHonigduft"
+    ],
+    "Pflegling": [
+      "AbscheulicherGestank",
+      "Hundetarnung",
+      "IndenRitzen",
+      "SeligeUnwissenheit"
+    ],
+    "Adren": [
+      "WildheitderindieEckegedr\u00e4ngtenRatte",
+      "GabederTermite",
+      "GabedesStinktiers",
+      "Gegenstandumformen",
+      "LachenderHy\u00e4ne",
+      "Rostruf"
+    ],
+    "Athro": [
+      "Blinzeln",
+      "Einstimmung",
+      "Verseuchen"
+    ],
+    "\u00c4ltester": [
+      "Aufstand",
+      "\u00dcberlebensk\u00fcnstler"
+    ],
+    "Legende": []
+  },
+  "Nachfahren des Fenris": {
+    "Cliath": [
+      "BlitzschnelleReflexe",
+      "FratzedesFenris",
+      "Herr\u00fcberdasFeuer",
+      "Rasiermesserklauen",
+      "Schmerzwiderstehen"
+    ],
+    "Pflegling": [
+      "F\u00e4ngedesNordens",
+      "DieFluchtdesFeiglingshemmen",
+      "KnurrendesRaubtiers",
+      "Trollhaut"
+    ],
+    "Adren": [
+      "Giftblut",
+      "Schmerzumleiten",
+      "ThorsMacht"
+    ],
+    "Athro": [
+      "FelsinderBrandung",
+      "GaiasSchrei",
+      "HerzdesBerges",
+      "K\u00f6rperver\u00e4nderung"
+    ],
+    "\u00c4ltester": [
+      "FenrisBiss",
+      "HeimdallsAusdauer",
+      "WalhallasHorden"
+    ],
+    "Legende": [
+      "Fenrisrufen"
+    ]
+  },
+  "Rote Klauen": {
+    "Cliath": [
+      "AugedesJ\u00e4gers",
+      "Geruchdesflie\u00dfendenWassers",
+      "Tiersprache",
+      "VerborgenerM\u00f6rder",
+      "W\u00f6lfevordenToren"
+    ],
+    "Pflegling": [
+      "Beutegesp\u00fcr",
+      "N\u00e4chtlichesGeheul",
+      "TierischeInstinkte",
+      "SchattendesImpergiums"
+    ],
+    "Adren": [
+      "Elementargunst",
+      "PfadloseEin\u00f6de",
+      "Revier",
+      "Zerlegen"
+    ],
+    "Athro": [
+      "GeheuldesTodes",
+      "Schlingen",
+      "Treibsand"
+    ],
+    "\u00c4ltester": [
+      "GaiasRache",
+      "LykaonsFluch",
+      "Schorfwandlerfluch"
+    ],
+    "Legende": [
+      "GaiasSchild"
+    ]
+  },
+  "Schattenlords": {
+    "Cliath": [
+      "AuraderZuversicht",
+      "LauscheranderWand",
+      "Schattenweben",
+      "T\u00f6dlicheSchw\u00e4che",
+      "Z\u00fcngleinanderWaage"
+    ],
+    "Pflegling": [
+      "Donnerschlag",
+      "K\u00fchleStimmederVernunft",
+      "LiedderErdmutter",
+      "LunasR\u00fcstung",
+      "N\u00e4chtlichesGeheul"
+    ],
+    "Adren": [
+      "Eisesk\u00e4ltederVerzweiflung",
+      "L\u00e4hmenderBlick",
+      "LenkendesSturms",
+      "Schattenschnitt",
+      "UnterDruck"
+    ],
+    "Athro": [
+      "Haft",
+      "St\u00e4rkedesBeherrschers",
+      "OffeneWunden"
+    ],
+    "\u00c4ltester": [
+      "Gehorsam",
+      "Schattenrudel"
+    ],
+    "Legende": []
+  },
+  "Schwarze Furien": {
+    "Cliath": [
+      "AtemderWyldnis",
+      "M\u00e4nnergestalt",
+      "Gesch\u00e4rfteSinne",
+      "WyldeRegeneration",
+      "Wyrmgesp\u00fcr"
+    ],
+    "Pflegling": [
+      "Beutegesp\u00fcr",
+      "FluchdesAeolus",
+      "Herrschaft\u00fcberdieGestalt",
+      "KalisZunge",
+      "Knien"
+    ],
+    "Adren": [
+      "Gnadensto\u00df",
+      "Herzklaue",
+      "SchmerzindenEingeweiden",
+      "SchwingendesPegasus"
+    ],
+    "Athro": [
+      "Qualenbereiten",
+      "Tierleben",
+      "Wespenklauen"
+    ],
+    "\u00c4ltester": [
+      "Gorgonenblick",
+      "TausendGestalten",
+      "Wyldnisverformung "
+    ],
+    "Legende": []
+  },
+  "Silberf\u00e4nge": {
+    "Cliath": [
+      "Falkenauge",
+      "GriffdesFalken",
+      "Inspiration",
+      "Wyrmgesp\u00fcr",
+      "Z\u00fcngelndeFlamme"
+    ],
+    "Pflegling": [
+      "EinheitdesRudels",
+      "Empathie",
+      "Handklinge",
+      "LunasR\u00fcstung",
+      "Silbergesp\u00fcr"
+    ],
+    "Adren": [
+      "Falkenklauen",
+      "Flammenklinge",
+      "GaiasZorn",
+      "Silberklauen"
+    ],
+    "Athro": [
+      "DemTodausweichen",
+      "GeistigeBarriere",
+      "Meisterschaft"
+    ],
+    "\u00c4ltester": [
+      "LunasR\u00e4cher",
+      "PfotendesneugeborenenWelpen"
+    ],
+    "Legende": [
+      "ErneuerungdesZyklus"
+    ]
+  },
+  "Sternentr\u00e4umer": {
+    "Cliath": [
+      "EiserneEntschlossenheit",
+      "F\u00e4llendeBer\u00fchrung",
+      "Gleichgewicht",
+      "Kanalisieren",
+      "Wyrmgesp\u00fcr"
+    ],
+    "Pflegling": [
+      "EinstimmungaufdieOberfl\u00e4che",
+      "InnereKraft",
+      "InneresLicht",
+      "Versuchungwiderstehen",
+      "Wuxing"
+    ],
+    "Adren": [
+      "Gleichgewichtsgesp\u00fcr",
+      "GnadedenBesiegten",
+      "Klarheit",
+      "WiederkehrendeGunstdesWindes"
+    ],
+    "Athro": [
+      "GeistigeBarriere",
+      "SchlaginsLeere",
+      "\u00dcbernat\u00fcrlichesBewusstsein"
+    ],
+    "\u00c4ltester": [
+      "HarmonischeEinheitdersmaragdenenMutter",
+      "Schl\u00e4geumlenken"
+    ],
+    "Legende": [
+      "WeisheitdesSehers"
+    ]
+  },
+  "Stillen Wanderer": {
+    "Cliath": [
+      "OrientierungamHimmel",
+      "Wyrmgesp\u00fcr",
+      "Stille",
+      "Gedankenschnelle",
+      "VisionenvomDuat"
+    ],
+    "Pflegling": [
+      "AxisMundi",
+      "SeligeUnwissenheit",
+      "AusdauerdesBoten",
+      "Weltsprache",
+      "AufSebeksR\u00fccken"
+    ],
+    "Adren": [
+      "Anpassung",
+      "Dergro\u00dfeSprung",
+      "MaldesTodeswolfs",
+      "Unnat\u00fcrlichesf\u00fchlen"
+    ],
+    "Athro": [
+      "Einstimmung",
+      "SchwarzesMal",
+      "Eind\u00e4mmenderHerzflut",
+      "UnvorstellbareSchnelligkeit"
+    ],
+    "\u00c4ltester": [
+      "Mondtor",
+      "Umbraerreichen"
+    ],
+    "Legende": []
+  },
+  "Uktena": {
+    "Cliath": [
+      "Echsengeist",
+      "Geistersprache",
+      "Magiegesp\u00fcr",
+      "Verh\u00fcllen",
+      "Wyrmgesp\u00fcr"
+    ],
+    "Pflegling": [
+      "WindungenderSchlange",
+      "Fetischruf",
+      "GeistdesFisches",
+      "GeistdesVogels",
+      "SchattenimMorgengrauen"
+    ],
+    "Adren": [
+      "Nebelketten",
+      "Totembannen",
+      "Unsichtbarkeit",
+      "Wahrsagen",
+      "Zerrei\u00dfenderKunst"
+    ],
+    "Athro": [
+      "Elementarrufen",
+      "Haft",
+      "HandderErdherren"
+    ],
+    "\u00c4ltester": [
+      "Fetischpuppe",
+      "GewebedesGeistes"
+    ],
+    "Legende": []
+  },
+  "Wendigo": {
+    "Cliath": [
+      "Briserufen",
+      "Eisecho",
+      "SchlagderHerztrommel",
+      "Schmerzwiderstehen",
+      "Tarnung"
+    ],
+    "Pflegling": [
+      "F\u00e4ngedesNordens",
+      "MitdenWindgeisternsprechen",
+      "SchneidenderWind",
+      "WahreFurcht",
+      "WieeinLachsimWasser"
+    ],
+    "Adren": [
+      "BlutdesNordens",
+      "BlutigeLabsal",
+      "Himmelslauf",
+      "WeisheitderAltenWege"
+    ],
+    "Athro": [
+      "FelsinderBrandung",
+      "GaiasSchrei",
+      "Kannibalengeistrufen",
+      "K\u00e4ltedesfr\u00fchenFrostes"
+    ],
+    "\u00c4ltester": [
+      "HerzausEis",
+      "Sturmgeisterbeschw\u00f6ren"
+    ],
+    "Legende": []
+  },
+  "T\u00e4nzer der schwarzen Spirale": {
+    "Cliath": [
+      "Gift widerstehen",
+      "Schutzplage",
+      "Schmerz widerstehen",
+      "Verh\u00fcllen",
+      "Wyrmgesp\u00fcr",
+      "Baalsr\u00fcstung",
+      "Spiralschattentanz",
+      "Makel unterdr\u00fccken",
+      "Baalsaura"
+    ],
+    "Pflegling": [
+      "Fledermausohren",
+      "Wyrmhaut",
+      "Grabesklauen",
+      "Verborgener M\u00f6rder",
+      "Unterwerfen"
+    ],
+    "Adren": [
+      "Flugh\u00e4ute",
+      "Sch\u00e4umende Wut",
+      "Sch\u00f6ne L\u00fcge",
+      "Klauen der Korrosion",
+      "Ichorklinge",
+      "Gabe des Befleckten Totems"
+    ],
+    "Athro": [
+      "Wyrmelementar  beschw\u00f6ren",
+      "Schleichendes  Gift",
+      "Offene Wunden",
+      "Hungriger Rost",
+      "Gestohlene Haut",
+      "Das  Wei\u00dfe  Heulen",
+      "Geheul der Plage"
+    ],
+    "\u00c4ltester": [
+      "Baalsfeuer",
+      "Makel tarnen",
+      "Mantel von Anthelios"
+    ],
+    "Legende": []
+  }
+}

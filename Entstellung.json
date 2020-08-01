@@ -1,0 +1,22 @@
+{
+  "Anzahl": {
+    "0": 4,
+    "1": 6,
+    "2": 2,
+    "3": 1
+  },
+  "Art": {
+    "ist ein Albino": 1,
+    "hat Anf\u00e4lle": 1,
+    "hat einen Buckel": 1,
+    "ist Haarlos": 1,
+    "hat H\u00f6rner": 1,
+    "hat eine Verwachsene Nase": 1,
+    "hat keinen Schwanz": 1,
+    "hat einen missgebildeten Arm": 0.5,
+    "hat ein missgebildetes Bein": 0.5,
+    "ist am Husten/Keuchen": 1,
+    "wirkt Wahnsinnig": 1,
+    "hat ledrige Haut": 1
+  }
+}

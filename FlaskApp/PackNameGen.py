@@ -1,29 +1,16 @@
 import random
+import json
 
 namensArt = ['die NomenVerb', 'die adjektiv NomenVerb','die Verb von Nomen', 'weird']
 
-nomen = {
-    'gut':['Mond','Luna','Wyldnis','Wolf','Mutter','Herz','Ernte','Kind'],
-    'gewalt':['Blut','Schlacht','Ende','Feuer','Klaue','Zahn','Wut','Rache','Knochen','Maul','Blitz','Fang','Schlag'],
-    'neutral':['Ruf','Geist','Schwanz','Pfote','Fell','Vater','Schrei','Dunkel','Fleisch','Auge','Makel'],
-    'böse':['Wyrm','Alptraum','Hölle','Baal','Fallout','Feind','Dämonen','Tod','Tänzer','Spiralen','Gift'],
-}
-
-verben = {
-    'gut':['Retter',],
-    'gewalt':['Reißer','Brecher','Sprenger','Brenner','Schlachter','Rufer','Fresser','Schläger','Töter'],
-    'neutral':['Bringer','Träumer'],
-    'böse':['Tänzer','Zerstörer','Verschlinger','Vergifter','Rächer'],
-}
-
-adjektive = {
-    'gut': ['weisen','klugen'],
-    'gewalt': ['schnellen','starken','blutigen','reißenden','wutenden','rächenden'],
-    'neutral': ['neuen'],
-    'böse': ['stinkenden', 'blutenden', 'tanzenden', 'rasenden'],
-}
-
-weirds = ['Ratzupaltuff','Cowabunga','YippiKaYay']
+with open('nomen.json', 'r', encoding='utf-8') as infile:
+    nomen = json.load(infile)
+with open('verben.json', 'r', encoding='utf-8') as infile:
+    verben = json.load(infile)
+with open('adjektive.json', 'r', encoding='utf-8') as infile:
+    adjektive = json.load(infile)
+with open('weirds.json', 'r', encoding='utf-8') as infile:
+    weirds = json.load(infile)
 
 def GenerateRandomName(seed = -1):
     if seed != -1:

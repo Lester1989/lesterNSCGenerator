@@ -1,0 +1,53 @@
+{
+  "gut": [
+    "Mond",
+    "Luna",
+    "Wyldnis",
+    "Wolf",
+    "Mutter",
+    "Herz",
+    "Ernte",
+    "Kind"
+  ],
+  "gewalt": [
+    "Blut",
+    "Schlacht",
+    "Ende",
+    "Feuer",
+    "Klaue",
+    "Zahn",
+    "Wut",
+    "Rache",
+    "Knochen",
+    "Maul",
+    "Blitz",
+    "Fang",
+    "Schlag"
+  ],
+  "neutral": [
+    "Ruf",
+    "Geist",
+    "Schwanz",
+    "Pfote",
+    "Fell",
+    "Vater",
+    "Schrei",
+    "Dunkel",
+    "Fleisch",
+    "Auge",
+    "Makel"
+  ],
+  "b\u00f6se": [
+    "Wyrm",
+    "Alptraum",
+    "H\u00f6lle",
+    "Baal",
+    "Fallout",
+    "Feind",
+    "D\u00e4monen",
+    "Tod",
+    "T\u00e4nzer",
+    "Spiralen",
+    "Gift"
+  ]
+}

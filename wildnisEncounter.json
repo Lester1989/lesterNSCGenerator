@@ -1,0 +1,115 @@
+[
+  {
+    "name": "Wilderer",
+    "text": "Das Rudel h\u00f6rt einen Schuss. Dabei wissen sie, dass der J\u00e4ger (CHAR0), welcher im hier zust\u00e4ndig ist (und auch Kinfolk ist), gerade nicht am Jagen ist.NEWLINE Wenn sich die SC in Richtung des Schusses bewegen, dann sto\u00dfen sie recht schnell auf zwei M\u00e4nner (CHAR1) und (CHAR2), welche sich einem angeschossenen Wildschwein n\u00e4hern.NEWLINE Das Tier ist noch nicht tot und zappelt noch. Der Schuss hat den Pansen und die H\u00fcfte durchschlagen, abgesehen von dem Anblick sind sowohl das schmerzensr\u00f6cheln, als auch der Gestank deutlich wahrnehmbar.NEWLINE Die beiden M\u00e4nner beratschlagen laut ob das Fleisch noch zu gebrauchen ist, oder ob sie lieber ein neues Schwein suchen (ggf. Zornwurf).NEWLINE Beide tragen Gewehre, sind jedoch keine guten Sch\u00fctzen.",
+    "nscConditions": [
+      {
+        "art": "Kinfolk"
+      },
+      {
+        "art": "Human",
+        "pronomen": "er",
+        "beschreibungKleidung": [
+          "alte ",
+          "zweckm\u00e4\u00dfige "
+        ],
+        "beschreibungKleidungsFarbe": [
+          "braunen",
+          "tarnenden"
+        ]
+      },
+      {
+        "art": "Human",
+        "pronomen": "er",
+        "beschreibungKleidung": [
+          "alte ",
+          "zweckm\u00e4\u00dfige "
+        ],
+        "beschreibungKleidungsFarbe": [
+          "braunen",
+          "tarnenden"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Umwelts\u00fcnder Spuren",
+    "text": "Das Rudel st\u00f6\u00dft im Wald auf einen gro\u00dfen Berg M\u00fcll. Hier hat jemand (CHAR0) einen gesamten H\u00e4nger abgeladen. Darunter sind einige Elektroger\u00e4te und Farbeimer und vieles mehr.NEWLINE Wenn das Rudel gr\u00fcndlich genug sucht(Nachforschen, erh\u00f6hter Schwierigkeit), k\u00f6nnen sie eine Adresse finden, welche jedoch aktuell nicht bewohnt ist.NEWLINE Der vorherige Mieter wollte seinen M\u00fcll scheinbar nicht mitnehmen.NEWLINE Je nachdem wieviel Zeit in dieser Begegnunge verbracht werden soll, kann das Rudel die neue Adresse ausfindig machen und sie befindet sich in Reichweite.",
+    "nscConditions": [
+      {
+        "art": "Human"
+      }
+    ]
+  },
+  {
+    "name": "Umwelts\u00fcnder T\u00e4ter",
+    "text": "Das Rudel h\u00f6rt einiges an Geschepper und Geklirr. Wenn sie dem Nachgehen, sto\u00dfen sie auf ein Paar (CHAR0) und (CHAR1), welches gerade einiges an M\u00fcll von einem Anh\u00e4nger herunterwirft und schiebt. Mitten Im Wald.NEWLINE Stellt das Rudel sie zu Rede? Eskaliert die Situation?",
+    "nscConditions": [
+      {
+        "art": "Human"
+      },
+      {
+        "art": "Human",
+        "nachname": "CHAR0.nachname"
+      }
+    ]
+  },
+  {
+    "name": "Pfadfinder",
+    "text": "Es ist Gesang zu h\u00f6ren. Die Ursache ist eine gr\u00f6\u00dfere Gruppe von Pfadfindern(3 mal 7) aus jeweils einem Jugendlichen und 6 Kindern.  Jeder von den Kindern tr\u00e4gt einen Stock mit Nagel dran und die Jugendlichen ziehen jeweils einen Bollerwagen.NEWLINE In den W\u00e4gen befindet sich schon einiges an M\u00fcll und die Kinder rennen umher und sammeln noch mehr ein.NEWLINE Die Menschen befinden sich im Revier der Septe, jedoch sammeln sie M\u00fcll, was etwas gutes ist.NEWLINE K\u00f6nnen die SC die Pfadfinder freundlich in eine richtige Richtung lenken?NEWLINE Die 3 F\u00e4hnleinf\u00fchrer sind (CHAR0), (CHAR1) und (CHAR2).NEWLINE Von den Kindern treten die meisten nicht mit den SC in Kontakt, daher nur (CHAR3) und (CHAR4) als Beispiele.",
+    "nscConditions": [
+      {
+        "art": "Human",
+        "alter": [
+          "gerade Vollj\u00e4hrig"
+        ]
+      },
+      {
+        "art": "Human",
+        "alter": [
+          "gerade Vollj\u00e4hrig"
+        ]
+      },
+      {
+        "art": "Human",
+        "alter": [
+          "gerade Vollj\u00e4hrig"
+        ]
+      },
+      {
+        "art": "Human",
+        "pronomen": "er",
+        "alter": [
+          "gerade Vollj\u00e4hrig"
+        ]
+      },
+      {
+        "art": "Human",
+        "pronomen": "sie",
+        "alter": [
+          "gerade Vollj\u00e4hrig"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Waldbrand",
+    "text": "(Ein Wahrnehmungswurf k\u00f6nnte bestimmen, wie fr\u00fch die SC den Brand bemerken)NEWLINE Es ist ein gr\u00f6\u00dferer Waldbrand, der von dem Rudel allein nicht gel\u00f6scht und nur mit gro\u00dfen Anstrengungen eingegrenzt werden kann. M\u00f6gliche Herangehensweisen:NEWLINE Schneise schlagen (\u00dcberleben um den besten Ort zu finden und K\u00f6rperkraft und Widerstand, um genug B\u00e4ume zu f\u00e4llen)NEWLINE Hilfe (von der Septe) holen (Sportlichkeit um schnell genug zu sein)NEWLINE Kontakt zu den Geistern aufnehmen (Geistersprache und ggf. Gnosis)NEWLINE etc.",
+    "nscConditions": []
+  },
+  {
+    "name": "Wanderer Pilzsucher",
+    "text": "(Das Rudel st\u00f6\u00dft auf eine \u00e4ltere Frau (CHAR0), mit einem Korb und einem Rucksack. In dem Korb liegt ein kleines Messer und ein Tuch.NEWLINE Sie klettert suchend \u00fcber Wurzeln und B\u00f6schungen. Sie sucht nach Pilzen und l\u00e4sst sich von irgendwelchen Halbstarken nicht verbieten, tiefer in den Wald(in Richtung Caern zu gehen).NEWLINE Wie k\u00f6nnen die SC sie davon abhalten, sich dem Caern weiter zu n\u00e4hern.",
+    "nscConditions": [
+      {
+        "art": "Human",
+        "pronomen": "sie",
+        "alter": [
+          "zwischen 40 und 50",
+          "ende 50",
+          "\u00fcber 60"
+        ]
+      }
+    ]
+  }
+]

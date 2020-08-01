@@ -1,0 +1,29 @@
+{
+  "im Nahkampf": [
+    "Nahkampf",
+    "Widerstand"
+  ],
+  "im Fernkampf": [
+    "Fernkampf",
+    "Wahrnehmen"
+  ],
+  "in Selbstverteidigung": [
+    "Widerstand",
+    "Wille",
+    "Verstecken"
+  ],
+  "im Handwerk": [
+    "Handwerk"
+  ],
+  "als F\u00fchrungsperson": [
+    "Wille",
+    "L\u00fcgen",
+    "Wahrnehmen"
+  ],
+  "in Medizin": [
+    "Medizin"
+  ],
+  "\u00fcber altes Wissen": [
+    "Wahrnehmen"
+  ]
+}
