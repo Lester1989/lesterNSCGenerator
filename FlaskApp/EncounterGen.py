@@ -15,11 +15,11 @@ from .config import basePath
 tokens = ['CHAR', 'NEWLINE']
 
 
-with open(basePath+'jsons/stadtEncounter.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'/jsons/stadtEncounter.json', 'r', encoding='utf-8') as infile:
     stadtEncounter = json.load(infile)
-with open(basePath+'jsons/wildnisEncounter.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'/jsons/wildnisEncounter.json', 'r', encoding='utf-8') as infile:
     wildnisEncounter = json.load(infile)
-with open(basePath+'jsons/umbraEncounter.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'/jsons/umbraEncounter.json', 'r', encoding='utf-8') as infile:
     umbraEncounter = json.load(infile)
 
 

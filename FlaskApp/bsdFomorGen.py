@@ -7,15 +7,15 @@ import json
 
 
 
-with open(basePath+'jsons/Entstellung.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'/jsons/Entstellung.json', 'r', encoding='utf-8') as infile:
     Entstellung = json.load(infile)
-with open(basePath+'jsons/Mutation.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'/jsons/Mutation.json', 'r', encoding='utf-8') as infile:
     Mutation = json.load(infile)
-with open(basePath+'jsons/Abstammung.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'/jsons/Abstammung.json', 'r', encoding='utf-8') as infile:
     Abstammung = json.load(infile)
-with open(basePath+'jsons/Geistesstörung.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'/jsons/Geistesstörung.json', 'r', encoding='utf-8') as infile:
     Geistesstörung = json.load(infile)
-with open(basePath+'jsons/PraegendeSuende.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'/jsons/PraegendeSuende.json', 'r', encoding='utf-8') as infile:
     PrägendeSünde = json.load(infile)
 
 

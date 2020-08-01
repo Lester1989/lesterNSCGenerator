@@ -5,23 +5,23 @@ from .config import basePath
 import json
 
 
-with open(basePath+'jsons/Kleidung.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'/jsons/Kleidung.json', 'r', encoding='utf-8') as infile:
     Kleidung = json.load(infile)
-with open(basePath+'jsons/Kleidungsfaerbung.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'/jsons/Kleidungsfaerbung.json', 'r', encoding='utf-8') as infile:
     Kleidungsfärbung = json.load(infile)
-with open(basePath+'jsons/Frisur.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'/jsons/Frisur.json', 'r', encoding='utf-8') as infile:
     Frisur = json.load(infile)
-with open(basePath+'jsons/Koerperbau.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'/jsons/Koerperbau.json', 'r', encoding='utf-8') as infile:
     Körperbau = json.load(infile)
-with open(basePath+'jsons/Merkmale.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'/jsons/Merkmale.json', 'r', encoding='utf-8') as infile:
     Merkmale = json.load(infile)
-with open(basePath+'jsons/Kopf.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'/jsons/Kopf.json', 'r', encoding='utf-8') as infile:
     Kopf = json.load(infile)
-with open(basePath+'jsons/Augen.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'/jsons/Augen.json', 'r', encoding='utf-8') as infile:
     Augen = json.load(infile)
-with open(basePath+'jsons/Haut.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'/jsons/Haut.json', 'r', encoding='utf-8') as infile:
     Haut = json.load(infile)
-with open(basePath+'jsons/Zaehne.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'/jsons/Zaehne.json', 'r', encoding='utf-8') as infile:
     Zähne = json.load(infile)
 
 def MakeBeschreibung(beschreibung):

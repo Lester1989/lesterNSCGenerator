@@ -4,13 +4,13 @@ from .config import basePath
 
 namensArt = ['die NomenVerb', 'die adjektiv NomenVerb','die Verb von Nomen', 'weird']
 
-with open(basePath+'jsons/nomen.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'/jsons/nomen.json', 'r', encoding='utf-8') as infile:
     nomen = json.load(infile)
-with open(basePath+'jsons/verben.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'/jsons/verben.json', 'r', encoding='utf-8') as infile:
     verben = json.load(infile)
-with open(basePath+'jsons/adjektive.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'/jsons/adjektive.json', 'r', encoding='utf-8') as infile:
     adjektive = json.load(infile)
-with open(basePath+'jsons/weirds.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'/jsons/weirds.json', 'r', encoding='utf-8') as infile:
     weirds = json.load(infile)
 
 def GenerateRandomName(seed = -1):

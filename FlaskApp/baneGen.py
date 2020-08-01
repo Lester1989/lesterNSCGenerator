@@ -10,15 +10,15 @@ import json
 
 
 
-with open(basePath+'jsons/baneType.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'/jsons/baneType.json', 'r', encoding='utf-8') as infile:
     baneType = json.load(infile)
-with open(basePath+'jsons/adjektiv.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'/jsons/adjektiv.json', 'r', encoding='utf-8') as infile:
     adjektiv = json.load(infile)
-with open(basePath+'jsons/spiritPower.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'/jsons/spiritPower.json', 'r', encoding='utf-8') as infile:
     spiritPower = json.load(infile)
-with open(basePath+'jsons/powerlevelLookUp.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'/jsons/powerlevelLookUp.json', 'r', encoding='utf-8') as infile:
     powerlevelLookUp = json.load(infile)
-with open(basePath+'jsons/spiritSpells.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'/jsons/spiritSpells.json', 'r', encoding='utf-8') as infile:
     spiritSpells = json.load(infile)
 
 
