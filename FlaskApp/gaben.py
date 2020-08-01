@@ -7,15 +7,15 @@ from .config import basePath
 
 gabenTexte = json.load(codecs.open(basePath+'/FlaskApp/gabenTexte.json', 'r', 'utf-8-sig'))
 
-with open('Raenge.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'jsons/Raenge.json', 'r', encoding='utf-8') as infile:
     Ränge = list(set(json.load(infile).keys()))
-with open('BrutGabenNamen.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'jsons/BrutGabenNamen.json', 'r', encoding='utf-8') as infile:
     BrutGabenNamen = json.load(infile)
-with open('VorzeichenGabenNamen.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'jsons/VorzeichenGabenNamen.json', 'r', encoding='utf-8') as infile:
     VorzeichenGabenNamen = json.load(infile)
-with open('StammGabenNamen.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'jsons/StammGabenNamen.json', 'r', encoding='utf-8') as infile:
     StammGabenNamen = json.load(infile)
-with open('FomoriGabenName.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'jsons/FomoriGabenName.json', 'r', encoding='utf-8') as infile:
     FomoriGabenName = json.load(infile)
 
 def LookUpTexteByName(needle):

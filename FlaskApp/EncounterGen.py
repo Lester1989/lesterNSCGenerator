@@ -4,6 +4,7 @@ import json
 from .kinfolkGen import GetRandomVorname, GetRandomNachname, BuildNSC, BuildBSD, BuildGarouPack, BuildBSDPack
 from .baneGen import MakeBane
 from .Formatting import Bold, Newline, Header, ListLines, Table
+from .config import basePath
 
 # encounter = {name,text,nscConditions}
 # nscCondition = {'sex':m/w,[beschreibungsname:[Möglichkeiten]]}
@@ -14,11 +15,11 @@ from .Formatting import Bold, Newline, Header, ListLines, Table
 tokens = ['CHAR', 'NEWLINE']
 
 
-with open('stadtEncounter.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'jsons/stadtEncounter.json', 'r', encoding='utf-8') as infile:
     stadtEncounter = json.load(infile)
-with open('wildnisEncounter.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'jsons/wildnisEncounter.json', 'r', encoding='utf-8') as infile:
     wildnisEncounter = json.load(infile)
-with open('umbraEncounter.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'jsons/umbraEncounter.json', 'r', encoding='utf-8') as infile:
     umbraEncounter = json.load(infile)
 
 

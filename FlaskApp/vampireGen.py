@@ -1,26 +1,26 @@
 from .Formatting import Bold, Newline, Header, ListLines
 from .NSCGenUtils import NameToSeed, DrawWithWeights,StartCapital,InsertWordAtSpace
-from .config import baseURL
+from .config import baseURL, basePath
 
 import random
 import json
 
 
-with open('einstellungVamp.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'jsons/einstellungVamp.json', 'r', encoding='utf-8') as infile:
     einstellungVamp = json.load(infile)
-with open('sekten.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'jsons/sekten.json', 'r', encoding='utf-8') as infile:
     sekten = json.load(infile)
-with open('clans.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'jsons/clans.json', 'r', encoding='utf-8') as infile:
     clans = json.load(infile)
-with open('unleben.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'jsons/unleben.json', 'r', encoding='utf-8') as infile:
     unleben = json.load(infile)
-with open('kuss.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'jsons/kuss.json', 'r', encoding='utf-8') as infile:
     kuss = json.load(infile)
-with open('GhulLookup.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'jsons/GhulLookup.json', 'r', encoding='utf-8') as infile:
     GhulLookup = json.load(infile)
-with open('GenerationLookup.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'jsons/GenerationLookup.json', 'r', encoding='utf-8') as infile:
     GenerationLookup = json.load(infile)
-with open('kinderChances.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'jsons/kinderChances.json', 'r', encoding='utf-8') as infile:
     kinderChances = {int(key):int(val) for (key,val) in json.load(infile).items()}
 
 # region Family Tree

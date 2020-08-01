@@ -1,15 +1,16 @@
 import random
 import json
 from .NSCGenUtils import  DrawWithWeights
+from .config import basePath
 
 
-with open('haltungen.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'jsons/haltungen.json', 'r', encoding='utf-8') as infile:
     haltungen = json.load(infile)
-with open('gestiken.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'jsons/gestiken.json', 'r', encoding='utf-8') as infile:
     gestiken = json.load(infile)
-with open('mimiken.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'jsons/mimiken.json', 'r', encoding='utf-8') as infile:
     mimiken = json.load(infile)
-with open('merkmal.json', 'r', encoding='utf-8') as infile:
+with open(basePath+'jsons/merkmal.json', 'r', encoding='utf-8') as infile:
     merkmal = json.load(infile)
 
 def MakeSpielAnweisung():
