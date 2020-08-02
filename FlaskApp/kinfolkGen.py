@@ -126,6 +126,7 @@ def MakeValue(nsc):
         charPools[pool] = min(charPools[pool], poolMaxes[pool] + nsc['Powerlevel'])
         charPools[pool] = max(charPools[pool], 1)
     nsc['dicePools'] = charPools
+    nsc['printedDicePools'] = Table(6 ,[f'{cell}' for pool in nsc['dicePools'] for cell in [pool, nsc["dicePools"][pool]]], 'HTML')
     return nsc
 
 
@@ -198,7 +199,7 @@ def MakePlayAdvise(nsc):
     return nsc
 
 
-def MakeBase(seed=-1, Art='Kinfolk', Stamm='', Powerlevel=0, occupation=''):
+def MakeBase(seed=-1, Art='Kinfolk', Stamm='', Powerlevel=0, occupation='',packString =''):
     nameData = {}
     #print(f'Seed: {seed}')
     if seed == -1:
@@ -222,18 +223,36 @@ def MakeBase(seed=-1, Art='Kinfolk', Stamm='', Powerlevel=0, occupation=''):
         'nachname': surname,
         'pronomen': 'er' if nameData['geschlecht'] == 'm' else 'sie',
         'possesivpronomen': 'seine' if nameData['geschlecht'] == 'm' else 'ihre',
+        'akkusativpronomen': 'ihn' if nameData['geschlecht'] == 'm' else 'sie',
+        'dativpronomen': 'ihm' if nameData['geschlecht'] == 'm' else 'ihr',
         'Powerlevel': Powerlevel,
         'occupation': occupation,
         'job': random.sample(berufe, 1)[0]
     }
-
+    nsc['Pronomen'] = StartCapital(nsc['pronomen'])
+    nsc['Possesivpronomen'] = StartCapital(nsc['possesivpronomen'])
+    nsc['Akkusativpronomen'] = StartCapital(nsc['akkusativpronomen'])
+    nsc['Dativpronomen'] = StartCapital(nsc['dativpronomen'])
     nsc['art'] = Art
+    baseLink = Newline("HTML") + f'<a class="no-print" href="{baseURL}/nsc/'
+    art = nsc["art"].lower() if nsc["art"] in ["Kinfolk", "Human", "Fomor", "vampir"] else "garou"
+    if Stamm == 'Tänzer der schwarzen Spirale':
+        art = 'bsd'
+    nscSeed = (nsc["vorname"]+" "+nsc["nachname"]).replace(" ", "_")
+    nsc['links'] = [baseLink + f'{art}/{nsc["Powerlevel"]}/html/{nscSeed}{packString}">Dieser NCS ({nsc["vorname"]+" "+nsc["nachname"]})</a>']
+    if nsc["Powerlevel"] < 12:
+        nsc['links'].append(baseLink + f'{art}/{nsc["Powerlevel"]+1}/html/{nscSeed}{packString}">Stärker</a>')
+    if nsc["Powerlevel"] > -1:
+        nsc['links'].append( baseLink + f'{art}/{nsc["Powerlevel"]-1}/html/{nscSeed}{packString}">Schwächer</a>{Newline("HTML")}')
+    nsc['links'].append( baseLink + f'{art}/{nsc["Powerlevel"]}/html">Zufall neu</a>')
+
+
     if Art in ['Human', 'vampir']:
         return nsc
     if Art == 'Fomor':
         nsc.update(MakeFomor(seed))
         return nsc
-    #if Art == 'Kinfolk':
+    # if Art == 'Kinfolk':
     if Art in vorzeichen:
         nsc['art'] = 'Garou'
         nsc['vorzeichen'] = Art
@@ -255,9 +274,6 @@ def PrintNSC(nsc, packname, language='Plain', shortPrint=False):
     # Rudel
     if packname is not None and 'packname' in packname:
         result += PrintPack(packname['packname'], nsc['vorname'])
-        packString = f'?packname={packname["packname"]}'
-    else:
-        packString = ''
 
     # Rang und Rolle
     if 'rang' in nsc:
@@ -289,8 +305,9 @@ def PrintNSC(nsc, packname, language='Plain', shortPrint=False):
 
     # Aussehen
     result += Header('Aussehen', '', language, 3)
-    result += TextWithImage(PrintBeschreibung(nsc, Newline(language)), GetFace(nsc))
+    result += nsc['printedImage']
 
+    result += f'<p style="min-height:200px;">{PrintBeschreibung(nsc, Newline(language))}</p><br>'
     # Beschreibung
     result += '<div class="clearfix"></div>'
     result += Header('Beschreibung:', '', language, 3)
@@ -371,34 +388,22 @@ def PrintNSC(nsc, packname, language='Plain', shortPrint=False):
             result += ListLines([Bold(gabe, language) for gabe in nsc['gaben']], language)
 
     if not shortPrint:
-        baseLink = Newline("HTML") + f'<a class="no-print" href="{baseURL}/nsc/'
-        art = nsc["art"].lower() if nsc["art"] in ["Kinfolk", "Human", "Fomor", "vampir"] else "garou"
-        if 'stamm' in nsc and nsc['stamm'] == 'Tänzer der schwarzen Spirale':
-            art = 'bsd'
-        seed = (nsc["vorname"]+" "+nsc["nachname"]).replace(" ", "_")
-
-        result += baseLink + f'{art}/{nsc["Powerlevel"]}/{language.lower()}/{seed}{packString}">Dieser NCS ({nsc["vorname"]+" "+nsc["nachname"]})</a>'
-        if nsc["Powerlevel"] < 12:
-            result += baseLink + f'{art}/{nsc["Powerlevel"]+1}/{language.lower()}/{seed}{packString}">Stärker</a>'
-        if nsc["Powerlevel"] > -1:
-            result += baseLink + f'{art}/{nsc["Powerlevel"]-1}/{language.lower()}/{seed}{packString}">Schwächer</a>{Newline("HTML")}'
-        # if language == 'HTML':
-        #     result += baseLink + f'{art}/{nsc["Powerlevel"]}/latex/{seed}{packString}">Dieser NCS ({seed}) als LaTeX Subsection</a>'
-        # else:
-        #     result += baseLink + f'{art}/{nsc["Powerlevel"]}/html/{seed}{packString}">Dieser NCS ({seed}) als HTML Subsection</a>'
-        result += baseLink + f'{art}/{nsc["Powerlevel"]}/{language.lower()}">Zufall neu</a>'
+        for link in nsc['links']:
+            result += link + '<br>\n'
+        
     return result
 
 
-def BuildNSC(seed=-1, Art='Kinfolk', Stamm='', Powerlevel=0, language='HTML', packname='', occupation='', brut='', shortPrint=True):
-    nsc = MakeBase(seed, Art, Stamm, Powerlevel, occupation)
-
+def BuildNSC(seed=-1, Art='Kinfolk', Stamm='', Powerlevel=0, language='HTML', packname='', occupation='', brut='', shortPrint=True,skipImage=False):
+    
     packString = ''
-    treeSeed = ''
-    nsc['treeSeed'] = -1
     if packname != '' and 'packname' in packname:
         packString = f'?packname={packname["packname"]}'
-    elif packname != '' and 'treeSeed' in packname:
+    nsc = MakeBase(seed, Art, Stamm, Powerlevel, occupation,packString=packString)
+
+    treeSeed = ''
+    nsc['treeSeed'] = -1
+    if packname != '' and 'treeSeed' in packname:
         treeSeed = f'?treeSeed={packname["treeSeed"]}'
         nsc['treeSeed'] = packname["treeSeed"].replace("__", "#").replace("_", " ")
 
@@ -408,6 +413,8 @@ def BuildNSC(seed=-1, Art='Kinfolk', Stamm='', Powerlevel=0, language='HTML', pa
     nsc = MakeExpertise(nsc)
     nsc = MakeDescriptions(nsc)
     nsc = MakeValue(nsc)
+    if not skipImage:
+        nsc['printedImage'] = TextWithImage(GetFace(nsc))
     if nsc['art'] == 'vampir':
         nsc = MakeVampire(nsc)
     art = nsc["art"].lower() if nsc["art"] in ["Kinfolk", "Human", 'vampir'] else "garou"
@@ -417,8 +424,12 @@ def BuildNSC(seed=-1, Art='Kinfolk', Stamm='', Powerlevel=0, language='HTML', pa
     return nsc
 
 
-def BuildBSD(seed=-1, Powerlevel=0, language='Plain', packname=None):
-    bsd = MakeBase(seed, 'Garou', 'Tänzer der schwarzen Spirale', Powerlevel)
+def BuildBSD(seed=-1, Powerlevel=0, language='Plain', packname=None,skipImage=False):
+    if packname is not None and 'packname' in packname:
+        packString = f'?packname={packname["packname"]}'
+    else:
+        packString = ''
+    bsd = MakeBase(seed, 'Garou', 'Tänzer der schwarzen Spirale', Powerlevel,packString=packString)
     bsd = MakeBeschreibung(bsd)
     bsd = MakeBreed(bsd)
     bsd = MakeExpertise(bsd)
@@ -426,19 +437,17 @@ def BuildBSD(seed=-1, Powerlevel=0, language='Plain', packname=None):
     bsd = MakeExpertise(bsd)
     bsd = MakeDescriptions(bsd)
     bsd = MakeValue(bsd)
+    if not skipImage:
+        bsd['printedImage'] = TextWithImage(GetFace(bsd))
     tänzerMotivationen = {'Wahnsinn': 5}
     tänzerMotivationen.update(motivation)
     bsd['motivation'] = DrawWithWeights(tänzerMotivationen)
     seed = (bsd["vorname"]+" "+bsd["nachname"]).replace(" ", "_")
-    if packname is not None and 'packname' in packname:
-        packString = f'?packname={packname["packname"]}'
-    else:
-        packString = ''
     bsd['link'] = f'<a href="{baseURL}/nsc/bsd/{bsd["Powerlevel"]}/{language.lower()}/{seed}{packString}">{bsd["vorname"]+" "+bsd["nachname"]}</a>'
     return bsd
 
 
-def BuildFomor(seed, Powerlevel, language):
+def BuildFomor(seed, Powerlevel, language,skipImage=False):
     fomor = MakeBase(seed, Art='Fomor', Powerlevel=Powerlevel)
     fomor = MakeBeschreibung(fomor)
     fomor = MakeBreed(fomor)
@@ -447,6 +456,8 @@ def BuildFomor(seed, Powerlevel, language):
     fomor = MakeExpertise(fomor)
     fomor = MakeDescriptions(fomor)
     fomor = MakeValue(fomor)
+    if not skipImage:
+        fomor['printedImage'] = TextWithImage(GetFace(fomor))
     tänzerMotivationen = {'Wahnsinn': 5}
     tänzerMotivationen.update(motivation)
     fomor['motivation'] = DrawWithWeights(tänzerMotivationen)
@@ -475,16 +486,10 @@ def BuildGarouPack(seed=-1, limitTribes=[], limitBreeds=[], minMembers=3, maxMem
     packMember = random.randint(minMembers, maxMembers)
     pack = []
     for _ in range(packMember):
-        nsc = BuildNSC(seed=-1,
-                       Art='Garou',
-                       packname=packname
-                       )
+        nsc = BuildNSC(seed=-1,Art='Garou',packname=packname,skipImage = True)
         # or nsc['art'] !='Galliard':
         while (len(limitTribes) > 0 and nsc['stamm'] in limitTribes) or (len(limitBreeds) > 0 and nsc['brut'] in limitBreeds):
-            nsc = BuildNSC(seed=-1,
-                           Art='Garou',
-                           packname=packname
-                           )
+            nsc = BuildNSC(seed=-1,Art='Garou',packname=packname,skipImage = True)
         pack.append(nsc)
     return {'packname': packname, 'pack': pack, 'link': f'<a href="{baseURL}/nsc/garoupack/?packname={packname}">Rudel: {packname.replace("_"," ")}</a>'}
 
@@ -499,14 +504,10 @@ def BuildBSDPack(seed=-1, limitBreeds=[], minMembers=3, maxMembers=6):
     packMember = random.randint(minMembers, maxMembers)
     pack = []
     for _ in range(packMember):
-        nsc = BuildBSD(seed=-1,
-                       packname=packname
-                       )
+        nsc = BuildBSD(seed=-1,packname=packname,skipImage = True)
         # or nsc['art'] !='Galliard':
         while (len(limitBreeds) > 0 and nsc['brut'] in limitBreeds):
-            nsc = BuildBSD(seed=-1,
-                           packname=packname
-                           )
+            nsc = BuildBSD(seed=-1,packname=packname,skipImage = True)
         pack.append(nsc)
     return {'packname': packname, 'pack': pack, 'link': f'<a href="{baseURL}/nsc/bsdpack/?packname={packname}">Rudel: {packname.replace("_"," ")}</a>'}
 

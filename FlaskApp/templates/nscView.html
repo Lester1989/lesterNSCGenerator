@@ -1,0 +1,182 @@
+{% extends "header.html" %}
+{% set active_page = nsc['art'].lower() %}
+{% if 'stamm' in nsc and nsc['stamm']== 'Tänzer der schwarzen Spirale' %}    
+    {% set active_page = 'bsd' %}
+{% endif %}
+{% block body %}
+
+
+<h2>{{nsc['vorname']}} {{nsc['nachname']}}</h2>
+<!-- TODO Rudel -->
+
+
+{% if 'rang' in nsc %}
+    {{nsc['rang']}}
+{% endif %}
+
+{% if 'Clan' in nsc %}
+    {{nsc['Clan']}} {{nsc['Generation']}}. Generation
+{% else %}
+    {{nsc['art']}}
+{% endif %}
+
+{% if 'stamm' in nsc %}
+    {{nsc['stamm']}}
+{% endif %}
+
+{% if 'brut' in nsc and len(nsc['brut']) > 0 %}
+    {{nsc['brut']}}
+{% endif %}
+
+{% if 'stamm' in nsc and nsc['stamm']== 'Tänzer der schwarzen Spirale' %}
+    {{nsc['Abstammung']}}
+{% endif %}
+<br>
+({{nsc['motto'][0]}})
+<br>
+<h3> Rollenspiel Vorschläge</h3>
+Ein Persönlichkeitsmerkmal ist <b>{{nsc["grundstimmung"]}}</b> <br>
+Körperhaltung: <b>{{nsc["haltung"][0]}}</b> - {{nsc["haltung"][1]}}<br>
+Gestik: <b>{{nsc["gestik"][0]}}</b> - {{nsc["gestik"][1]}}<br>
+Mimik: <b>{{nsc["mimik"][0]}}</b> - {{nsc["mimik"][1]}}<br>
+
+
+<h3> Aussehen </h3>
+
+{% block aussehen %}
+
+{% endblock %}
+<!-- TODO Beschreibung und Bild -->
+{{nsc["printedImage"]|safe}}
+{{nsc["vorname"]}} trägt {{nsc["beschreibungKleidung"]}}Kleidung in {{nsc["beschreibungKleidungsFarbe"]}} Farbtönen. 
+Diese Kleidung lässt darunter einen Körper erkennen, der eher {{nsc["beschreibungKörperbau"]}} ist. 
+{{nsc["Possesivpronomen"]}} Haare sind {{nsc["beschreibungFrisur"]}}
+ und {{nsc["beschreibungMerkmal"][1]}} trägt {{nsc["pronomen"]}} {{nsc["beschreibungMerkmal"][0]}}. <br>
+Beim Betrachten von {{nsc["vorname"]}}s Kopf fällt ein Detail in Auge: {{nsc["beschreibungKopf"]}} und {{nsc["possesivpronomen"]}} Augen sind {{nsc["beschreibungAugen"]}}.
+{% if 'beschreibungHaut' in nsc %}
+    Die Haut sieht {nsc["beschreibungHaut"]} aus. '
+{% elif 'beschreibungZähne' in nsc %}
+    Wenn {{nsc["vorname"]}} den Mund öffnet kann man sehen, wie {{nsc["beschreibungZähne"]}} die Zähne sind. 
+{% endif %}
+<br>
+<div class="clearfix"></div>
+
+
+
+<h3> Beschreibung </h3>
+{{nsc["vorname"]}} ({{nsc["alter"]}}), ist {{nsc["zeit"]}} und aktuell <b>{{nsc["familie"]}}</b>.
+{{nsc["Pronomen"]}} arbeitet(e) als {{nsc["job"]}}.
+{{nsc["Possesivpronomen"]}} eigentliche Motivation ist {{nsc["motivation"]}} und der zur Zeit verfolgte Plan hat {{nsc["pläne"]}} als Ziel.<br>
+{{nsc["vorname"]}} {{nsc["motto"][1]}}
+
+{% if nsc['art'] == 'Human' %}
+Gegenüber den SC Rudel ist {{nsc["pronomen"]}} <b>{{nsc["scRudel"]}}</b>.
+{% elif nsc['art'] == 'vampir'%}
+{% else %}
+    {% if 'stamm' in nsc and nsc['stamm'] == 'Tänzer der schwarzen Spirale' %}
+            Die Rangordnung ist {{nsc["rangordnung"]}} für {{nsc["akkusativpronomen"]}}. <br>
+    {% else %}
+            Über den Wyrm denkt {{nsc["pronomen"]}}: {{nsc["wyrm"]}}.<br>
+            Die Rangordnung ist für {{nsc["akkusativpronomen"]}} {{nsc["rangordnung"]}} und 
+            gegenüber dem SC Rudel ist {{nsc["pronomen"]}} <b>{{nsc["scRudel"]}}</b>.
+    {% endif %}
+{% endif %}
+
+Über den <b>{{"Plot"}}</b> hat {{nsc["vorname"]}} {{nsc["plot"]}}. <br>
+
+{% if 'stamm' in nsc and nsc['stamm'] == 'Tänzer der schwarzen Spirale' %}
+    {{nsc["vorname"]}} leidet an {{nsc["Geistesstörung"]["Grad"]}}{nsc["Geistesstörung"]["Art"]}<br>
+    <b>Äußere Merkmale:</b><br>
+    {% for merkmal in nsc['Mutationen'] %}
+        {% if nsc['Mutationen'][merkmal][0] == 'Tierisch' %}
+            {{merkmal}} wie von {{nsc["Mutationen"][merkmal][1]}}<br>
+        {% elif nsc['Mutationen'][merkmal][0] == 'Verderbnis' %}
+            {{merkmal}} {{"sehen" if merkmal =="Die Augen" else "sieht"}} {{nsc["Mutationen"][merkmal][1]}} aus<br>
+        {% elif nsc['Mutationen'][merkmal][0] == 'Verzerrung' %}
+            {{merkmal}} {{"wirken" if merkmal =="Die Augen" else "wirkt"}} {{nsc["Mutationen"][merkmal][1]}}<br>
+        {% endif %}
+    {% endfor %}
+    {% if nsc['Entstellungen']|length > 0 %}
+        <b>{{nsc["vorname"]}}</b> {{nsc["Entstellungen"][0]}} 
+        {% for entstellung in nsc['Entstellungen'][1:] %}
+            und {{entstellung}}
+        {% endfor %}
+    {% else %}
+        {% if nsc['Mutationen']|length == 0 %}
+            keine erkennbare Entstellung
+        {% endif %}
+    {% endif %}
+{% endif %}
+    {% if nsc['art'] == 'Fomor' %}
+        Die prägende Sünde von {{nsc["vorname"]}} ist <b>{{nsc["Sünde"]}}</b>. <br> 
+        <b>Äußere Merkmale:</b><br>
+        {% if nsc['Mutationen']|length > 0 %}
+            {% for merkmal in nsc['Mutationen'] %}
+                {% if nsc['Mutationen'][merkmal][0] == 'Tierisch' %}
+                    {{merkmal}} wie von {{nsc["Mutationen"][merkmal][1]}}<br>
+                {% elif nsc['Mutationen'][merkmal][0] == 'Verderbnis' %}
+                    {{merkmal}} {{"sehen" if merkmal =="Die Augen" else "sieht"}} {{nsc["Mutationen"][merkmal][1]}} aus<br>
+                {% elif nsc['Mutationen'][merkmal][0] == 'Verzerrung' %}
+                    {{merkmal}} {{"wirken" if merkmal =="Die Augen" else "wirkt"}} {{nsc["Mutationen"][merkmal][1]}} <br>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            keine körperlichen Entstellungen
+        {% endif %}
+{% endif %}
+{# Arbeit oder Amt #}
+{% if nsc['occupation']|length > 0 %}
+    {% if nsc['art'] != 'Kinfolk' %}
+        In der Septe hat {{nsc["vorname"]}} folgende Ämter: <b>{{nsc["occupation"]}}</b><br>
+    {% else %}
+        In der Siedlung arbeitet {{nsc["vorname"]}} als <b>{{nsc["occupation"]}}</b><br>
+    {% endif %}
+{% endif %}
+     {# ausbildung #}
+{% if nsc['art'] != 'vampir' %}
+        Um einen Platz in der Gesellschaft einzunehmen gab es {{nsc["ausbildung"]|length}} Ausbildung{{"en" if nsc["ausbildung"]|length>1 else ""}} für {{nsc["akkusativpronomen"]}}:<br>
+        <ul>
+        {% for ausb in nsc['ausbildung'] %}
+            <li>{{ausb[1]}} Ausbildung <b>{{ausb[0]}}</b></li>
+        {% endfor %}
+        </ul>
+{% else %}
+    <h3>Unleben</h3>
+    {{nsc["printedLineAge"]|safe}}
+    {% if nsc['Erzeuger'] is not none %}
+        {{nsc["vorname"]}} wurde von {{nsc["Erzeuger"]}} {{nsc["Kuss"][0]}} geschaffen. 
+        Die Motivation zu diesem Kuss bestand aus {{nsc["Kuss"][1]}}.<br>
+    {% else %}
+        Über den Erzeuger von {{nsc["vorname"]}} ist nichts bekannt, jedoch erfahren Vertraute {{nsc["dativpronomen"]}}, dass der Kuss aus {{nsc["Kuss"][1]}} geschenkt wurde.<br>
+    {% endif %}
+    Als neues Kainskind der {{nsc["Generation"]}}. Generation begann das Unleben mit dem niemals endenden Durst.<br>
+    Seit dieser Nacht gab es einige Ereignisse im Dasein von {{nsc["vorname"]}}:<br>
+    <ul>
+    {% for ereignis in nsc['Unleben'] %}
+        <li>{{ereignis|safe}}</li>
+    {% endfor %}
+    </ul>    
+    Diese Erfahrungen prägen {{nsc["vorname"]}}. {{nsc["Pronomen"]}} {{nsc["TrinkPraktik"]}} und {{nsc["TrinkMoral"]}}.<br>
+    Außerdem {{nsc["Ansichten"]["Sterbliche"]}}.<br>
+{% endif %}
+{# Würfelpools #}
+<h3>Würfelpools</h3>
+{{nsc['printedDicePools']|safe}}
+{# Gaben #}
+{% if nsc['art'] != 'Kinfolk' and 'gaben' in nsc %}
+    <h3>Gaben</h3>
+    <ul>
+    {% for gabe in nsc['gaben'] %}
+        <li>
+            <b>{{gabe}}</b>: {{+nsc['gaben'][gabe]['fluffText']}}<br>
+            <b>System</b>:{{nsc['gaben'][gabe]['systemText']}}
+        </li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+{% for link in nsc['links'] %}
+    {{link|safe}}<br>
+{% endfor %}
+<button onclick="window.print()" class="button no-print" style="vertical-align:middle"><span>Ausdrucken </span></button>
+{% endblock %}

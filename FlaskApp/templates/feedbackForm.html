@@ -1,0 +1,15 @@
+{% extends "header.html" %}
+{% set active_page = "feedback" %}
+
+{% block body %}
+
+<form method="POST">
+    <p>Name(optional):<input type="text" name="Submitter"/></p>
+     <p>Feedback: </p>
+    <textarea name="Feedback" style="min-width:50vw;min-height:20vh;"></textarea>
+    <p>Kontaktmöglichkeit (optional) <input name="Contact"/></p>
+    <input type="submit"/>
+  </form>
+
+    <p> Bisher wurde {{count}} mal Feedback abgegeben</p>
+{% endblock %}

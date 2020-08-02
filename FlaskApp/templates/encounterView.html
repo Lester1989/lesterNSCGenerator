@@ -1,0 +1,9 @@
+{% extends "header.html" %}
+{% set active_page = data[0] %}
+
+{% block body %}
+
+{{data[1]|safe}}
+
+<a class="no-print" href="/encounter/{{data[0]}}/html"> Neu </a><br>
+{% endblock %}

@@ -3,5 +3,10 @@
     "python.linting.enabled": true,
     "python.formatting.autopep8Args": [
         "--max-line-length=200"
-    ]
+    ],
+    "files.associations": {
+        "*.html":"jinja-html"
+    }
+    
+    
 }

@@ -5,23 +5,20 @@ import json
 from bs4 import BeautifulSoup
 import random
 
-def TextWithImage(text, imageURL):
+def TextWithImage( imageURL):
     if imageURL == 'https://cdn.pixabay.com/photo/2020/06/05/16/27/excuse-me-5263696_960_720.jpg':
         return f'''
     <figure style="float:left;margin-right: 10px;margin-top:0px;margin-left:0px">
     <img src="{imageURL}"  width="300" height="200" title=" Source: Pixabay.com" style="filter: grayscale(75%); ">
       <figcaption>Generated.Photos is not whitelisted by Pythonanywhere yet </figcaption>
     </figure>
-    <p style="min-height:200px;">{text}</p><br>'''
+    '''
 
     return f'''
     <figure style="float:left;margin-right: 10px;margin-top:0px;margin-left:0px">
     <img src="{imageURL}"  width="256" height="256" title="AI Generated Image, Source: Generated Photos" style="filter: grayscale(75%); ">
       <figcaption>Photo by <a href="https://generated.photos">Generated Photos</a></figcaption>
     </figure>
-    <p style="min-height:200px;">{text}</p><br>
-    </p><br>
-
     '''
 
 
@@ -38,15 +35,28 @@ def GetFace(nsc):
         bildEmotion = 'joy'
     else:
         bildEmotion = 'neutral'
+    if nsc['beschreibungFrisur'] in ['blond','hell']:
+        bildHaare = 'blond-hair/'
+    elif nsc['beschreibungFrisur'] in ['dunkel','schwarz']:
+        bildHaare = 'black-hair/'
+    elif nsc['beschreibungFrisur'] in ['grau']:
+        bildHaare = 'gray-hair/'
+    elif nsc['beschreibungFrisur'] in ['braun']:
+        bildHaare = 'brown-hair/'
+    elif nsc['beschreibungFrisur'] in ['lang']:
+        bildHaare = 'long/'
+    else:
+        bildHaare = ''
     gender = 'male'if nsc['pronomen'] == 'er' else 'female'
     print(f'getting Image for ({gender}) {nsc["vorname"]+" "+nsc["nachname"]}')
     try:
-        url = f'https://generated.photos/faces/{bildAlter}/{bildEmotion}/{gender}'
+        url = f'https://generated.photos/faces/{bildAlter}/{bildHaare}{bildEmotion}/{gender}'
         soup = BeautifulSoup(requests.get(url).text, "html.parser")
         imgs = []
         for post in soup.findAll('div', {'class': 'card-image'}):
             imgs.append(str(post.find('img')).split('"')[-2])
         return random.choice(imgs)
-    except:
+    except Exception as e:
+        print(e)
         pass
     return 'https://cdn.pixabay.com/photo/2020/06/05/16/27/excuse-me-5263696_960_720.jpg'

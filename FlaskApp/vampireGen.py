@@ -207,7 +207,7 @@ def MakeUnleben(nsc):
     return nsc
 
 
-def PrintEreignis(nsc, ereignis, language):
+def PrintEreignis(nsc, ereignis, language='HTML'):
     if ereignis[0] == 'Starre':
         return f'{nsc["vorname"]} war {ereignis[1]} in <b>Starre</b>.'
     elif ereignis[0] == 'Umzug in neue Domäne':
@@ -253,13 +253,15 @@ def MakeVampire(nsc):
     nsc['TrinkPraktik'] = random.choice(einstellungVamp['Trinken']['Praktik'])
     nsc['TrinkMoral'] = random.choice(einstellungVamp['Trinken']['Einstellung'])
     nsc['Ansichten'] = {'Sterbliche':random.choice(einstellungVamp['Sterbliche'])}
+    nsc['Ansichten']["Sterbliche"] = InsertWordAtSpace(nsc["Ansichten"]["Sterbliche"],nsc["pronomen"])
     nsc = MakeUnleben(nsc)
+    nsc['Unleben'] = [PrintEreignis(nsc,ereignis) for ereignis in nsc['Unleben']]
     return nsc
 
 
 def PrintVampire(nsc, language):
     result = Header('Unleben', '', language, 3)
-    result += PrintLineageTree(nsc)
+    result += nsc['printedLineAge']
     if nsc['Erzeuger'] is not None:
         Zeugung = f'{nsc["vorname"]} wurde von {nsc["Erzeuger"]} {nsc["Kuss"][0]} geschaffen. Die Motivation zu diesem Kuss bestand aus {nsc["Kuss"][1]}.{Newline(language)}'
     else:
@@ -271,10 +273,10 @@ def PrintVampire(nsc, language):
     <ul>
     '''
     for ereignis in nsc['Unleben']:
-        result += f'<li>{PrintEreignis(nsc,ereignis,language)}</li>'
+        result += f'<li>{ereignis}</li>'
     result += '</ul>'
     result += f'''
     Diese Erfahrungen prägen {nsc["vorname"]}. {StartCapital(nsc["pronomen"])} {nsc["TrinkPraktik"]} und {nsc["TrinkMoral"]}.{Newline(language)}
-    Außerdem {InsertWordAtSpace(nsc["Ansichten"]["Sterbliche"],nsc["pronomen"])}.{Newline(language)}
+    Außerdem {nsc["Ansichten"]["Sterbliche"]}.{Newline(language)}
     '''
     return result + f'{Newline(language)}Dieser Abschnitt ist aktuell noch in Bearbeitung...{Newline(language)} {Newline(language)} Vorschläge gerne an mich!<div class="clearfix"></div>\n '

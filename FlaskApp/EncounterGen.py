@@ -138,7 +138,8 @@ def BuildEncounter(encounter, gelaende, language):
                         Powerlevel=0 if 'Powerlevel' not in encounter['nscConditions'][nscNumber] else encounter['nscConditions'][nscNumber]['Powerlevel'],
                         packname='' if 'packname' not in encounter['nscConditions'][nscNumber] else encounter['nscConditions'][nscNumber]['packname'],
                         occupation='' if 'occupation' not in encounter['nscConditions'][nscNumber] else encounter['nscConditions'][nscNumber]['occupation'],
-                        brut='' if 'brut' not in encounter['nscConditions'][nscNumber] else encounter['nscConditions'][nscNumber]['brut']
+                        brut='' if 'brut' not in encounter['nscConditions'][nscNumber] else encounter['nscConditions'][nscNumber]['brut'],
+                        skipImage = True
                     )
                     counter = 0
                     while not CheckNSCwithConditions(nsc, encounter['nscConditions'][nscNumber], chars):
@@ -152,7 +153,8 @@ def BuildEncounter(encounter, gelaende, language):
                             Powerlevel=0 if 'Powerlevel' not in encounter['nscConditions'][nscNumber] else encounter['nscConditions'][nscNumber]['Powerlevel'],
                             packname='' if 'packname' not in encounter['nscConditions'][nscNumber] else encounter['nscConditions'][nscNumber]['packname'],
                             occupation='' if 'occupation' not in encounter['nscConditions'][nscNumber] else encounter['nscConditions'][nscNumber]['occupation'],
-                            brut='' if 'brut' not in encounter['nscConditions'][nscNumber] else encounter['nscConditions'][nscNumber]['brut']
+                            brut='' if 'brut' not in encounter['nscConditions'][nscNumber] else encounter['nscConditions'][nscNumber]['brut'],
+                            skipImage = True
                         )
                     #print( f'YAY: {nsc["vorname"]} {nsc["nachname"]} erfüllt alle Bedingungen für {token}{nscNumber}')
                     chars[f'{token}{nscNumber}'] = nsc
@@ -175,6 +177,7 @@ def BuildEncounter(encounter, gelaende, language):
                         language=language,
                         Powerlevel=0 if 'Powerlevel' not in encounter['nscConditions'][nscNumber] else encounter['nscConditions'][nscNumber]['Powerlevel'],
                         packname='' if 'packname' not in encounter['nscConditions'][nscNumber] else encounter['nscConditions'][nscNumber]['packname'],
+                        skipImage = True
                     )
                     counter = 0
                     while not CheckNSCwithConditions(nsc, encounter['nscConditions'][nscNumber], chars):
@@ -185,6 +188,7 @@ def BuildEncounter(encounter, gelaende, language):
                             language=language,
                             Powerlevel=0 if 'Powerlevel' not in encounter['nscConditions'][nscNumber] else encounter['nscConditions'][nscNumber]['Powerlevel'],
                             packname='' if 'packname' not in encounter['nscConditions'][nscNumber] else encounter['nscConditions'][nscNumber]['packname'],
+                            skipImage = True
                         )
                     # print(f'YAY: {nsc["vorname"]} {nsc["nachname"]} erfüllt alle Bedingungen für {token}{nscNumber}')
                     chars[f'{token}{nscNumber}'] = nsc
