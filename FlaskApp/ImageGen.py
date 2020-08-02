@@ -10,7 +10,7 @@ def TextWithImage( imageURL):
         return f'''
     <figure style="float:left;margin-right: 10px;margin-top:0px;margin-left:0px">
     <img src="{imageURL}"  width="300" height="200" title=" Source: Pixabay.com" style="filter: grayscale(75%); ">
-      <figcaption>Generated.Photos is not whitelisted by Pythonanywhere yet </figcaption>
+      <figcaption>Leider ist ein Fehler aufgetreten.</figcaption>
     </figure>
     '''
 
@@ -50,13 +50,17 @@ def GetFace(nsc):
     gender = 'male'if nsc['pronomen'] == 'er' else 'female'
     print(f'getting Image for ({gender}) {nsc["vorname"]+" "+nsc["nachname"]}')
     try:
-        url = f'https://generated.photos/faces/{bildAlter}/{bildHaare}{bildEmotion}/{gender}'
+        url = f'https://generated.photos/faces/{bildAlter}/{bildHaare}{gender}'
         soup = BeautifulSoup(requests.get(url).text, "html.parser")
         imgs = []
         for post in soup.findAll('div', {'class': 'card-image'}):
             imgs.append(str(post.find('img')).split('"')[-2])
         return random.choice(imgs)
     except Exception as e:
+        print(bildAlter)
+        print(bildEmotion)
+        print(bildHaare)
+        print(gender)
         print(e)
         pass
     return 'https://cdn.pixabay.com/photo/2020/06/05/16/27/excuse-me-5263696_960_720.jpg'
