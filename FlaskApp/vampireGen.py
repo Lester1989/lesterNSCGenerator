@@ -255,6 +255,7 @@ def MakeVampire(nsc):
     nsc['Ansichten'] = {'Sterbliche':random.choice(einstellungVamp['Sterbliche'])}
     nsc['Ansichten']["Sterbliche"] = InsertWordAtSpace(nsc["Ansichten"]["Sterbliche"],nsc["pronomen"])
     nsc = MakeUnleben(nsc)
+    nsc['printedLineAge'] = PrintLineageTree(nsc)
     nsc['Unleben'] = [PrintEreignis(nsc,ereignis) for ereignis in nsc['Unleben']]
     return nsc
 
