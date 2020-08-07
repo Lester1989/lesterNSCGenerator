@@ -7,7 +7,7 @@ from webargs.flaskparser import use_args
 from datetime import datetime
 
 
-from .kinfolkGen import PrintBSDPack, PrintPack, CreateRandom, CreateBSD, CreateFomor,BuildNSC,BuildBSD,BuildFomor
+from .kinfolkGen import PrintBSDPack, PrintPack, CreateRandom, CreateBSD, CreateFomor,BuildNSC,BuildBSD,BuildFomor,stämme,vorzeichen,bruten
 from .Formatting import StartCapital
 from .baneGen import CreateBane
 from .EncounterGen import CreateEncounter
@@ -28,9 +28,80 @@ app = Flask(__name__)
 app.config["DEBUG"] = True
 
 
-@app.route('/clean/')
+with open(basePath+'/jsons/hintergruende.json', 'r', encoding='utf-8') as infile:
+    hintergründe = json.load(infile)
+with open(basePath+'/jsons/namedMotivation.json', 'r', encoding='utf-8') as infile:
+    namedMotivation = json.load(infile)
+with open(basePath+'/jsons/motivation.json', 'r', encoding='utf-8') as infile:
+    motivation = json.load(infile)
+with open(basePath+'/jsons/plaene.json', 'r', encoding='utf-8') as infile:
+    pläne = json.load(infile)
+with open(basePath+'/jsons/richtlinien.json', 'r', encoding='utf-8') as infile:
+    richtlinien = json.load(infile)
+with open(basePath+'/jsons/einstellung.json', 'r', encoding='utf-8') as infile:
+    einstellung = json.load(infile)
+with open(basePath+'/jsons/wissen.json', 'r', encoding='utf-8') as infile:
+    wissen = json.load(infile)
+with open(basePath+'/jsons/ausbildung.json', 'r', encoding='utf-8') as infile:
+    ausbildung = json.load(infile)
+with open(basePath+'/jsons/factor.json', 'r', encoding='utf-8') as infile:
+    factor = json.load(infile)
+with open(basePath+'/jsons/skills.json', 'r', encoding='utf-8') as infile:
+    skills = json.load(infile)
+with open(basePath+'/jsons/poolMaxes.json', 'r', encoding='utf-8') as infile:
+    poolMaxes = json.load(infile)
+# with open(basePath+'/jsons/staemme.json', 'r', encoding='utf-8') as infile:
+#     stämme = json.load(infile)
+# with open(basePath+'/jsons/vorzeichen.json', 'r', encoding='utf-8') as infile:
+#     vorzeichen = json.load(infile)
+# with open(basePath+'/jsons/bruten.json', 'r', encoding='utf-8') as infile:
+#     bruten = json.load(infile)
+with open(basePath+'/jsons/Raenge.json', 'r', encoding='utf-8') as infile:
+    Ränge = json.load(infile)
+with open(basePath+'/jsons/beziehungen.json', 'r', encoding='utf-8') as infile:
+    beziehungen = json.load(infile)
+with open(basePath+'/jsons/berufe.json', 'r', encoding='utf-8') as infile:
+    berufe = json.load(infile)
+
+@app.route('/test/')
 def showClean():
-    return render_template("nscView.html",nsc=BuildNSC())
+
+    return render_template("probabilityForm.html",
+        staemme=stämme,
+        hintergruende=hintergründe,
+        namedMotivation=namedMotivation,
+        motivation=motivation,
+        plaene=pläne,
+        richtlinien=richtlinien,
+        einstellung=einstellung,
+        wissen=wissen,
+        ausbildung=ausbildung,
+        factor=factor,
+        skills=skills,
+        poolMaxes=poolMaxes,
+        vorzeichen=vorzeichen,
+        bruten=bruten,
+        raenge=Ränge,
+        beziehungen=beziehungen,
+        berufe=berufe)
+
+
+
+@app.route('/handle_data/', methods=['POST'])
+def handle_data():
+    print('BLA')
+    print(list(request.form.items()))
+    for stamm in stämme:
+        if stamm in request.form:
+            stämme[stamm] = int(request.form[stamm])
+    for brut in bruten:
+        if stamm in request.form:
+            bruten[brut] = int(request.form[brut])
+    for auspice in vorzeichen:
+        if auspice in request.form:
+            vorzeichen[auspice] = int(request.form[auspice])
+    return render_template('nscView.html',nsc=BuildNSC(seed=-1, Art='Garou', Powerlevel=0, language='HTML' ))
+
 
 @app.route('/nsc/bsdpack/')
 @use_args({'packname': fields.Str(required=False)}, location="query")

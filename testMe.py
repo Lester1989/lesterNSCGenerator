@@ -1,12 +1,12 @@
 
-import FlaskApp
-import FlaskApp.vampireGen as vG
+#import FlaskApp
+#import FlaskApp.vampireGen as vG
 import json
-import FlaskApp.NSCGenUtils as utils
+#import FlaskApp.NSCGenUtils as utils
 
 if __name__ == '__main__':
     nsc = {'vorname': 'Eldana', 'nachname': 'Rozell', 'treeSeed':'Alrik Alrikson#0#Tremere', 'Clan':'Tremere','Powerlevel':0}
-    nsc['RelationTree'] = vG.MakeRelationTree(nsc)
+    #nsc['RelationTree'] = vG.MakeRelationTree(nsc)
     #print(json.dumps(vG.MakeRelationTree(nsc),indent=2))
     #print(vG.FindCreator(nsc,vG.MakeRelationTree(nsc)))
     #print(vG.FindChildren(nsc,vG.MakeRelationTree(nsc)))
@@ -16,4 +16,4 @@ if __name__ == '__main__':
     sentence = "Hallo Welt Das ist ein Satz"
     word = 'BLA'
     print(sentence)
-    print(utils.InsertWordAtSpace(sentence,word))
+    #print(utils.InsertWordAtSpace(sentence,word))

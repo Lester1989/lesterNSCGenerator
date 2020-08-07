@@ -138,7 +138,7 @@ def MakeDescriptions(nsc):
     nsc['motivation'] = DrawWithWeights(motivation)
     nsc['pläne'] = DrawWithWeights(pläne)
     mottos = namedMotivation['Alle']
-    if nsc['art'] in vorzeichen:
+    if nsc['art'] =='Garou':
         mottos.update(namedMotivation['Garou'])
     if nsc['art'] == 'vampir':
         mottos.update(namedMotivation['Vampire'])
@@ -152,18 +152,18 @@ def MakeDescriptions(nsc):
 
 def MakeBreed(nsc, brut=''):
     NameToSeed(nsc['vorname']+' '+nsc['nachname'])
-    if nsc['art'] in vorzeichen:
+    if nsc['art'] =='Garou':
         nsc['brut'] = DrawWithWeights(bruten) if brut == '' else brut
         #print(f'{nsc["vorname"]} {nsc["nachname"]}, {nsc["art"]} {nsc["brut"]} {nsc["stamm"]}')
         nsc['gaben'] = {}
+        if nsc['Powerlevel'] < -1:
+            nsc['rang'] = 'Cliath'
+        elif nsc['Powerlevel'] > 11:
+            nsc['rang'] = 'Legende'
+        else:
+            nsc['rang'] = Ränge[str(nsc['Powerlevel'])]
         for _ in range(3+nsc['Powerlevel']):
-            if nsc['Powerlevel'] < -1:
-                nsc['rang'] = 'Cliath'
-            elif nsc['Powerlevel'] > 11:
-                nsc['rang'] = 'Legende'
-            else:
-                nsc['rang'] = Ränge[nsc['Powerlevel']]
-            gabe = LookUpTexteByName(DrawKeyUnique(GetGaben(nsc['brut'], nsc['art'], nsc['stamm'], nsc['rang']), nsc['gaben']))
+            gabe = LookUpTexteByName(DrawKeyUnique(GetGaben(nsc['brut'], nsc['vorzeichen'], nsc['stamm'], nsc['rang']), nsc['gaben']))
             nsc['gaben'][gabe['name']] = gabe
     if nsc['art'] == 'Vampir':
         nsc['Disziplinen'] = {}
@@ -420,7 +420,7 @@ def BuildNSC(seed=-1, Art='Kinfolk', Stamm='', Powerlevel=0, language='HTML', pa
     art = nsc["art"].lower() if nsc["art"] in ["Kinfolk", "Human", 'vampir'] else "garou"
     seed = (nsc["vorname"]+" "+nsc["nachname"]).replace(" ", "_")
     nsc['link'] = f'<a href="{baseURL}/nsc/{art}/{nsc["Powerlevel"]}/{language.lower()}/{seed}{packString}{treeSeed}">{nsc["vorname"]+" "+nsc["nachname"]}</a>'
-
+    print(json.dumps(nsc))
     return nsc
 
 

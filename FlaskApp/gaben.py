@@ -8,7 +8,7 @@ from .config import basePath
 gabenTexte = json.load(codecs.open(basePath+'/FlaskApp/gabenTexte.json', 'r', 'utf-8-sig'))
 
 with open(basePath+'/jsons/Raenge.json', 'r', encoding='utf-8') as infile:
-    Ränge = list(set(json.load(infile).keys()))
+    Ränge = list(dict.fromkeys(json.load(infile).values()))
 with open(basePath+'/jsons/BrutGabenNamen.json', 'r', encoding='utf-8') as infile:
     BrutGabenNamen = json.load(infile)
 with open(basePath+'/jsons/VorzeichenGabenNamen.json', 'r', encoding='utf-8') as infile:
@@ -28,6 +28,8 @@ def GetGaben(Brut,Vorzeichen,Stamm,Rang='Cliath'):
     result = []
     for i in range(len(Ränge)):
         RangIdx = Ränge[i]
+        print(Ränge)
+        print(i)
         if Stamm=='Tänzer der schwarzen Spirale':
             for gabenName in BrutGabenNamen[Brut+' des Wyrms'][RangIdx]:
                 result.append(LookUpTexteByName(gabenName))

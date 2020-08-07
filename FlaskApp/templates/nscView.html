@@ -16,6 +16,8 @@
 
 {% if 'Clan' in nsc %}
     {{nsc['Clan']}} {{nsc['Generation']}}. Generation
+{% elif 'vorzeichen' in nsc%}
+    {{nsc['vorzeichen']}}
 {% else %}
     {{nsc['art']}}
 {% endif %}
@@ -24,7 +26,7 @@
     {{nsc['stamm']}}
 {% endif %}
 
-{% if 'brut' in nsc and len(nsc['brut']) > 0 %}
+{% if 'brut' in nsc and nsc['brut']|length > 0 %}
     {{nsc['brut']}}
 {% endif %}
 
@@ -54,7 +56,7 @@ Diese Kleidung lässt darunter einen Körper erkennen, der eher {{nsc["beschreib
  und {{nsc["beschreibungMerkmal"][1]}} trägt {{nsc["pronomen"]}} {{nsc["beschreibungMerkmal"][0]}}. <br>
 Beim Betrachten von {{nsc["vorname"]}}s Kopf fällt ein Detail in Auge: {{nsc["beschreibungKopf"]}} und {{nsc["possesivpronomen"]}} Augen sind {{nsc["beschreibungAugen"]}}.
 {% if 'beschreibungHaut' in nsc %}
-    Die Haut sieht {nsc["beschreibungHaut"]} aus. '
+    Die Haut sieht {{nsc["beschreibungHaut"]}} aus. '
 {% elif 'beschreibungZähne' in nsc %}
     Wenn {{nsc["vorname"]}} den Mund öffnet kann man sehen, wie {{nsc["beschreibungZähne"]}} die Zähne sind. 
 {% endif %}
