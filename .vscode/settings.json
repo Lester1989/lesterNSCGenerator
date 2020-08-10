@@ -5,7 +5,6 @@
         "--max-line-length=200"
     ],
     "files.associations": {
-        "*.html":"jinja-html"
     }
     
     
