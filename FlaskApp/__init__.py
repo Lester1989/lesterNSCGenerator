@@ -11,6 +11,7 @@ from .kinfolkGen import PrintBSDPack, PrintPack, CreateRandom, CreateBSD, Create
 from .Formatting import StartCapital
 from .baneGen import CreateBane
 from .EncounterGen import CreateEncounter
+from .vampireGen import clans
 from .gaben import *
 from .EncounterGen import *
 from .LookGen import *
@@ -83,14 +84,13 @@ def showClean():
         bruten=bruten,
         raenge=Ränge,
         beziehungen=beziehungen,
-        berufe=berufe)
+        berufe=berufe,
+        clans=clans)
 
 
 
-@app.route('/handle_data/', methods=['POST'])
-def handle_data():
-    print('BLA')
-    print(list(request.form.items()))
+@app.route('/handle_data_Garou/', methods=['POST'])
+def handle_data_Garou():
     for stamm in stämme:
         if stamm in request.form:
             stämme[stamm] = int(request.form[stamm])
@@ -101,6 +101,19 @@ def handle_data():
         if auspice in request.form:
             vorzeichen[auspice] = int(request.form[auspice])
     return render_template('nscView.html',nsc=BuildNSC(seed=-1, Art='Garou', Powerlevel=0, language='HTML' ))
+
+@app.route('/handle_data_Vampire/', methods=['POST'])
+def handle_data_Vampire():
+    for stamm in stämme:
+        if stamm in request.form:
+            stämme[stamm] = int(request.form[stamm])
+    for brut in bruten:
+        if stamm in request.form:
+            bruten[brut] = int(request.form[brut])
+    for auspice in vorzeichen:
+        if auspice in request.form:
+            vorzeichen[auspice] = int(request.form[auspice])
+    return render_template('nscView.html',nsc=BuildNSC(seed=-1, Art='vampir', Powerlevel=0, language='HTML' ))
 
 
 @app.route('/nsc/bsdpack/')

@@ -18,57 +18,71 @@
         beziehungen,
         berufe #}
 <div class="tabbed">
-   <input checked="checked" id="tab1" type="radio" name="tabs" />
-   <input id="tab2" type="radio" name="tabs" />
-   <input id="tab3" type="radio" name="tabs" />
+    <input checked="checked" id="tab1" type="radio" name="tabs" />
+    <input id="tab2" type="radio" name="tabs" />
+    <input id="tab3" type="radio" name="tabs" />
 
-   <nav>
-      <label for="tab1">Garou</label>
-      <label for="tab2">Mensch</label>
-      <label for="tab3">Vampir</label>
-   </nav>
-   
-   <figure>
-      <div class="tab1"> 
-        <form action="{{ url_for('handle_data') }}" method="post">
-            <div style="display:flex">
-            <div style="width:350px;padding:10px">
-            <h3>Stämme</h3>
-            {% for stamm in staemme %}
-                <p>
-                    <input type="range" min=0 max=10 value={{staemme[stamm]}}
-                        name="{{stamm}}" title="{{stamm}}">
-                    {{stamm}}
-                </p>
-            {% endfor %}
-            </div>
-            <div style="width:350px;padding:10px">
-            <h3>Brut</h3>
-            {% for brut in bruten %}
-                <p>
-                    <input type="range" min=0 max=10 value={{bruten[brut]}}
-                        name="{{brut}}" title="{{brut}}">
-                    {{brut}}
-                </p>
-            {% endfor %}
-            </div>
-            <div style="width:350px;padding:10px">
-            <h3>Vorzeichen</h3>
-            {% for auspice in vorzeichen %}
-                <p>
-                    <input type="range" min=0 max=10 value={{vorzeichen[auspice]}}
-                        name="{{auspice}}" title="{{auspice}}">
-                    {{auspice}}
-                </p>
-            {% endfor %}
-            </div>
-            </div>
-            <input type="submit" >
-        </form>
- </div>
-      <div class="tab2"> Coming Soon </div>
-      <div class="tab3"> Coming Soon </div>
-   </figure>
+    <nav>
+        <label for="tab1">Garou</label>
+        <label for="tab2">Mensch</label>
+        <label for="tab3">Vampir</label>
+    </nav>
+
+    <figure>
+        <div class="tab1">
+            <form action="{{ url_for('handle_data_Garou') }}" method="post">
+                <div style="display:flex">
+                    <div style="width:350px;padding:10px">
+                        <h3>Stämme</h3>
+                        {% for stamm in staemme %}
+                        <p>
+                            <input type="range" min=0 max=10 value={{staemme[stamm]}} name="{{stamm}}"
+                                title="{{stamm}}">
+                            {{stamm}}
+                        </p>
+                        {% endfor %}
+                    </div>
+                    <div style="width:350px;padding:10px">
+                        <h3>Brut</h3>
+                        {% for brut in bruten %}
+                        <p>
+                            <input type="range" min=0 max=10 value={{bruten[brut]}} name="{{brut}}" title="{{brut}}">
+                            {{brut}}
+                        </p>
+                        {% endfor %}
+                    </div>
+                    <div style="width:350px;padding:10px">
+                        <h3>Vorzeichen</h3>
+                        {% for auspice in vorzeichen %}
+                        <p>
+                            <input type="range" min=0 max=10 value={{vorzeichen[auspice]}} name="{{auspice}}"
+                                title="{{auspice}}">
+                            {{auspice}}
+                        </p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <input type="submit">
+            </form>
+        </div>
+        <div class="tab2"> Coming Soon </div>
+        <div class="tab3">
+            <form action="{{ url_for('handle_data_Vampire') }}" method="post">
+                <div style="display:flex">
+                    <div style="width:350px;padding:10px">
+                        <h3>Clans</h3>
+                        {% for clan in clans %}
+                        <p>
+                            <input type="range" min=0 max=10 value={{clans[clan]}} name="{{clan}}"
+                                title="{{clan}}">
+                            {{clan}}
+                        </p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <input type="submit">
+            </form>
+        </div>
+    </figure>
 </div>
 {% endblock %}
-
